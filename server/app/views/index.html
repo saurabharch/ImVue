@@ -40,24 +40,22 @@
             <span class="map glyphicon glyphicon-globe"></span>
             <span class="send glyphicon glyphicon-send"></span>
             <span class="profile glyphicon glyphicon-user"></span>
-            <div class="pos">
-                <div ng-controller="geoLocationCtrl">
-                    <!--<div class="geo">-->
-                        <!--<div>lat: {{pos.latitude}}   long: {{pos.longitude}}</div>-->
-                        <!--<div>angle: {{angle}}   tilt: {{tilt}}</div>-->
-                        <!--<button class="btn" ng-click="update()">Update Info</button>-->
-                        <!--<span>-->
-                            <!--<button class="btn" ng-click="savePng()">Save</button>-->
-                            <!--<button class="btn" ng-click="loadPng()">Load</button>-->
-                        <!--</span>-->
-                    <!--</div>-->
+        </div>
+
+        <!-- <div class="pos">
+            <div ng-controller="geoLocationCtrl">
+                <div class="geo">
+                    <div>lat: {{pos.latitude}}   long: {{pos.longitude}}</div>
+                    <div>angle: {{angle}}   tilt: {{tilt}}</div>
+                    <button ng-click="update()">Update Info</button>
+                    <button ng-click="fetchDrawings()">fetch drawings</button>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div id="bottom">
             <div ng-controller="CameraCtrl">
-            <video autoplay="true" id="videoElement"></video>
+                <video autoplay="true" id="videoElement"></video>
             </div>
 
             <!--<div>Color: <input class="jscolor" value="ab2567"></div>-->

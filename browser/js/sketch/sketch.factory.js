@@ -1,3 +1,4 @@
+/* eslint-disable  id-length */
 app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
 
     var SketchFactory = {}
@@ -32,44 +33,34 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
         // and they can click it to acknowledge?
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        var canvasPointsString = canvasPoints.join(",")
+        var canvasPointsString = canvasPoints.join(',')
 
-        geoLocationFactory.updateLocation()
-        .then( (position) => {
-                $http.post('http://192.168.5.251:1337/api/drawings', {image: canvasPointsString, longitude: position.coords.longitude, latitude:position.coords.latitude})
-            }
-            )
-        .then( (response) => {
-            // Dont care about the response here
-            // Our log below will let us know if something didn't go correctly
-            // Leaving this here for now in case we want to do something later
+        navigator.geolocation.getCurrentPosition((position) => {
+            $http.post('http://localhost:1337/api/drawings', {
+                image: canvasPointsString,
+                longitude: position.coords.longitude,
+                latitude: position.coords.latitude
+            })
+            .catch($log)
         })
-        .catch($log)
 
     } /* End of saveImg Function */
 
-    SketchFactory.loadImg = function(){
+    SketchFactory.loadImg = function(id){
 
-        var drawing = doc.getElementById('paint')
-
-        $http.get('http://192.168.5.251:1337/api/drawings/21')
+        $http.get('http://localhost:1337/api/drawings/' + id)
         .then(function(response){
             return response.data.image;
         })
         .then(function(canvasString){
 
-            var canvasArray = canvasString.split(",")
-            for( var i = 0; i < canvasArray.length; i += 5 ){
+            var canvasArray = canvasString.split(',')
+            for (var i = 0; i < canvasArray.length; i += 5 ){
 
                 canvas.draw(  /* Start Point */
-                             { x: canvasArray[i],
-                               y: canvasArray[i+1]
-                             },
+                             { x: canvasArray[i], y: canvasArray[i + 1] },          // eslint-disable-line id-length
                              /* End Point */
-                             {
-                                x: canvasArray[i + 2],
-                                y: canvasArray[i + 3]
-                             },
+                             { x: canvasArray[i + 2], y: canvasArray[i + 3] },      // eslint-disable-line id-length
                              /* Color */
                              canvasArray[i + 4]
                              );
@@ -122,8 +113,8 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
 
         // Allocate backing store large enough to give us a 1:1 device pixel
         // to canvas pixel ratio.
-        var w = canvas.clientWidth * pixelRatio,
-            h = canvas.clientHeight * pixelRatio;
+        var w = canvas.clientWidth * pixelRatio,    // eslint-disable-line id-length
+            h = canvas.clientHeight * pixelRatio;   // eslint-disable-line id-length
         if (w !== canvas.width || h !== canvas.height) {
             // Resizing the canvas destroys the current content.
             // So, save it...
@@ -140,19 +131,28 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
         // backing store is larger.
         ctx.scale(pixelRatio, pixelRatio);
 
-        ctx.lineWidth = 5
+        ctx.lineWidth = 5;
+
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
     }
 
     // Event functions for canvas
 
-    function mDown(e) {
-            e.preventDefault();
+    function getCurrentX(event){
+        return Math.floor(event.changedTouches[0].pageX)
+    }
+
+    function getCurrentY(event){
+        return Math.floor(event.changedTouches[0].pageY)
+    }
+
+    function mDown(event) {
+            event.preventDefault();
 
             drawing = true;
-            currentMousePosition.x = e.changedTouches[0].pageX - this.offsetLeft;
-            currentMousePosition.y = e.changedTouches[0].pageY - this.offsetTop;
+            currentMousePosition.x = getCurrentX(event) - this.offsetLeft;
+            currentMousePosition.y = getCurrentY(event) - this.offsetTop;
 
         }
 
@@ -160,23 +160,22 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
         drawing = false;
     }
 
-    function mMove(e) {
-        e.preventDefault();
+    function mMove(event) {
+        event.preventDefault();
 
         if (!drawing) return;
 
         lastMousePosition.x = currentMousePosition.x;
         lastMousePosition.y = currentMousePosition.y;
 
-        currentMousePosition.x = e.changedTouches[0].pageX - this.offsetLeft;
-        currentMousePosition.y = e.changedTouches[0].pageY - this.offsetTop;
+        currentMousePosition.x = getCurrentX(event) - this.offsetLeft;
+        currentMousePosition.y = getCurrentY(event) - this.offsetTop;
 
         // Push our points into an array
         canvasPoints.push(
-            lastMousePosition.x + "," +
-            lastMousePosition.y + "," +
-            currentMousePosition.x + "," +
-            currentMousePosition.y + "," +
+
+            lastMousePosition.x + ',' + lastMousePosition.y + ',' +
+            currentMousePosition.x + ',' + currentMousePosition.y + ',' +
             color
         )
 

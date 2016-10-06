@@ -1,39 +1,35 @@
-app.factory('CameraFactory', function ($log) {
+app.factory('CameraFactory', function ($log){
 
-	function streamCamera() {
-    
-			var video = document.querySelector("#videoElement");
-      
-			navigator.getUserMedia =
-				navigator.getUserMedia ||
-				navigator.webkitGetUserMedia ||
-				navigator.mozGetUserMedia ||
-				navigator.msGetUserMedia ||
-				navigator.oGetUserMedia;
+	function streamCamera(){
 
-			if (navigator.getUserMedia) {
-				navigator.getUserMedia({
-					video: {
-						frameRate: {
-							ideal: 5,
-							max: 10
-						}
+		var video = document.querySelector('#videoElement');
+
+		navigator.getUserMedia =
+			navigator.getUserMedia ||
+			navigator.webkitGetUserMedia ||
+			navigator.mozGetUserMedia ||
+			navigator.msGetUserMedia ||
+			navigator.oGetUserMedia;
+
+		if (navigator.getUserMedia) {
+			navigator.getUserMedia({
+				video: {
+					frameRate: {
+						ideal: 5,
+						max: 10
 					}
-				}, handleVideo, videoError);
-			}
+				}
+			}, handleVideo, videoError);
+		}
 
-			function handleVideo(stream) {
-				video.src = window.URL.createObjectURL(stream);
-			}
+		function handleVideo(stream) {
+			video.src = window.URL.createObjectURL(stream);
+		}
 
-			function videoError(e) {
-        console.log("Throwing error")
-				// do something
-			}
-
+		function videoError(event){
+			console.log('Error: navigator.getUserMedia not a function')
+		}
 	}
-
-	// Factory service object to return
 
 	return {
 		streamCamera: streamCamera,
