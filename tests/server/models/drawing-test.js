@@ -11,7 +11,7 @@ describe('Drawing model', () => {
     beforeEach('Sync DB', () => {
         return db.sync({ force: true });
     });
-    decribe('Correctly saves drawings', function(){
+    describe('Correctly saves drawings', function(){
         it('should exist', function(){
 
         })

@@ -1,5 +1,3 @@
-app.controller('CameraCtrl', function($scope, CameraFactory) {
-	
+app.controller('CameraCtrl', function($scope, CameraFactory){
 	CameraFactory.streamCamera()
-
 });

@@ -1,21 +1,19 @@
 app.controller('geoLocationCtrl', function($scope, $log, geoLocationFactory, SketchFactory, $http){
 
     $scope.update = function(){
-        console.log("calling update")
         navigator.geolocation.getCurrentPosition( (position) => {
             $scope.pos = position.coords;
             $scope.$evalAsync();
         })
     }
 
-    var deviceOrientationListener = function (e) {
+    var deviceOrientationListener = function (event) {
         //alpha: ANGLE, beta: TILTING
-        $scope.angle = Math.round(e.alpha);
-        $scope.tilt = Math.round(e.beta);
+        $scope.angle = Math.round(event.alpha);
+        $scope.tilt = Math.round(event.beta);
     }
 
     window.addEventListener('deviceorientation', deviceOrientationListener);
-
 
     $scope.fetchDrawings = function () {
         console.log('fetching drawings');
@@ -24,12 +22,13 @@ app.controller('geoLocationCtrl', function($scope, $log, geoLocationFactory, Ske
         var testLat = 40.704906;
         $http.get(`/api/locations/ping/${testLon}/${testLat}`)//test
             .then(drawings => {
-                var d = drawings.data;
-                alert("We found " + d.length + ' drawings around you!');
-                console.log(d[0])
-                console.log(d[0].id);
+                var data = drawings.data;
+                console.log('We found ' + data.length + ' drawings around you!');
+                console.log(data[0])
+                console.log(data[0].id);
                 // return SketchFactory.loadImg();
             })
             //TODO: sending these images and putting on the canvas
     }
 });
+
