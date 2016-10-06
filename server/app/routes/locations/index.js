@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/ping/:longitude/:latitude', (req, res, next) => {
-    var range = 2000 / 10000;
+    var range = 2000 / 100000;
     var lat = parseFloat(req.params.latitude);
     var lon = parseFloat(req.params.longitude);
 
