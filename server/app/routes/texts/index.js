@@ -1,13 +1,11 @@
-const router = require('express').Router()
+const router = require('express').Router() // eslint-disable-line new-cap
 module.exports = router;
 const Texts =  require('../../../db/models/text.js')
 
 router.get('/', (req, res, next) => {
-    console.log('Retriving All Text')
+    
     Texts.findAll()
-        .then( texts => {
-            res.send(text)
-        })
+        .then( texts => { res.send(texts) })
         .catch(next)
 })
 
