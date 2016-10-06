@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/" />
+    <title>Fullstack Academy Generated Application</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <script src="/lodash/index.js"></script>
+    <script src="/angular/angular.js"></script>
+    <script src="/angular-animate/angular-animate.js"></script>
+    <script src="/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/angular-ui-bootstrap/ui-bootstrap.js"></script>
+    <script src="/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
+   <!--  <script src="/socket.io-client/socket.io.js"></script> -->
+   <script src="/main.js"></script>
+   <!-- CAMERA -->
+    <!-- <script type="text/javascript" src="js/camera/camera.controller.js"></script>
+    <script type="text/javascript" src="js/camera/camera.factory.js"></script> -->
+    <!-- GEO LOCATION -->
+   <!--  <script type="text/javascript" src="js/geoLocation/geo.location.controller.js"></script>
+    <script type="text/javascript" src="js/geoLocation/geo.location.factory.js"></script> -->
+    <!-- SKETCH -->
+   <!--  <script type="text/javascript" src="js/sketch/sketch.controller.js"></script>
+    <script type="text/javascript" src="js/sketch/sketch.factory.js"></script> -->
+
+
+    
+</head>
+<!-- <body ng-app="FullstackGeneratedApp">
+    <navbar></navbar>
+    <div id="main" ui-view></div>
+</body> -->
+<body ng-app="FullstackGeneratedApp">
+        <div class="pos">
+            <div ng-controller="geoLocationCtrl">
+                <div class="geo">
+                    <div>lat: {{pos.latitude}}   long: {{pos.longitude}}</div>
+                    <!-- <div>heading: {{heading}}</div> -->
+                    <button ng-click="update()">Update Info</button>
+                </div>
+            </div>
+        </div>
+
+        <div ng-controller="CameraCtrl">
+            <video autoplay="true" id="videoElement"></video>
+        </div>
+
+        <div id="tester" ng-controller="SketchCtrl">
+
+            <canvas id="paint"></canvas>
+
+            <div id="color-selector">
+
+                <button class="save-btn" ng-click="savePng()">SAVE</button>
+                <button class="save-btn" ng-click="loadPng()">Load</button>
+
+                <div class="marker selected" id="black"></div>
+                <div class="marker" id="purple"></div>
+                <div class="marker" id="red"></div>
+                <div class="marker" id="blue"></div>
+                <div class="marker" id="green"></div>
+                <div class="marker" id="orange"></div>
+                <div class="marker" id="yellow"></div>
+                <div class="marker" id="brown"></div>
+            </div>
+
+        </div>
+
+</body>
+</html>
