@@ -19,11 +19,15 @@ app.factory('CameraFactory', function ($log){
 						max: 10
 					}
 				}
-			}, handleVideo, $log);
+			}, handleVideo, videoError);
 		}
 
 		function handleVideo(stream) {
 			video.src = window.URL.createObjectURL(stream);
+		}
+
+		function videoError(event){
+			console.log('Error: navigator.getUserMedia not a function')
 		}
 	}
 

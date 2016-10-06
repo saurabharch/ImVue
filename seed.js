@@ -27,7 +27,6 @@ let db = require('./server/db');
 let User = db.model('user')
 let Drawing = db.model('drawing');
 let Location = db.model('location');
-let Text =  db.model('text')
 let Promise = require('sequelize').Promise;
 
  var drawingPath =  path.join(__dirname, '/server/db/models/drawings/')

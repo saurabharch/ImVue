@@ -37,7 +37,7 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
 
         geoLocationFactory.updateLocation()
         .then( (position) => {
-                $http.post('http://192.168.5.251:1337/api/drawings', {image: canvasPointsString, longitude: position.coords.longitude, latitude: position.coords.latitude})
+                $http.post('http://localhost:1337/api/drawings', {image: canvasPointsString, longitude: position.coords.longitude, latitude: position.coords.latitude})
             }
             )
         .then( (response) => {
@@ -51,7 +51,7 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
 
     SketchFactory.loadImg = function(){
 
-        $http.get('http://192.168.5.251:1337/api/drawings/21')
+        $http.get('http://localhost:1337/api/drawings/21')
         .then(function(response){
             return response.data.image;
         })
