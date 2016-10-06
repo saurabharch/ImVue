@@ -1,4 +1,4 @@
-app.controller('geoLocationCtrl', function($scope, $log, geoLocationFactory, $http){
+app.controller('geoLocationCtrl', function($scope, $log, geoLocationFactory, SketchFactory, $http){
 
     $scope.update = function(){
         console.log("calling update")
@@ -18,13 +18,17 @@ app.controller('geoLocationCtrl', function($scope, $log, geoLocationFactory, $ht
 
 
     $scope.fetchDrawings = function () {
+        console.log('fetching drawings');
         // $http.get(`/locations/ping/${$scope.pos.longitude}/${$scope.pos.latitude}`)//real
-        var testLon = 40;
-        var testLat = -70;
-        $http.get(`/locations/ping/${testLon}/${testLat}`)//test
+        var testLon = -74.0086208;
+        var testLat = 40.704906;
+        $http.get(`/api/locations/ping/${testLon}/${testLat}`)//test
             .then(drawings => {
-                alert("We found " + drawings.length + ' drawings around you!');
-                console.log("We found " + drawings.length + ' drawings around you!');
+                var d = drawings.data;
+                alert("We found " + d.length + ' drawings around you!');
+                console.log(d[0])
+                console.log(d[0].id);
+                // return SketchFactory.loadImg();
             })
             //TODO: sending these images and putting on the canvas
     }

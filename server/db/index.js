@@ -4,7 +4,7 @@ module.exports = db;
 
 // eslint-disable-next-line no-unused-vars
 var User = require('./models/user');
-
+var Location_Drawing = require('./models/location_drawing');
 var Location = require('./models/location');
 var Drawing = require('./models/drawing');
 var Stroke = require('./models/strokes');

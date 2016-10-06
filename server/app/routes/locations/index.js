@@ -1,6 +1,7 @@
 const router = require('express').Router()
 module.exports = router;
-const Location = require('../../../db/models/location.js')
+const Location = require('../../../db/models/location.js');
+const Drawing = require('../../../db/models/drawing.js');
 
 router.get('/', (req, res, next) => {
     console.log('Retriving All Location')
@@ -12,34 +13,27 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/ping/:longitude/:latitude', (req, res, next) => {
-    console.log('Longitude', req.params.longitude, 'Latitude', req.params.latitude)
-    Location.findAll({
+    var range = 2000 / 10000;
+    var lat = parseFloat(req.params.latitude);
+    var lon = parseFloat(req.params.longitude);
+
+    Drawing.findAll({
         where: {
-            latitude: {
-                $between: [+req.params.latitude - 2000, +req.params.latitude + 2000]
-            },
-            longitude: {
-                $beween: [+req.params.longitude - 2000, +req.params.longitude + 2000]
+            $and: {
+                latitude: {
+                    $between: [lat - range, lat + range]
+                },
+                longitude: {
+                    $between: [lon - range, lon + range]
+                }
             }
             // altitude: {
-            //   $beween: [+req.params.alt - 2000, +req.params.alt + 2000]
+            //   $beween: [+req.params.alt - range, +req.params.alt + range]
             // }
         }
     })
-        .then(function (locations) {
-            console.log(locations)
-                var gettingDrawings = locations.map(loc => loc.getDrawings());
-                return Promise.all(gettingDrawings)
-        })
-        .then(function (drawings) {
-            console.log(drawings)
-            res.send(drawings);
-        })
-        // Location.findAll()
-        //     .then( Locations => {
-        //         res.send(Locations)
-        //     })
-        //     .catch(next)
+        .then(drawings => res.send(drawings))
+        .catch(next);
 })
 
 // var router = require('express').Router(); // eslint-disable-line new-cap
