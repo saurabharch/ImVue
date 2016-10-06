@@ -41,10 +41,10 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
             )
         .then( (response) => {
             // Dont care about the response here
-            // Our log below will let us know if something didn't go correctly 
+            // Our log below will let us know if something didn't go correctly
             // Leaving this here for now in case we want to do something later
         })
-        .catch($log)    
+        .catch($log)
 
     } /* End of saveImg Function */
 
@@ -57,14 +57,14 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
             return response.data.image;
         })
         .then(function(canvasString){
-            
+
             var canvasArray = canvasString.split(",")
             for( var i = 0; i < canvasArray.length; i += 5 ){
 
                 canvas.draw(  /* Start Point */
                              { x: canvasArray[i],
-                               y: canvasArray[i+1] 
-                             }, 
+                               y: canvasArray[i+1]
+                             },
                              /* End Point */
                              {
                                 x: canvasArray[i + 2],
@@ -74,7 +74,7 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
                              canvasArray[i + 4]
                              );
             }
-            
+
         })
         .catch($log)
 
@@ -95,7 +95,7 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
         // Touch screen event handlers
         canvas.addEventListener('touchstart', mDown);
         canvas.addEventListener('touchend', mUp);
-        canvas.addEventListener('touchmove', mMove); 
+        canvas.addEventListener('touchmove', mMove);
 
         // Keyboard event handlers
         //canvas.addEventListener('mousedown', mDown);
@@ -115,11 +115,11 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
     function resizeCanvas() {
         // Unscale the canvas (if it was previously scaled)
         ctx.setTransform(1, 0, 0, 1, 0, 0);
-        
+
         // The device pixel ratio is the multiplier between CSS pixels
         // and device pixels
-        var pixelRatio = workspace.devicePixelRatio || 1;    
-        
+        var pixelRatio = workspace.devicePixelRatio || 1;
+
         // Allocate backing store large enough to give us a 1:1 device pixel
         // to canvas pixel ratio.
         var w = canvas.clientWidth * pixelRatio,
@@ -139,10 +139,10 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
         // ratio to ensure that 1 canvas unit = 1 css pixel, even though our
         // backing store is larger.
         ctx.scale(pixelRatio, pixelRatio);
-        
+
         ctx.lineWidth = 5
         ctx.lineJoin = 'round';
-        ctx.lineCap = 'round';     
+        ctx.lineCap = 'round';
     }
 
     // Event functions for canvas
@@ -173,10 +173,10 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
 
         // Push our points into an array
         canvasPoints.push(
-            lastMousePosition.x + "," + 
-            lastMousePosition.y + "," + 
+            lastMousePosition.x + "," +
+            lastMousePosition.y + "," +
             currentMousePosition.x + "," +
-            currentMousePosition.y + "," + 
+            currentMousePosition.y + "," +
             color
         )
 
@@ -198,6 +198,8 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
             // Attach a click handler that will set our color variable to
             // the elements id, remove the selected class from all colors,
             // and then add the selected class to the clicked color.
+
+
             function pickColor() {
                 color = this.id;
                 doc.querySelector('.selected').classList.remove('selected');
@@ -209,6 +211,7 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
 
         });
     }
+
 
     return SketchFactory
 
