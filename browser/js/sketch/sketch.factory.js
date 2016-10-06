@@ -35,23 +35,20 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
 
         var canvasPointsString = canvasPoints.join(',')
 
-        geoLocationFactory.updateLocation()
-        .then( (position) => {
-                $http.post('http://localhost:1337/api/drawings', {image: canvasPointsString, longitude: position.coords.longitude, latitude: position.coords.latitude})
-            }
-            )
-        .then( (response) => {
-            // Dont care about the response here
-            // Our log below will let us know if something didn't go correctly
-            // Leaving this here for now in case we want to do something later
+        navigator.geolocation.getCurrentPosition((position) => {
+            $http.post('http://localhost:1337/api/drawings', {
+                image: canvasPointsString,
+                longitude: position.coords.longitude,
+                latitude: position.coords.latitude
+            })
+            .catch($log)
         })
-        .catch($log)
 
     } /* End of saveImg Function */
 
-    SketchFactory.loadImg = function(){
+    SketchFactory.loadImg = function(id){
 
-        $http.get('http://localhost:1337/api/drawings/21')
+        $http.get('http://localhost:1337/api/drawings/' + id)
         .then(function(response){
             return response.data.image;
         })
@@ -141,12 +138,20 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
 
     // Event functions for canvas
 
+    function getCurrentX(event){
+        return Math.floor(event.changedTouches[0].pageX)
+    }
+
+    function getCurrentY(event){
+        return Math.floor(event.changedTouches[0].pageY)
+    }
+
     function mDown(event) {
             event.preventDefault();
 
             drawing = true;
-            currentMousePosition.x = event.changedTouches[0].pageX - this.offsetLeft;
-            currentMousePosition.y = event.changedTouches[0].pageY - this.offsetTop;
+            currentMousePosition.x = getCurrentX(event) - this.offsetLeft;
+            currentMousePosition.y = getCurrentY(event) - this.offsetTop;
 
         }
 
@@ -162,8 +167,8 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
         lastMousePosition.x = currentMousePosition.x;
         lastMousePosition.y = currentMousePosition.y;
 
-        currentMousePosition.x = event.changedTouches[0].pageX - this.offsetLeft;
-        currentMousePosition.y = event.changedTouches[0].pageY - this.offsetTop;
+        currentMousePosition.x = getCurrentX(event) - this.offsetLeft;
+        currentMousePosition.y = getCurrentY(event) - this.offsetTop;
 
         // Push our points into an array
         canvasPoints.push(

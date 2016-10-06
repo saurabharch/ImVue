@@ -17,18 +17,21 @@ app.controller('geoLocationCtrl', function($scope, $log, geoLocationFactory, Ske
 
     $scope.fetchDrawings = function () {
         console.log('fetching drawings');
-        // $http.get(`/locations/ping/${$scope.pos.longitude}/${$scope.pos.latitude}`)//real
-        var testLon = -74.0086208;
-        var testLat = 40.704906;
-        $http.get(`/api/locations/ping/${testLon}/${testLat}`)//test
-            .then(drawings => {
+
+        $http.get(`/api/locations/ping/${$scope.pos.longitude}/${$scope.pos.latitude}`)
+        .then( drawings => {
                 var data = drawings.data;
-                console.log('We found ' + data.length + ' drawings around you!');
-                console.log(data[0])
-                console.log(data[0].id);
-                // return SketchFactory.loadImg();
+                if (data.length === 0) {
+                    console.log('we found nothing!');
+                    return;
+                } else {
+                    console.log('We found ' + data.length + ' drawings around you!');
+                    console.log(data[0])
+                    console.log(data[0].id);
+                    return SketchFactory.loadImg(data[0].id)
+                }
             })
-            //TODO: sending these images and putting on the canvas
+            .catch($log)
     }
 });
 
