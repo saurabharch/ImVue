@@ -4,8 +4,9 @@ app.controller('geoLocationCtrl', function($scope, $log, geoLocationFactory){
         console.log("calling update")
         navigator.geolocation.getCurrentPosition( (position) => {
             $scope.pos = position.coords;
-            $scope.$evalAsync(); 
+            $scope.$evalAsync();
         })
+
 
     	// $scope.pos = geoLocationFactory.updateLocation().coords
     	// .then(function(position){
@@ -21,7 +22,14 @@ app.controller('geoLocationCtrl', function($scope, $log, geoLocationFactory){
     	// })
     	// .catch($log)
 
-	    
     }
+
+    var deviceOrientationListener = function (e) {
+        //alpha: ANGLE, beta: TILTING
+        $scope.angle = Math.round(e.alpha);
+        $scope.tilt = Math.round(e.beta);
+    }
+
+    window.addEventListener('deviceorientation', deviceOrientationListener);
 
 });
