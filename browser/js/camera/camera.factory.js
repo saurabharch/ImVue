@@ -1,6 +1,7 @@
 app.factory('CameraFactory', function ($log){
+
 	function streamCamera(){
-		
+
 		var video = document.querySelector('#videoElement');
 
 		navigator.getUserMedia =
