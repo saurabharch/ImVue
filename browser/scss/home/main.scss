@@ -10,36 +10,29 @@
   }
 }
 
-#container {
-    margin: 0px auto;
-    width: 100%;
-    height: 100%;
-    border: 10px #333 solid;
-}
-
 #videoElement {
     position: absolute;
     z-index: 0;
     width: 100%;
     height: 100%;
     margin: auto;
-    background-color: gray;
+    background-color: transparent;
 }
 
 canvas {
     background-color: transparent;
     z-index: 2;
     position: absolute;
-    width: 100%; 
-    height: 80%;
-    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    margin: auto;
 }
 
 #color-selector {
     z-index: 2;
     position: fixed;
-    bottom: 60px;
-    right: 0;
+    bottom: 40px;
+    left: 0px;
     width: 80px;
     height: 120px;
     background: black;
@@ -57,12 +50,66 @@ canvas {
 }
 
 .geo {
-    margin-top: 20px;
     font-size: 250%
 }
 
-.save-btn {
-    z-index: 4;
-    border-color: blue;
+body, html, #containerr {
+    height: 100%
+}
+
+#top {
+  z-index: 4;
+  background-color: teal;
+  width: 100%;
+  height: 13%;
+  margin: auto;
+}
+
+#bottom {
+  background-color: cadetblue;
+  width: 100%;
+  height: 87%;
+  margin: auto;
+}
+
+.pos {
+  text-align: center;
+}
+
+.map {
+   display: block;
+   background-color: transparent;
+   float: right;
+   font-size: 80px;
+   padding: 40px;
+ }
+
+.profile {
+  background-color: transparent;
+  float: left;
+  font-size: 80px;
+  padding: 40px;
+}
+
+.inbox {
+  display: block;
+  background-color: transparent;
+  float: right;
+  font-size: 80px;
+  padding: 40px;
+}
+
+.send {
+  display: block;
+  background-color: transparent;
+  float: right;
+  font-size: 80px;
+  padding: 40px;
+}
+
+.btn {
+  background-color: darkgray;
+  border-bottom-color: black;
+  border: solid;
 }
 

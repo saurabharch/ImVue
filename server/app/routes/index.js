@@ -5,7 +5,6 @@ module.exports = router;
 router.use('/members', require('./members'));
 router.use('/drawings', require('./drawings'));
 router.use('/locations', require('./locations'));
-router.use('/texts', require('./texts'));
 
 
 // Make sure this is after all of

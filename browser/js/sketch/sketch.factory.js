@@ -132,6 +132,7 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
         ctx.scale(pixelRatio, pixelRatio);
 
         ctx.lineWidth = 5;
+
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
     }
@@ -172,6 +173,7 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
 
         // Push our points into an array
         canvasPoints.push(
+
             lastMousePosition.x + ',' + lastMousePosition.y + ',' +
             currentMousePosition.x + ',' + currentMousePosition.y + ',' +
             color
@@ -195,6 +197,8 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
             // Attach a click handler that will set our color variable to
             // the elements id, remove the selected class from all colors,
             // and then add the selected class to the clicked color.
+
+
             function pickColor() {
                 color = this.id;
                 doc.querySelector('.selected').classList.remove('selected');
@@ -206,6 +210,7 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
 
         });
     }
+
 
     return SketchFactory
 
