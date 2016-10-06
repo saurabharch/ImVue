@@ -1,4 +1,4 @@
-app.controller('geoLocationCtrl', function($scope, $log, geoLocationFactory){
+app.controller('geoLocationCtrl', function($scope, $log, geoLocationFactory, $http){
 
     $scope.update = function(){
         console.log("calling update")
@@ -6,22 +6,6 @@ app.controller('geoLocationCtrl', function($scope, $log, geoLocationFactory){
             $scope.pos = position.coords;
             $scope.$evalAsync();
         })
-
-
-    	// $scope.pos = geoLocationFactory.updateLocation().coords
-    	// .then(function(position){
-    	// 	$scope.pos = position.coords;
-    	// })
-     //    .catch($log)
-
-     //    geoLocationFactory.updateOrientation()
-    	// .then(function(heading){
-     //        // trueHeading doesn't work for iphone
-     //        // reading about android it just returns magnetic for true
-    	// 	$scope.heading = heading.magneticHeading;
-    	// })
-    	// .catch($log)
-
     }
 
     var deviceOrientationListener = function (e) {
@@ -32,4 +16,16 @@ app.controller('geoLocationCtrl', function($scope, $log, geoLocationFactory){
 
     window.addEventListener('deviceorientation', deviceOrientationListener);
 
+
+    $scope.fetchDrawings = function () {
+        // $http.get(`/locations/ping/${$scope.pos.longitude}/${$scope.pos.latitude}`)//real
+        var testLon = 40;
+        var testLat = -70;
+        $http.get(`/locations/ping/${testLon}/${testLat}`)//test
+            .then(drawings => {
+                alert("We found " + drawings.length + ' drawings around you!');
+                console.log("We found " + drawings.length + ' drawings around you!');
+            })
+            //TODO: sending these images and putting on the canvas
+    }
 });
