@@ -6,6 +6,8 @@ router.use('/members', require('./members'));
 router.use('/drawings', require('./drawings'));
 router.use('/locations', require('./locations'));
 
+console.log('hitting users route next')
+router.use('/users', require('./users'));
 
 // Make sure this is after all of
 // the registered routes!
