@@ -25,4 +25,16 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state) {
 
     };
 
+    $scope.sendSignUp = function (signUpInfo) {
+
+        $scope.error = null;
+
+        console.log('~~~~~~~~~~im in controller', signUpInfo)
+        AuthService.signUp(signUpInfo.userName, signUpInfo.email, signUpInfo.password)
+            $state.go('home');
+
+    };
+
+
+
 });

@@ -1,0 +1,24 @@
+<div class="container">
+    <H1 class="signUp-title">Sign Up!</H1>
+    <form id="signUp-form" name="signUpForm" ng-submit="sendSignUp(signUp)">
+        <alert type="danger" ng-show="userNameError" ng>
+            {{ userNameError }}
+        </alert>
+        <div class="form-group">
+            <label for="userName">Enter a username</label>
+            <input type="text" ng-model="signUp.userName" class="form-control" id="userName" placeholder="Enter username">
+        </div>
+        <alert type="danger" ng-show="userEmailError" ng>
+            {{ userEmailError }}
+        </alert>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="text" ng-model="signUp.email" class="form-control" id="email" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="signUp-password">Password</label>
+            <input type="password" ng-model="signUp.password" class="form-control" id="signUp-password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
