@@ -1,3 +1,4 @@
+
 'use strict'
 
 app.config(function ($stateProvider) {
@@ -33,3 +34,4 @@ app.config(function ($stateProvider) {
 //         }
 //     });
 // });
+
