@@ -1,4 +1,4 @@
-app.factory('textFactory', function(){
+app.factory('TextFactory', function(){
 
 	var ctx;
 

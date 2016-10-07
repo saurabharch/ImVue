@@ -1,5 +1,5 @@
 /* eslint-disable  id-length */
-app.factory('SketchFactory', function($http, $log, geoLocationFactory, textFactory){
+app.factory('SketchFactory', function($http, $log, geoLocationFactory, TextFactory){
 
     var SketchFactory = {}
 
@@ -26,7 +26,7 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory, textFacto
         initializeCanvas();
         initializeColorElements();
 
-        textFactory.initializeTextFactory(ctx);
+        TextFactory.initializeTextFactory(ctx);
     }
 
     SketchFactory.saveImg = function(){
