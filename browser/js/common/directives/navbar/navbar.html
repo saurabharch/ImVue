@@ -1,4 +1,17 @@
-<nav class="navbar navbar-static-top">
+<div id="top">
+    <span class="inbox glyphicon glyphicon-inbox" ui-sref="inbox"></span>
+    <span class="map glyphicon glyphicon-globe" ui-sref="map"></span>
+    <span class="draw glyphicon glyphicon-pencil" ui-sref="home"></span>
+    <!-- TODO hook up with functions -->
+    <span class="send glyphicon glyphicon-send" ng-click="savePng()"></span>
+
+    <!---->
+
+    <span class="profile glyphicon glyphicon-user" ui-sref="profile"></span>
+</div>
+
+
+<!--<nav class="navbar navbar-static-top">
     <div class="container">
         <div class="navbar-header">
             <fullstack-logo></fullstack-logo>
@@ -14,4 +27,4 @@
             <a ng-click="logout()">Logout</a>
         </div>
     </div>
-</nav>
+</nav>-->
