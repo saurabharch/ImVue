@@ -94,6 +94,18 @@
                 });
         };
 
+        this.signUp = function(userName, email, password) {
+            console.log('userName: ', userName)
+            console.log('email: ', email)
+            console.log('password: ', password)
+            return $http.post('/api/users', { userName: userName, email: email, password: password })
+                .then(function(response) {
+                    Session.create(response.data);
+                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                    // $state.go('home');
+                });
+        };
+
         this.logout = function () {
             return $http.get('/logout').then(function () {
                 Session.destroy();

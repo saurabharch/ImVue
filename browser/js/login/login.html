@@ -1,16 +1,48 @@
-<form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
+<div id="bottom">
 
-    <alert type="danger" ng-show="error">
-        {{ error }}
-    </alert>
+    <h1>Login</h1>
+    <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
 
-    <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
-    </div>
-    <div class="form-group">
-        <label for="login-password">Password</label>
-        <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-</form>
+        <alert type="danger" ng-show="error">
+            {{ error }}
+        </alert>
+
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
+
+
+
+    <h1>Sign Up</h1>
+    <form id="signUp-form" name="signUpForm" ng-submit="signUpForm.$valid && sendSignUp(signUp)">
+
+        <alert type="danger" ng-show="error">
+            {{ error }}
+        </alert>
+
+        <div class="form-group">
+            <label for="userName">Email address</label>
+            <input type="text" ng-model="signUp.userName" class="form-control" id="userName" placeholder="Enter User Name">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="text" ng-model="signUp.email" class="form-control" id="email" placeholder="Enter email">
+        </div>
+
+        <div class="form-group">
+            <label for="signUp-password">Password</label>
+            <input type="password" ng-model="signUp.password" class="form-control" id="signUp-password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
+</div>
