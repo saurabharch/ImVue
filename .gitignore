@@ -31,9 +31,10 @@ Temporary Items
 # Added by project team
 node_modules/
 public
-server/env/https/git
+server/env/https/
 .idea
 node_modules
 npm-debug.log
 coverage
 server/db/models/drawings
+
