@@ -1,9 +1,17 @@
-app.controller('MapCtrl', function ($scope, geoLocationFactory) {
+app.controller('MapCtrl', function ($scope, geoLocationFactory, $http) {
 
   var map;
-  // var pos;
 
-  // .then(pos => console.log(pos));
+  function creatingMarker (pos, title) {
+    var newMarker = new google.maps.Marker({
+      position: pos,
+      map: map,
+      title: title,
+      mapTypeControl: false
+    });
+    return newMarker;
+  }
+
 
   function initMap() {
     geoLocationFactory.updateLocation
@@ -11,31 +19,58 @@ app.controller('MapCtrl', function ($scope, geoLocationFactory) {
         return position.coords
       })
       .then(function (coords) {
-        var currentPos = { lat: coords.latitude, lng: coords.longitude }
+        var currentPos = {
+          lat: coords.latitude,
+          lng: coords.longitude
+        }
 
-        var myStyles =[
-            {
-                featureType: "poi",
-                elementType: "labels",
-                stylers: [
-                      { visibility: "off" }
-                ]
-            }
-        ];
+        var styles = {
+          default: null,
+          hide: [{
+            featureType: 'poi.business',
+            stylers: [{
+              visibility: 'off'
+            }]
+          }, {
+            featureType: 'transit',
+            elementType: 'labels.icon',
+            stylers: [{
+              visibility: 'off'
+            }]
+          }]
+        };
 
         map = new google.maps.Map(document.getElementById('map'), {
           center: currentPos,
-          zoom: 17
+          zoom: 17,
+          styles: styles['hide']
         })
 
-        var marker = new google.maps.Marker({
-          position: currentPos,
-          map: map,
-          title: 'Current Location',
-          styles: myStyles
-        })
+        var currentMarker = creatingMarker(currentPos, 'current Location');
+
+        // var marker = new google.maps.Marker({
+        //   position: currentPos,
+        //   map: map,
+        //   title: 'Current Location',
+        //   mapTypeControl: false
+        // })
+
+        return $http.get(`/api/locations/ping/${coords.longitude}/${coords.latitude}`)
       })
+        .then(function(drawings) {
+
+          for (var i = 0; i < drawings.data.length; i++) {
+            var pos = {lat: drawings.data[i].latitude, lng: drawings.data[i].longitude};
+            var title = 'randomTitle'
+            creatingMarker(pos, title);
+          }
+
+
+        })
+
+
   }
+
   initMap();
 
 });
