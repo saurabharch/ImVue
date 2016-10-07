@@ -1,5 +1,6 @@
-app.factory('profileFactory', function($http, $q, $rootScope, AuthService) {
+app.factory('profileFactory', function() {
     let profileFactory = {};
+
 
     profileFactory.fetchAllUserDrawings = (userId) => {
 
@@ -8,6 +9,7 @@ app.factory('profileFactory', function($http, $q, $rootScope, AuthService) {
             console.log('Got the user Drawings',userDrawings)
             return userDrawings;
         })
+
     };
 
     return profileFactory;

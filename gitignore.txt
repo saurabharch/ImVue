@@ -5,3 +5,4 @@ public
 .DS_Store
 coverage
 server/db/models/drawings
+server/env/https
