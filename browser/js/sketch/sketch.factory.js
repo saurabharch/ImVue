@@ -1,5 +1,5 @@
 /* eslint-disable  id-length */
-app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
+app.factory('SketchFactory', function($http, $log, geoLocationFactory, TextFactory){
 
     var SketchFactory = {}
 
@@ -25,6 +25,8 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
 
         initializeCanvas();
         initializeColorElements();
+
+        TextFactory.initializeTextFactory(ctx);
     }
 
     SketchFactory.saveImg = function(){
@@ -87,7 +89,7 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
         canvas.addEventListener('touchstart', mDown);
         canvas.addEventListener('touchend', mUp);
         canvas.addEventListener('touchmove', mMove);
-
+        
         // Keyboard event handlers
         //canvas.addEventListener('mousedown', mDown);
         //canvas.addEventListener('mouseup', mUp);

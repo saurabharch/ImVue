@@ -1,8 +1,0 @@
-.idea
-node_modules
-npm-debug.log
-public
-.DS_Store
-coverage
-server/db/models/drawings
-server/env/https
