@@ -1,8 +1,8 @@
-app.factory('profileFactory', function($http, $q, $rootScope, AuthService) {
+app.factory('profileFactory', function() {
     let profileFactory = {};
 
     profileFactory.fetchProfileInfo = () => {
-        return "Got Profile Factory Data"
+        return 'Got Profile Factory Data';
     };
 
     return profileFactory;

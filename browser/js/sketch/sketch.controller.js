@@ -12,7 +12,7 @@ app.controller('SketchCtrl', function($scope, SketchFactory) {
 	}
 
 	$scope.toggleColors = function(){
-		if($scope.showColors){
+		if ($scope.showColors){
 			$scope.showColors = false
 		} else {
 			$scope.showColors = true
