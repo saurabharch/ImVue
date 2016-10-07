@@ -9,11 +9,9 @@ app.factory('geoLocationFactory', function () {
     //      return geoLocationPos
     // }
 
-    geoLocationFactory.updateLocation = function() {
-        return new Promise(function(resolve, reject) {
-            navigator.geolocation.getCurrentPosition( position => position );
-        })
-    }
+    geoLocationFactory.updateLocation = new Promise(function(resolve, reject) {
+        navigator.geolocation.getCurrentPosition(resolve)
+    })
 
     return geoLocationFactory;
 
