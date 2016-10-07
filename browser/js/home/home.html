@@ -1,4 +1,27 @@
-<section id="home">
-    <fullstack-logo></fullstack-logo>
-    <rando-greeting></rando-greeting>
-</section>
+<div id="bottom">
+    <div ng-controller="CameraCtrl">
+        <video autoplay="true" id="videoElement"></video>
+    </div>
+
+    <!--<div>Color: <input class="jscolor" value="ab2567"></div>-->
+
+    <div id="tester" ng-controller="SketchCtrl">
+
+        <canvas id="paint"></canvas>
+
+        <div class="cont">
+            <span class="color glyphicon glyphicon-tint" ng-click="toggleColors()"></span>
+            <div id="color-selector" ng-show="showColors">
+                <div class="marker selected" id="black"></div>
+                <div class="marker" id="purple"></div>
+                <div class="marker" id="red"></div>
+                <div class="marker" id="blue"></div>
+                <div class="marker" id="green"></div>
+                <div class="marker" id="orange"></div>
+                <div class="marker" id="yellow"></div>
+                <div class="marker" id="brown"></div>
+            </div>
+        </div>
+
+    </div>
+</div>

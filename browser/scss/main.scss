@@ -1,26 +1,151 @@
-* {
-  box-sizing: border-box;
-}
+// @import 'home/main';
 
-body {
-  background: #fdfdfd;
-}
-
-@mixin clearfix {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
+#home {
+  fullstack-logo {
+    padding-top: 30px;
+    width: 150px;
+    margin: 0 auto;
+  }
+  h1 {
+    margin-top: 40px;
+    text-align: center;
   }
 }
 
-#main {
-  padding-top: 60px;
-  margin: 0 auto;
+#videoElement {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    background-color: transparent;
 }
 
-@import 'directives/main';
-@import 'home/main';
-@import 'about/main';
-@import 'tutorial/main';
-@import 'login/main';
+canvas {
+    background-color: transparent;
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.marker {
+    width: 40px;
+    height: 40px;
+    float: left;
+    box-sizing: border-box;
+}
+
+.marker.selected {
+    border: 2px solid white;
+}
+
+.geo {
+    font-size: 250%
+}
+
+body, html, #containerr {
+    height: 100%
+}
+
+#top {
+  z-index: 4;
+  background-color: teal;
+  width: 100%;
+  height: 13%;
+  margin: auto;
+}
+
+#bottom {
+  background-color: cadetblue;
+  width: 100%;
+  height: 87%;
+  margin: auto;
+}
+
+.cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.pos {
+  text-align: center;
+}
+
+.map {
+   display: block;
+   background-color: transparent;
+   float: right;
+   font-size: 80px;
+   padding: 40px;
+ }
+
+.profile {
+  background-color: transparent;
+  float: left;
+  font-size: 80px;
+  padding: 40px;
+}
+
+.inbox {
+  display: block;
+  background-color: transparent;
+  float: right;
+  font-size: 80px;
+  padding: 40px;
+}
+
+.send {
+  display: block;
+  background-color: transparent;
+  float: right;
+  font-size: 80px;
+  padding: 40px;
+}
+
+.draw {
+  display: block;
+  background-color: transparent;
+  float: right;
+  font-size: 80px;
+  padding: 40px;
+}
+
+.color {
+  z-index: 2;
+  background-color: transparent;
+  font-size: 80px;
+  padding: 40px;
+  margin-top: 122%;
+  display: block;
+}
+
+#color-selector {
+  z-index: 2;
+  background-color: transparent;
+  font-size: 80px;
+  padding: 40px;
+  margin-top: 122%;
+  display: block;
+}
+
+.color-selector {
+  display: block;
+  z-index: 2;
+  position: fixed;
+  bottom: 40px;
+  right: 0px;
+  width: 80px;
+  height: 120px;
+  background: black;
+}
+
+.btn {
+  background-color: darkgray;
+  border-bottom-color: black;
+  border: solid;
+}
+
+
