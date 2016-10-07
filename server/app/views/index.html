@@ -35,10 +35,11 @@
 
     <div id="containerr">
 
-        <div id="top">
+        <div id="top" ng-controller="SketchCtrl">
             <span class="inbox glyphicon glyphicon-inbox"></span>
             <span class="map glyphicon glyphicon-globe"></span>
-            <span class="send glyphicon glyphicon-send"></span>
+            <span class="send glyphicon glyphicon-send" ng-click="savePng()"></span>
+            <span class="render glyphicon glyphicon-pencil" ng-click="loadPng()"></span>
             <span class="profile glyphicon glyphicon-user"></span>
         </div>
 
@@ -62,20 +63,22 @@
 
             <div id="tester" ng-controller="SketchCtrl">
 
-            <canvas id="paint"></canvas>
+                <canvas id="paint"></canvas>
 
-            <!--<div id="color-selector">-->
-                <!--<div class="marker selected" id="black"></div>-->
-                <!--<div class="marker" id="purple"></div>-->
-                <!--<div class="marker" id="red"></div>-->
-                <!--<div class="marker" id="blue"></div>-->
-                <!--<div class="marker" id="green"></div>-->
-                <!--<div class="marker" id="orange"></div>-->
-                <!--<div class="marker" id="yellow"></div>-->
-                <!--<div class="marker" id="brown"></div>-->
-            <!--</div>-->
-                
-                
+                <div class="cont">
+                    <span class="color glyphicon glyphicon-tint" ng-click="toggleColors()"></span>
+                    <div id="color-selector" ng-show="showColors">
+                        <div class="marker selected" id="black"></div>
+                        <div class="marker" id="purple"></div>
+                        <div class="marker" id="red"></div>
+                        <div class="marker" id="blue"></div>
+                        <div class="marker" id="green"></div>
+                        <div class="marker" id="orange"></div>
+                        <div class="marker" id="yellow"></div>
+                        <div class="marker" id="brown"></div>
+                    </div>
+                </div>  
+
             </div>
         </div>
 
