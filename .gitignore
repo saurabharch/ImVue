@@ -1,3 +1,9 @@
 node_modules/
 public
-server/env/https
+server/env/https/
+.idea
+node_modules
+npm-debug.log
+.DS_Store
+coverage
+server/db/models/drawings
