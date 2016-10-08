@@ -1,12 +1,10 @@
-app.factory('profileFactory', function() {
+app.factory('profileFactory', function($http) {
     let profileFactory = {};
 
 
     profileFactory.fetchAllUserDrawings = (userId) => {
-
-        console.log('Getting all user Drawing')
-        return $http.get('api/user/:userId/drawings').then((userDrawings) => {
-            console.log('Got the user Drawings',userDrawings)
+        var path = '/api/user/'+userId+'/drawings'
+        return $http.get(path).then((userDrawings) => {
             return userDrawings;
         })
 

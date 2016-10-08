@@ -6,16 +6,17 @@ app.config(function ($stateProvider) {
 
         url: '/profile/:userId',
         templateUrl: 'js/profile/profile.template.html',
-        controller: 'profileCtrl',
+        controller: 'profileCtrl'
 
-        resolve:{
-            loginInUserDrawings: function(profileFactory,$stateParams){
-
-                // return profileFactory.fetchAllUserDrawings($stateParams.userId)
-                    return profileFactory.fetchAllUserDrawings(1);
-
-            }
-        }
+        // resolve:{
+        //     loginInUserDrawings: function(profileFactory,$stateParams){
+        //         console.log('User ID',$stateParams.userID)
+        //
+        //         // return profileFactory.fetchAllUserDrawings($stateParams.userId)
+        //             return profileFactory.fetchAllUserDrawings($stateParams.userId);
+        //
+        //     }
+        // }
     });
 });
 
