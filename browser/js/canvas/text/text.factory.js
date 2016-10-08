@@ -6,12 +6,12 @@ app.factory('TextFactory', function(){
 		ctx = canvasCtx;
 	}
 
-	function getTextSizes(){ 
-		return textSizes(); 
+	function getTextSizes(){
+		return fetchTextSizes();
 	}
 
-	function getFontFamilies(){ 
-		return fontFamilies(); 
+	function getFontFamilies(){
+		return fetchFontFamilies();
 	}
 
 	function drawText( size, font, color, locX, locY, text){
@@ -20,9 +20,16 @@ app.factory('TextFactory', function(){
         ctx.fillText(text, locX, locY);
 	}
 
+	function drawTextsOnCanvas(texts){
+		texts.forEach( text => {
+			drawText( text.size, text.font, text.color, text.x, text.y, text.content )
+		})
+	}
+
 	return {
 		initializeTextFactory: initializeTextFactory,
 		drawText: drawText,
+		drawTextsOnCanvas: drawTextsOnCanvas,
 		getTextSizes: getTextSizes,
 		getFontFamilies: getFontFamilies,
 	}
@@ -31,14 +38,14 @@ app.factory('TextFactory', function(){
 
 /* ------------- TEXT SIZES ------------- */
 
-function textSizes(){
+function fetchTextSizes(){
 
 	let minTextSize = 50;
 	let maxTextSize = 150;
 	let textIncrementSize = 10;
 	let textSizes = [];
 
-	for( let i = minTextSize; i <= maxTextSize; i += textIncrementSize){
+	for ( let i = minTextSize; i <= maxTextSize; i += textIncrementSize){
 		textSizes.push(i);
 	}
 
@@ -47,7 +54,7 @@ function textSizes(){
 
 /* ------------- FONT FAMILIES ------------- */
 
-function fontFamilies(){
+function fetchFontFamilies(){
 	return [
 		'Arial',
 		'Verdana',
