@@ -26,13 +26,13 @@
         <video autoplay="true" id="videoElement"></video>
     </div>
     
-    <div id="tester" ng-controller="SketchCtrl">
+    <div id="tester" ng-controller="CanvasCtrl">
 
         <canvas id="paint"></canvas>
 
-        <div class="cont">
-            <span class="color glyphicon glyphicon-tint" ng-click="toggleColors()"></span>
-            <div id="color-selector" ng-show="showColors">
+        <div class="cont" ng-controller='ColorCtrl'>
+            <span class="color glyphicon glyphicon-tint" ng-click="toggleColorPalette()"></span>
+            <div id="color-selector" ng-show="showColorPalette()">
                 <div class="marker selected" id="black"></div>
                 <div class="marker" id="purple"></div>
                 <div class="marker" id="red"></div>

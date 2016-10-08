@@ -1,0 +1,22 @@
+'use strict'
+
+app.config(function($stateProvider) {
+
+    $stateProvider.state('signup', {
+        url: '/signup',
+        templateUrl: '/js/signUp/signUp.html',
+        controller: 'SignUpCtrl'
+    });
+
+});
+
+//
+// app.config(function ($stateProvider) {
+//
+//     $stateProvider.state('login', {
+//         url: '/login',
+//         templateUrl: 'js/login/login.html',
+//         controller: 'LoginCtrl'
+//     });
+//
+// });

@@ -1,6 +1,6 @@
 const router = require('express').Router() // eslint-disable-line new-cap
 module.exports = router;
-const Location = require('../../../db/models/location.js');
+
 const Drawing = require('../../../db/models/drawing.js');
 const User = require('../../../db/models/user.js');
 
@@ -15,17 +15,13 @@ router.get('/', (req, res, next) => {
         .catch(next)
 })
 
-console.log("hit users route")
-router.get('/:id/drawings', (req, res, next) => {
 
-    console.log("H!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+router.get('/:id/drawings', (req, res, next) => {
     Drawing.findAll({
         where:{
-            userId:req.params.id
+            userId : req.params.id
         }
     }).then((drawings) => {
-
-        console.log("These are the drawings I found", drawings)
         res.send(drawings)
     }).catch(next)
 
@@ -40,15 +36,30 @@ router.get('/:id', (req, res, next) => {
         .catch(next)
 })
 
-router.post('/', (req, res, next) => {
-    console.log('Creating new User')
-    let newUser = req.body
-    User.create(newUser)
-        .then(user => {
-            res.send(user)
+// router.post('/', (req, res, next) => {
+//     console.log('Creating new User')
+//     let newUser = req.body
+//     User.create(newUser)
+//         .then(user => {
+//             res.send(user)
+//         })
+//         .catch(next)
+// })
+
+router.post('/register', function(req, res, next) {
+
+    console.log(req.body)
+
+    User.create(req.body)
+        .then(function(successfullySavedNewUser) {
+            req.session.user = successfullySavedNewUser.dataValues;
+
+            console.log("User registered on the session as",req.session.user)
+            res.send(successfullySavedNewUser);
         })
-        .catch(next)
-})
+});
+
+
 
 router.delete('/:id', (req, res, next) => {
     console.log('Destoying User #{req.params.id}')
