@@ -1,34 +1,31 @@
 <div id="bottom">
     <div ng-controller='TextCtrl'>
-        <form novalidate name='textForm'>
-            <input ng-model='textInput' ng-show="showInput" type='input'>
+        <form name='textForm'>
 
-            <label>Style</label>
+            <label>Text</label>    
+            <input ng-model='textInput' ng-show="showInput" type='input' placeholder="Input Text Here">
+
+            <lable>Font</lable>
             <select ng-model="fontFamily" style="background-color: white">
-                <option value="serif">Serif</option>
-                <option value="TimesNewRoman">Times New Roman</option>
-                <option value="Arial">Arial</option>
+                <option ng-repeat='font in getFontFamilies()' value='{{font}}'>{{font}}</option>
             </select>
 
             <label>Size</label>
-            <input ng-model="fontSize" id="fontSize" type="range" min="10" max="150" value="30" step="5" style="background-color: white">
-            <h4>{{fontSize}}</h4>
+            <select ng-model='fontSize' style="background-color: white">
+                <option ng-repeat='size in getTextSizes()' value='{{size}}'>{{size}}</option>
+            </select>
+            
+            <button class="button" style='background-color: white' ng-click='addText(textInput)'>Add Text</button>
 
-
-
-            <button class="button" ng-click='addText(textInput)'>Add Text</button>
         </form>
     </div>
-
-
 
     <div ng-controller="CameraCtrl">
         <video autoplay="true" id="videoElement"></video>
     </div>
 
     <!--<div>Color: <input class="jscolor" value="ab2567"></div>-->
-
-
+    
     <div id="tester" ng-controller="SketchCtrl">
 
         <canvas id="paint"></canvas>

@@ -1,5 +1,12 @@
 app.controller('TextCtrl', function($scope, TextFactory){
-	$scope.textInput = "Text"
+
+	let textSizes = TextFactory.getTextSizes();
+	let fontFamilies = TextFactory.getFontFamilies();
+
+	$scope.getTextSizes = () => textSizes;
+
+	$scope.getFontFamilies = () => fontFamilies;
+
 	$scope.showInput = function(){
 		return true;
 	}
@@ -7,8 +14,9 @@ app.controller('TextCtrl', function($scope, TextFactory){
 		TextFactory.drawText( $scope.fontSize, $scope.fontFamly, 'red', 300, 500, $scope.textInput)
 	}
 
-
 	$scope.chooseFont = function() {
 		var fontFamily = $scope.fontFamily;
 	}
 });
+
+
