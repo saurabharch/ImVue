@@ -21,8 +21,10 @@ app.directive('navbar', function () {
             };
 
             scope.logout = function () {
+
                 AuthService.logout().then(function () {
-                   $state.go('home');
+
+                   $state.go('login');
                 });
             };
 
