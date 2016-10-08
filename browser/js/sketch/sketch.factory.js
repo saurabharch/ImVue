@@ -35,7 +35,8 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory, TextFacto
         // and they can click it to acknowledge?
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        var canvasPointsString = canvasPoints.join(',')
+        var canvasPointsString = canvasPoints.join(',');
+
 
         navigator.geolocation.getCurrentPosition((position) => {
             $http.post('http://localhost:1337/api/drawings', {
@@ -89,7 +90,7 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory, TextFacto
         canvas.addEventListener('touchstart', mDown);
         canvas.addEventListener('touchend', mUp);
         canvas.addEventListener('touchmove', mMove);
-        
+
         // Keyboard event handlers
         //canvas.addEventListener('mousedown', mDown);
         //canvas.addEventListener('mouseup', mUp);
@@ -182,6 +183,10 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory, TextFacto
         )
 
         canvas.draw(lastMousePosition, currentMousePosition, color);
+
+        var canvasPointsString = canvasPoints.join(',');
+        console.log(canvasPointsString);
+
     }
 
     /* -------------------- COLOR ELEMENT FUNCTIONS -------------------- */

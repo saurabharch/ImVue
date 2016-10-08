@@ -18,5 +18,3 @@ app.controller('TextCtrl', function($scope, TextFactory){
 		var fontFamily = $scope.fontFamily;
 	}
 });
-
-

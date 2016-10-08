@@ -1,7 +1,7 @@
 const router = require('express').Router() // eslint-disable-line new-cap
 module.exports = router;
 const Drawing = require('../../../db/models/drawing.js')
-const Location = require('../../../db/models/location.js')
+// const Location = require('../../../db/models/location.js')
 
 router.get('/', (req, res, next) => {
 
@@ -30,22 +30,7 @@ router.post('/', (req, res, next) => {
     Drawing.create(req.body)
         .then( drawing => { res.send(drawing) })
         .catch(next)
-})
-
-router.post('/longitude/:longitudeNum/latitude/:latitudeNum', (req, res, next) => {
-
-    console.log('longitude', req.params.longitudeNum)
-    console.log('latitude', req.params.latitudeNUm)
-
-    Location.findOrCreate({
-        where: { longitude: req.params.longitudeNum, latitude: req.params.latitudeNum }
-    }).spread(function(found,  created){
-        console.log('found', found, 'created', created)
-        res.send(found)
-    }).catch(next)
-
-})
-
+});
 
 router.delete('/:id', (req, res, next) => {
     console.log('Destoying drawing #{req.params.id}')
