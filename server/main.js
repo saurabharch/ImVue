@@ -2,25 +2,25 @@
 var chalk = require('chalk');
 var db = require('./db');
 var fs = require('fs');
-var path = require('Path')
+var path = require('path')
 
 // Create a node server instance! cOoL!
 var server;
 var options;
 
-// if ( process.env.NODE_ENV === 'production'){
+if ( process.env.NODE_ENV === 'production'){
 	server = require('http').createServer();
-// }
+}
 
-// else {
-// 	options = {
-// 		key: fs.readFileSync(path.join( __dirname, '/env/https/server.key')),
-// 	    cert: fs.readFileSync(path.join(__dirname, '/env/https/server.crt')),
-// 	    requestCert: false,
-// 	    rejectUnauthorized: false
-// 	}
-// 	server = require('https').createServer(options);
-// }
+else {
+	options = {
+		key: fs.readFileSync(path.join( __dirname, '/env/https/server.key')),
+	    cert: fs.readFileSync(path.join(__dirname, '/env/https/server.crt')),
+	    requestCert: false,
+	    rejectUnauthorized: false
+	}
+	server = require('https').createServer(options);
+}
 
 var createApplication = function () {
     var app = require('./app')(db);
