@@ -32,7 +32,9 @@ app.factory('signUpFactory', function($http, $q) {
 
     signUpFactory.postUser = function(user) {
 
-        $http.post('/api/user', user)
+        console.log("posting user")
+
+        $http.post('/api/user/register', user)
             .then(function(user) {}).catch(function(error) {
                 return error
             });

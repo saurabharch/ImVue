@@ -1,4 +1,4 @@
-app.factory('CameraFactory', function ($log){
+app.factory('CameraFactory', function (){
 
 	function streamCamera(){
 
