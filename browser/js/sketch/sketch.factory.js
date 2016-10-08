@@ -1,7 +1,7 @@
 /* eslint-disable  id-length */
 app.factory('SketchFactory', function($http, $log, geoLocationFactory, TextFactory){
 
-    var SketchFactory = {}
+    var db_Location = 'http://localhost:1337/api';
 
     var workspace;
     var doc;
@@ -19,7 +19,7 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory, TextFacto
 
     /* ---------------- SKETCH FACTORY ACCESSABLE FUNCTIONS ---------------- */
 
-    SketchFactory.initialize = function(init_workspace, init_doc){
+    function initialize(init_workspace, init_doc){
         workspace = init_workspace;
         doc = init_doc;
 
@@ -29,7 +29,7 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory, TextFacto
         TextFactory.initializeTextFactory(ctx);
     }
 
-    SketchFactory.saveImg = function(){
+    function saveImg(){
         // Clearn the canvas to show the user a response
         // Could change this later to display a button that says saved \
         // and they can click it to acknowledge?
@@ -38,7 +38,7 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory, TextFacto
         var canvasPointsString = canvasPoints.join(',')
 
         navigator.geolocation.getCurrentPosition((position) => {
-            $http.post('http://localhost:1337/api/drawings', {
+            $http.post( db_Location + '/drawings', {
                 image: canvasPointsString,
                 longitude: position.coords.longitude,
                 latitude: position.coords.latitude
@@ -48,9 +48,9 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory, TextFacto
 
     } /* End of saveImg Function */
 
-    SketchFactory.loadImg = function(id){
+    function loadImg(id){
 
-        $http.get('http://localhost:1337/api/drawings/' + id)
+        $http.get( db_Location + '/drawings/' + id)
         .then(function(response){
             return response.data.image;
         })
@@ -58,20 +58,35 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory, TextFacto
 
             var canvasArray = canvasString.split(',')
             for (var i = 0; i < canvasArray.length; i += 5 ){
-
-                canvas.draw(  /* Start Point */
-                             { x: canvasArray[i], y: canvasArray[i + 1] },          // eslint-disable-line id-length
-                             /* End Point */
-                             { x: canvasArray[i + 2], y: canvasArray[i + 3] },      // eslint-disable-line id-length
-                             /* Color */
-                             canvasArray[i + 4]
-                             );
+                canvas.draw(
+                    /* Start Point */
+                    { x: canvasArray[i], y: canvasArray[i + 1] },          // eslint-disable-line id-length
+                     /* End Point */
+                    { x: canvasArray[i + 2], y: canvasArray[i + 3] },      // eslint-disable-line id-length
+                    /* Color */
+                    canvasArray[i + 4]
+                );
             }
 
         })
         .catch($log)
 
     } /* End of load image function */
+
+    function loadImage(id){
+        $http.get( db_Location + '/images/' + id)
+        .then(function(response){
+            return response.data;
+        })
+        .then(function(img){
+            let imgTag = new Image();
+            imgTag.src = img.url;
+            imgTag.onload = () => { canvas.drawImage(imgTag, img.x, img.y) }
+
+        })
+        .catch($log)
+
+    }
 
     /* ---------------- SKETCH FACTORY HELPER FUNCTIONS ---------------- */
 
@@ -89,7 +104,6 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory, TextFacto
         canvas.addEventListener('touchstart', mDown);
         canvas.addEventListener('touchend', mUp);
         canvas.addEventListener('touchmove', mMove);
-        
         // Keyboard event handlers
         //canvas.addEventListener('mousedown', mDown);
         //canvas.addEventListener('mouseup', mUp);
@@ -214,6 +228,11 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory, TextFacto
     }
 
 
-    return SketchFactory
+    return {
+        initialize: initialize,
+        saveImg: saveImg,
+        loadImg: loadImg,
+        loadImage: loadImage
+    }
 
 })
