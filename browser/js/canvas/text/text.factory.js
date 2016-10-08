@@ -20,9 +20,16 @@ app.factory('TextFactory', function(){
         ctx.fillText(text, locX, locY);
 	}
 
+	function drawTextsOnCanvas(texts){
+		texts.forEach( text => {
+			drawText( text.size, text.font, text.color, text.x, text.y, text.content )
+		})
+	}
+
 	return {
 		initializeTextFactory: initializeTextFactory,
 		drawText: drawText,
+		drawTextsOnCanvas: drawTextsOnCanvas,
 		getTextSizes: getTextSizes,
 		getFontFamilies: getFontFamilies,
 	}
