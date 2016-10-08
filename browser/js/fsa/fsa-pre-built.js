@@ -98,11 +98,11 @@
             console.log('userName: ', userName)
             console.log('email: ', email)
             console.log('password: ', password)
-            return $http.post('/api/users', { userName: userName, email: email, password: password })
+            return $http.post('/api/users/register', { userName: userName, email: email, password: password })
                 .then(function(response) {
+                    console.log(response)
                     Session.create(response.data);
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                    // $state.go('home');
                 });
         };
 

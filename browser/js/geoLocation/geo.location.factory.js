@@ -1,6 +1,6 @@
 app.factory('geoLocationFactory', function () {
 
-    var geoLocationPos;
+    // var geoLocationPos;
 
     var geoLocationFactory = {}
 

@@ -74,11 +74,12 @@ let randomDotGrid = () => {
 let seedUsers = function () {
 
     let users = [
-        {
+        {   userName:'Jose',
             email: 'testing@fsa.com',
             password: 'password'
         },
         {
+            userName:'President',
             email: 'obama@gmail.com',
             password: 'potus'
         }
