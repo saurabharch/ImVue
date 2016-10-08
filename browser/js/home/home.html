@@ -2,7 +2,8 @@
     <div ng-controller='TextCtrl'>
         <form name='textForm'>
 
-            <label>Text</label>    
+            <label>Text</label> 
+
             <input ng-model='textInput' ng-show="showInput" type='input' placeholder="Input Text Here">
 
             <lable>Font</lable>
@@ -18,13 +19,12 @@
             <button class="button" style='background-color: white' ng-click='addText(textInput)'>Add Text</button>
 
         </form>
+
     </div>
 
     <div ng-controller="CameraCtrl">
         <video autoplay="true" id="videoElement"></video>
     </div>
-
-    <!--<div>Color: <input class="jscolor" value="ab2567"></div>-->
     
     <div id="tester" ng-controller="SketchCtrl">
 
