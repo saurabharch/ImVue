@@ -62,6 +62,7 @@ body, html, #containerr {
   width: 100%;
   height: 87%;
   margin: auto;
+  overflow: scrollable;
 }
 
 .cont {
@@ -113,7 +114,7 @@ body, html, #containerr {
   padding: 40px;
 }
 
-.color {
+.text {
   z-index: 2;
   background-color: transparent;
   font-size: 80px;
@@ -122,12 +123,21 @@ body, html, #containerr {
   display: block;
 }
 
+.color {
+  z-index: 2;
+  background-color: transparent;
+  font-size: 80px;
+  padding: 40px;
+  margin-top: 95%;
+  display: block;
+}
+
 #color-selector {
   z-index: 2;
   background-color: transparent;
   font-size: 80px;
   padding: 40px;
-  margin-top: 122%;
+  margin-top: 95%;
   display: block;
 }
 
@@ -149,5 +159,52 @@ body, html, #containerr {
 }
 
 #map {
-  height: 100%
+  height: 100%;
 }
+
+#list-group {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+#list-group-item {
+  width: 100%;
+  height: 10%;
+  font-size: 24px;
+  border: solid;
+  border-width: thin;
+  text-align: center;
+}
+
+#search-bar {
+  width: 100%;
+  font-size: 24px;
+  border: solid;
+  border-width: thin;
+  background-color: transparent;
+}
+
+.even {
+  background: rgba(128,128,128, .2);
+}
+
+.odd {
+  background: rgba(128,128,128, .5);
+}
+
+.filtery {
+  border: solid;
+  border-width: thin;
+  background-color: white;
+}
+
+.input-group-addon {
+  color: black;
+  font-size: 24px;
+}
+
+
+
+
+
