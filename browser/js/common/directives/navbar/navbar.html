@@ -5,11 +5,11 @@
     <!-- TODO hook up with functions -->
     <span class="send glyphicon glyphicon-send" ng-click="savePng()"></span>
 
-    <button class="logIn glyphicons glyphicons-log-in" ui-sref="login">signup</button>
-    <button class="logIn glyphicons glyphicons-log-in" ui-sref="signUp">Login</button>
-    <span class="profile glyphicon glyphicon-user" ui-sref="profile"></span>
+    <button ng-show="!user" type="button" class="logIn btn btn-default" ui-sref="login">signup</button>
+    <button ng-show="!user" type="button" class="logIn btn btn-default" ui-sref="signUp">Login</button>
+        <a ng-show="user" class="profile glyphicon glyphicon-user" ui-sref="profile({userId:user.id})"></a>
 </div>
-
+<span > Name of user is {{user}}</span>
 
 <!--<nav class="navbar navbar-static-top">
     <div class="container">
