@@ -1,6 +1,6 @@
 const router = require('express').Router() // eslint-disable-line new-cap
 module.exports = router;
-// const Location = require('../../../db/models/location.js');
+
 const Drawing = require('../../../db/models/drawing.js');
 const User = require('../../../db/models/user.js');
 

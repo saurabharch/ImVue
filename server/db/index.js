@@ -1,15 +1,18 @@
 'use strict';
-var db = require('./_db');
+const db = require('./_db');
+const User = require('./models/user');
+const Location = require('./models/location');
+const Drawing = require('./models/drawing');
+const Text = require('./models/text');
+const Image = require('./models/image');
+
 module.exports = db;
 
-// eslint-disable-next-line no-unused-vars
-var User = require('./models/user');
-var Location_Drawing = require('./models/location_drawing');
-var Location = require('./models/location');
-var Drawing = require('./models/drawing');
+Location.hasMany(Drawing);
+Location.hasMany(Text);
+Location.hasMany(Image);
+Location.hasMany(User, {as: 'author'});
 
-Location.belongsToMany(Drawing, {through: Location_Drawing});
-Drawing.belongsToMany(Location, {through: Location_Drawing});
-Drawing.belongsTo(User, {as: 'Artist'})
-Drawing.belongsTo(User, {as: 'Viewer'})
-User.hasMany(Drawing);
+Drawing.belongsTo(Location);
+Text.belongsTo(Location);
+Image.belongsTo(Location);

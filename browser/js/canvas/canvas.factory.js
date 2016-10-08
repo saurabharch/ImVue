@@ -60,6 +60,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
         canvas.addEventListener('touchstart', mDown);
         canvas.addEventListener('touchend', mUp);
         canvas.addEventListener('touchmove', mMove);
+
         // Keyboard event handlers
         //canvas.addEventListener('mousedown', mDown);
         //canvas.addEventListener('mouseup', mUp);
@@ -146,7 +147,9 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
         // Save points for each drawing
         DrawingFactory.addDrawingPoint(lastMousePosition, currentMousePosition, ColorFactory.getCurrentColor())
 
+
         canvas.draw(lastMousePosition, currentMousePosition, ColorFactory.getCurrentColor());
+
     }
 
     return {
