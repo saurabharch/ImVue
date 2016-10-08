@@ -1,17 +1,31 @@
 <div id="bottom">
     <div ng-controller='TextCtrl'>
-        <form novalidate name='textForm'>
-            <input ng-model='textInput' ng-show="showInput" type='input'>
-            <button class="button" ng-click='addText(textInput)'>Add Text</button>
-        </form> 
+        <form name='textForm'>
+
+            <label>Text</label>    
+            <input ng-model='textInput' ng-show="showInput" type='input' placeholder="Input Text Here">
+
+            <lable>Font</lable>
+            <select ng-model="fontFamily" style="background-color: white">
+                <option ng-repeat='font in getFontFamilies()' value='{{font}}'>{{font}}</option>
+            </select>
+
+            <label>Size</label>
+            <select ng-model='fontSize' style="background-color: white">
+                <option ng-repeat='size in getTextSizes()' value='{{size}}'>{{size}}</option>
+            </select>
+            
+            <button class="button" style='background-color: white' ng-click='addText(textInput)'>Add Text</button>
+
+        </form>
     </div>
+
     <div ng-controller="CameraCtrl">
         <video autoplay="true" id="videoElement"></video>
     </div>
 
     <!--<div>Color: <input class="jscolor" value="ab2567"></div>-->
-
-
+    
     <div id="tester" ng-controller="SketchCtrl">
 
         <canvas id="paint"></canvas>
