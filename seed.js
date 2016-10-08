@@ -12,8 +12,8 @@ const Promise = require('sequelize').Promise;
 
 /* seed data */
 const users = [
-  {email: 'testing@fsa.com', password: 'password'},
-  {email: 'obama@gmail.com', password: 'potus'}
+  {userName:"Jose",email: 'testing@fsa.com', password: 'password'},
+  {userName:"President",email: 'obama@gmail.com', password: 'potus'}
 ];
 
 const texts = [
