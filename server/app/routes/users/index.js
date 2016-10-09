@@ -5,27 +5,13 @@ const Drawing = require('../../../db/models/drawing.js');
 const User = require('../../../db/models/user.js');
 
 router.get('/', (req, res, next) => {
-
-
     console.log('Retriving All Users')
     User.findAll()
         .then(Users => {
             res.send(Users)
         })
         .catch(next)
-})
-
-
-router.get('/:id/drawings', (req, res, next) => {
-    Drawing.findAll({
-        where:{
-            userId : req.params.id
-        }
-    }).then((drawings) => {
-        res.send(drawings)
-    }).catch(next)
-
-})
+});
 
 router.get('/:id', (req, res, next) => {
     console.log('Retriving User number #{req.params.id}')
@@ -34,7 +20,7 @@ router.get('/:id', (req, res, next) => {
             res.send(User)
         })
         .catch(next)
-})
+});
 
 // router.post('/', (req, res, next) => {
 //     console.log('Creating new User')
@@ -89,23 +75,17 @@ router.put('/:id', (req, res, next) => {
 })
 
 
-// router.get('/ping/:longitude/:latitude', (req, res, next) => {
-//     var range = 2000 / 100000;
-//     var lat = parseFloat(req.params.latitude);
-//     var lon = parseFloat(req.params.longitude);
-//
-//     Drawing.findAll({
-//         where: {
-//             $and: {
-//                 latitude: {
-//                     $between: [lat - range, lat + range]
-//                 },
-//                 longitude: {
-//                     $between: [lon - range, lon + range]
-//                 }
-//             }
-//         }
-//     })
-//         .then(drawings => res.send(drawings))
-//         .catch(next);
-// })
+
+router.get('/:userId/drawings', (req, res, next) => {
+    // WE HAVEN'T SETUP THE ASSOCIATION BETWEEN USER AND DRAWINGS
+    // THIS ROUTE IS CURRENTLY NOT WORKING
+    // ref => profile.factory.js
+    Drawing.findAll({
+        where:{
+            userId : req.params.userId
+        }
+    }).then((drawings) => {
+        res.send(drawings)
+    }).catch(next)
+
+});

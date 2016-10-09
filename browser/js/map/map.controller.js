@@ -46,7 +46,7 @@ app.controller('MapCtrl', function ($scope, geoLocationFactory, $http) {
           styles: styles['hide']
         })
         var currentPositionMarker = createMarker(currentPos, 'current Location');
-        return $http.get(`/api/locations/ping/${coords.longitude}/${coords.latitude}`)
+        return $http.get(`/api/locations/${coords.longitude}/${coords.latitude}`)
       })
       .then(function (drawings) {
         for (var i = 0; i < drawings.data.length; i++) {
