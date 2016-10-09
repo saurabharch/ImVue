@@ -6,7 +6,7 @@ app.controller('SignUpCtrl', function($scope, AuthService, $state, signUpFactory
     $scope.sendSignUp = function(signUpUser) {
 
         $scope.error = null;
-
+console.log(AuthService)
 
         AuthService.signUp(signUpUser.userName, signUpUser.email, signUpUser.password)
             .then(() => {
