@@ -35,8 +35,11 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
     function loadCanvasContent(){
         navigator.geolocation.getCurrentPosition((position) => {
 
-            $http.get('http://localhost:1337/api/' + position.coords.longitude, position.coords.latitude)
+            $http.get('http://localhost:1337/api/locations' + position.coords.longitude, position.coords.latitude)
             .then( response => {
+                //TODO: CHECKOUT RESPONSE FORMAT
+                console.log(response.data);
+
                 DrawingFactory.loadDrawingsOnCanvas(response.drawings);
                 ImageFactory.loadImagesOnCanvas(response.images);
                 TextFactory.loadTextsOnCanvas(response.texts);

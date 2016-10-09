@@ -1,15 +1,48 @@
 const router = require('express').Router() // eslint-disable-line new-cap
 module.exports = router;
 const Drawing = require('../../../db/models/drawing.js')
-// const Location = require('../../../db/models/location.js')
+const Location = require('../../../db/models/location.js')
 
-router.get('/', (req, res, next) => {
 
-    Drawing.findAll()
-        .then( drawings => { res.send(JSON.stringify(drawings));})
+router.post('/', (req, res, next) => {
+    Location.create({
+        latitude: req.body.location.coords.latitude,
+        longitude:  req.body.location.coords.longitude
+    })
+        .then(function(location) {
+            return location.createDrawing(req.body.image);
+        })
+        .then( drawing => { res.send(drawing) })
         .catch(next)
+});
 
-})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 router.get('/:id', (req, res, next) => {
 
@@ -25,12 +58,6 @@ router.get('/:id/image', (req, res, next) => {
         .catch(next)
 })
 
-router.post('/', (req, res, next) => {
-
-    Drawing.create(req.body)
-        .then( drawing => { res.send(drawing) })
-        .catch(next)
-});
 
 router.delete('/:id', (req, res, next) => {
     console.log('Destoying drawing #{req.params.id}')

@@ -2,10 +2,7 @@ app.factory('signUpFactory', function($http, $q) {
     var signUpFactory = {}
 
     signUpFactory.getUserEmail = function(email) {
-        console.log(email)
-
-
-        return $http.get('/api/user/email/' + email)
+        return $http.get('/api/users/email/' + email)
             .then(function(user) {
                 console.log(user)
                 if (user.data) {
@@ -16,11 +13,8 @@ app.factory('signUpFactory', function($http, $q) {
             })
     }
 
-
     signUpFactory.getUserName = function(name) {
-
-
-        return $http.get('/api/user/username/' + name)
+        return $http.get('/api/users/username/' + name)
             .then(function(userName) {
                 if (userName.data) {
                     return true;
@@ -31,10 +25,7 @@ app.factory('signUpFactory', function($http, $q) {
     }
 
     signUpFactory.postUser = function(user) {
-
-        console.log("posting user")
-
-        $http.post('/api/user/register', user)
+        $http.post('/api/users/register', user)
             .then(function(user) {}).catch(function(error) {
                 return error
             });

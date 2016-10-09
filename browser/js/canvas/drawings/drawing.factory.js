@@ -20,11 +20,8 @@ app.factory('DrawingFactory', function($http, $log){
         var drawingPointsString = drawingPoints.join(',')
 
         navigator.geolocation.getCurrentPosition((position) => {
-            $http.post('http://localhost:1337/api/drawings', {
-                image: drawingPointsString,
-                longitude: position.coords.longitude,
-                latitude: position.coords.latitude
-            })
+
+			$http.post('/api/drawings', {location: position, image:  drawingPointsString})
             .catch($log)
         })
 

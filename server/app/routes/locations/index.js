@@ -1,23 +1,16 @@
-const router = require('express').Router() // eslint-disable-line new-cap
+const router = require('express').Router();
 module.exports = router;
-// const Location = require('../../../db/models/location.js');
+const Location = require('../../../db/models/location.js');
 const Drawing = require('../../../db/models/drawing.js');
+const Text = require('../../../db/models/text.js');
+const Image = require('../../../db/models/image.js');
 
-// router.get('/', (req, res, next) => {
-//     console.log('Retriving All Location')
-//     Location.findAll()
-//         .then(Locations => {
-//             res.send(Locations)
-//         })
-//         .catch(next)
-// })
-
-router.get('/ping/:longitude/:latitude', (req, res, next) => {
+router.get('/:lat/:lng', (req, res, next) => {
     var range = 2000 / 100000;
-    var lat = parseFloat(req.params.latitude);
-    var lon = parseFloat(req.params.longitude);
+    var lat = parseFloat(req.params.lat);
+    var lon = parseFloat(req.params.lng);
 
-    Drawing.findAll({
+    Location.findAll({
         where: {
             $and: {
                 latitude: {
@@ -27,11 +20,17 @@ router.get('/ping/:longitude/:latitude', (req, res, next) => {
                     $between: [lon - range, lon + range]
                 }
             }
-        }
+        },
+        include: [
+            {model: Drawing},
+            {model: Text},
+            {model: Image}
+        ]
     })
-        .then(drawings => res.send(drawings))
+        .then(allInfo => res.send(allInfo))
         .catch(next);
-})
+});
+
 
 // router.get('/:id', (req, res, next) => {
 //     console.log('Retriving drawing number #{req.params.id}')
@@ -78,4 +77,13 @@ router.get('/ping/:longitude/:latitude', (req, res, next) => {
 //         })
 //         .catch(next)
 
+// })
+
+// router.get('/', (req, res, next) => {
+//     console.log('Retriving All Location')
+//     Location.findAll()
+//         .then(Locations => {
+//             res.send(Locations)
+//         })
+//         .catch(next)
 // })
