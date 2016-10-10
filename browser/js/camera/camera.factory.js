@@ -27,7 +27,7 @@ app.factory('CameraFactory', function (){
 		}
 
 		function videoError(event){
-			console.log('Error: navigator.getUserMedia not a function')
+			console.log('Error: navigator.getUserMedia not a function', event)
 		}
 	}
 

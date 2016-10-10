@@ -1,4 +1,4 @@
-app.factory('DrawingFactory', function($http, $log){
+app.factory('DrawingFactory', function(){
 
 	let drawingPoints = [];
 	let canvas;

@@ -1,4 +1,4 @@
-app.factory('signUpFactory', function($http, $q) {
+app.factory('signUpFactory', function($http, $log) {
     var signUpFactory = {}
 
     signUpFactory.getUserEmail = function(email) {
@@ -26,9 +26,8 @@ app.factory('signUpFactory', function($http, $q) {
 
     signUpFactory.postUser = function(user) {
         $http.post('/api/users/register', user)
-            .then(function(user) {}).catch(function(error) {
-                return error
-            });
+            .then(function() {})
+            .catch($log);
     }
     return signUpFactory
 })

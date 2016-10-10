@@ -1,4 +1,4 @@
-app.controller('SignUpCtrl', function($scope, AuthService, $state, signUpFactory) {
+app.controller('SignUpCtrl', function($scope, AuthService, $state) {
 
     $scope.login = {};
     $scope.error = null;

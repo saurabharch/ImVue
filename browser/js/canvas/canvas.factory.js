@@ -1,4 +1,4 @@
-app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFactory, TextFactory, DrawingFactory, ImageFactory, $state){ // eslint-disable-line max-params
+app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFactory, TextFactory, DrawingFactory, ImageFactory){ // eslint-disable-line max-params
 
 	var workspace;
     var doc;
@@ -27,35 +27,36 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
     function saveCanvasContent(){
         let drawingToSave = DrawingFactory.saveDrawing();
         let texts = []; //TextFactory.saveTexts();
-        let images = {source: 'waldo.png', x: 100, y: 200};
+        let images = {source: 'waldo.png', x: 100, y: 200}; // eslint-disable-line id-length
 
         //let images = ImageFactory.saveImages();
 
         navigator.geolocation.getCurrentPosition((position) => {
-            
-            $http.post('https://localhost:1337/api/locations/' + position.coords.latitude + "/" + position.coords.longitude, {drawing: {image: drawingToSave}, texts: texts, images: images} )
-            .then( response => {
-                alert("Drawing Saved Successfully")
+
+            $http.post('https://localhost:1337/api/locations/' + position.coords.latitude + '/' + position.coords.longitude, {drawing: {image: drawingToSave}, texts: texts, images: images} )
+            .then( () => {
+                alert('Drawing Saved Successfully') // eslint-disable-line no-alert
             })
+            .catch($log)
 
         })
     }
 
     function loadCanvasContent(){
+
         navigator.geolocation.getCurrentPosition((position) => {
-            
-            $http.get('https://localhost:1337/api/locations/' + position.coords.latitude + "/" + position.coords.longitude )
+            $http.get('https://localhost:1337/api/locations/' + position.coords.latitude + '/' + position.coords.longitude )
             .then( response => {
-                
+
                 let drawings = [];
                 let texts = [];
                 let images = [];
 
                 response.data.forEach(function(location){
                     // Turnary array pushes
-                    if( location.drawings.length )  { drawings = drawings.concat(location.drawings) }
-                    if( location.texts.length )     { texts = texts.concat(location.texts) }    
-                    if( location.images.length )    { images = images.concat(location.images)  } 
+                    if ( location.drawings.length )  { drawings = drawings.concat(location.drawings) }
+                    if ( location.texts.length )     { texts = texts.concat(location.texts) }
+                    if ( location.images.length )    { images = images.concat(location.images)  }
                 })
 
                 DrawingFactory.drawDrawingsOnCanvas(drawings);

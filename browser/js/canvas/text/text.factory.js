@@ -26,11 +26,11 @@ app.factory('TextFactory', function(){
         ctx.fillStyle = color;
         ctx.fillText(content, locX, locY);
 
-        texts.push({size: size, font: font, color: color, x: locX, y: locY, content: content})
+        texts.push({size: size, font: font, color: color, x: locX, y: locY, content: content}) // eslint-disable-line id-length
 	}
 
-	function drawTextsOnCanvas(texts){
-		texts.forEach( text => {
+	function drawTextsOnCanvas(textsToDraw){
+		textsToDraw.forEach( text => {
 			drawText( text.size, text.font, text.color, text.x, text.y, text.content )
 		})
 	}
@@ -42,7 +42,7 @@ app.factory('TextFactory', function(){
 		saveTexts: saveTexts,
 		getTextSizes: getTextSizes,
 		getFontFamilies: getFontFamilies,
-		//getTextLocations: getTextLocations
+		fetchTextLocations: fetchTextLocations
 	}
 
 });
@@ -86,7 +86,7 @@ function fetchTextLocations(){
 	let centerH = 100;
 	let right = 400;
 
-	return [
+	return [ /*eslint-disable id-length*/
 		{ locString: 'top-left', 		locCoords: 	{x: top, y: left } },
 		{ locString: 'top-center', 		locCoords: 	{x: top, y: centerH } },
 		{ locString: 'top-right', 		locCoords: 	{x: top, y: right } },
@@ -96,5 +96,5 @@ function fetchTextLocations(){
 		{ locString: 'bottom-left', 	locCoords: 	{x: bottom, y: left } },
 		{ locString: 'bottom-center', 	locCoords: 	{x: bottom, y: centerH } },
 		{ locString: 'bottom-right', 	locCoords: 	{x: bottom, y: right } },
-	]
+	]		/*eslint-enable id-length*/
 }

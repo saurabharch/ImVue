@@ -16,34 +16,6 @@ router.post('/', (req, res, next) => {
         .catch(next)
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 router.get('/:id', (req, res, next) => {
 
     Drawing.findById(req.params.id)
