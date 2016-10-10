@@ -11,7 +11,7 @@ module.exports = db;
 Location.hasMany(Drawing);
 Location.hasMany(Text);
 Location.hasMany(Image);
-Location.hasMany(User, {as: 'author'});
+// Location.hasMany(User, {as: 'author'});
 
 Drawing.belongsTo(Location);
 Text.belongsTo(Location);

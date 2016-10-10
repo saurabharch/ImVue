@@ -12,61 +12,65 @@ const Promise = require('sequelize').Promise;
 
 /* seed data */
 const users = [
-  {userName:"Jose",email: 'testing@fsa.com', password: 'password'},
-  {userName:"President",email: 'obama@gmail.com', password: 'potus'}
+  {userName: 'Jose', email: 'testing@fsa.com', password: 'password'},
+  {userName: 'President', email: 'obama@gmail.com', password: 'potus'},
+  {userName: 'Han', email: 'han@gmail.com', password: 'han1234'},
+  {userName: 'John Doe', email: 'john@gmail.com', password: 'doe'},
+  {userName: 'Jane Doe', email: 'jane@gmail.com', password: 'doe'}
 ];
 
+
 const texts = [
-  {font: 'serif', size: 32, color: 'black', x: 843, y: 357},
-  {font: 'Arial', size: 40, color: 'black', x: 478, y: 290},
-  {font: 'Verdana', size: 144, color: 'black', x: 816, y: 765},
-  {font: 'serif', size: 110, color: 'white', x: 383, y: 111},
-  {font: 'Times New Roman', size: 73, color: 'black', x: 112, y: 463},
-  {font: 'Times New Roman', size: 79, color: 'purple', x: 583, y: 580},
-  {font: 'Times New Roman', size: 102, color: 'black', x: 118, y: 519},
-  {font: 'Courier New', size: 67, color: 'yellow', x: 984, y: 265},
-  {font: 'Arial', size: 133, color: 'green', x: 301, y: 984},
-  {font: 'Times New Roman', size: 70, color: 'yellow', x: 482, y: 708},
-  {font: 'serif', size: 40, color: 'white', x: 641, y: 588},
-  {font: 'Times New Roman', size: 76, color: 'white', x: 950, y: 944},
-  {font: 'sans-serif', size: 107, color: 'white', x: 238, y: 628},
-  {font: 'Times New Roman', size: 33, color: 'purple', x: 139, y: 5},
-  {font: 'sans-serif', size: 77, color: 'green', x: 874, y: 150},
-  {font: 'serif', size: 31, color: 'green', x: 26, y: 122},
-  {font: 'Times New Roman', size: 10, color: 'white', x: 266, y: 48},
-  {font: 'Courier New', size: 45, color: 'white', x: 458, y: 506},
-  {font: 'sans-serif', size: 111, color: 'green', x: 120, y: 71},
-  {font: 'Arial', size: 55, color: 'white', x: 729, y: 126},
-  {font: 'sans-serif', size: 42, color: 'white', x: 276, y: 347},
-  {font: 'Arial', size: 77, color: 'blue', x: 348, y: 887},
-  {font: 'Times New Roman', size: 80, color: 'black', x: 395, y: 497},
-  {font: 'Courier New', size: 126, color: 'blue', x: 422, y: 483},
-  {font: 'sans-serif', size: 91, color: 'black', x: 628, y: 79},
-  {font: 'Verdana', size: 1, color: 'red', x: 517, y: 863},
-  {font: 'Arial', size: 146, color: 'blue', x: 80, y: 418},
-  {font: 'sans-serif', size: 14, color: 'black', x: 933, y: 272},
-  {font: 'Times New Roman', size: 46, color: 'green', x: 517, y: 600},
-  {font: 'Courier New', size: 26, color: 'green', x: 227, y: 964},
-  {font: 'Courier New', size: 16, color: 'blue', x: 25, y: 411},
-  {font: 'sans-serif', size: 23, color: 'black', x: 185, y: 163},
-  {font: 'Courier New', size: 130, color: 'black', x: 867, y: 701},
-  {font: 'Times New Roman', size: 67, color: 'purple', x: 622, y: 891},
-  {font: 'Times New Roman', size: 52, color: 'purple', x: 261, y: 893},
-  {font: 'Verdana', size: 34, color: 'yellow', x: 439, y: 5},
-  {font: 'Verdana', size: 93, color: 'black', x: 554, y: 298},
-  {font: 'Verdana', size: 141, color: 'purple', x: 897, y: 797},
-  {font: 'Times New Roman', size: 132, color: 'red', x: 805, y: 960},
-  {font: 'sans-serif', size: 97, color: 'blue', x: 147, y: 395},
-  {font: 'Verdana', size: 1, color: 'blue', x: 545, y: 312},
-  {font: 'sans-serif', size: 5, color: 'purple', x: 219, y: 847},
-  {font: 'Verdana', size: 86, color: 'yellow', x: 712, y: 550},
-  {font: 'sans-serif', size: 23, color: 'red', x: 62, y: 654},
-  {font: 'sans-serif', size: 30, color: 'yellow', x: 121, y: 556},
-  {font: 'Arial', size: 9, color: 'purple', x: 515, y: 467},
-  {font: 'Arial', size: 49, color: 'black', x: 936, y: 116},
-  {font: 'Courier New', size: 32, color: 'black', x: 217, y: 350},
-  {font: 'Arial', size: 130, color: 'blue', x: 997, y: 22},
-  {font: 'serif', size: 23, color: 'green', x: 20, y: 215}
+  {font: 'serif', size: 32, color: 'black', x: 843, y: 357, content: 'Hello World'},
+  {font: 'Arial', size: 40, color: 'black', x: 478, y: 290, content: 'Awesome'},
+  {font: 'Verdana', size: 144, color: 'black', x: 816, y: 765, content: 'Awesome'},
+  {font: 'serif', size: 110, color: 'white', x: 383, y: 111, content: 'Awesome'},
+  {font: 'Times New Roman', size: 73, color: 'black', x: 112, y: 463, content: 'Hello World'},
+  {font: 'Times New Roman', size: 79, color: 'purple', x: 583, y: 580, content: 'Awesome'},
+  {font: 'Times New Roman', size: 102, color: 'black', x: 118, y: 519, content: 'Splendid'},
+  {font: 'Courier New', size: 67, color: 'yellow', x: 984, y: 265, content: 'Amazing!'},
+  {font: 'Arial', size: 133, color: 'green', x: 301, y: 984, content: 'Awesome'},
+  {font: 'Times New Roman', size: 70, color: 'yellow', x: 482, y: 708, content: 'Hello World'},
+  {font: 'serif', size: 40, color: 'white', x: 641, y: 588, content: 'Amazing!'},
+  {font: 'Times New Roman', size: 76, color: 'white', x: 950, y: 944, content: 'Splendid'},
+  {font: 'sans-serif', size: 107, color: 'white', x: 238, y: 628, content: 'Amazing!'},
+  {font: 'Times New Roman', size: 33, color: 'purple', x: 139, y: 5, content: 'Splendid'},
+  {font: 'sans-serif', size: 77, color: 'green', x: 874, y: 150, content: 'Amazing!'},
+  {font: 'serif', size: 31, color: 'green', x: 26, y: 122, content: 'Awesome'},
+  {font: 'Times New Roman', size: 10, color: 'white', x: 266, y: 48, content: 'Amazing!'},
+  {font: 'Courier New', size: 45, color: 'white', x: 458, y: 506, content: 'Amazing!'},
+  {font: 'sans-serif', size: 111, color: 'green', x: 120, y: 71, content: 'Awesome'},
+  {font: 'Arial', size: 55, color: 'white', x: 729, y: 126, content: 'Splendid'},
+  {font: 'sans-serif', size: 42, color: 'white', x: 276, y: 347, content: 'Splendid'},
+  {font: 'Arial', size: 77, color: 'blue', x: 348, y: 887, content: 'Awesome'},
+  {font: 'Times New Roman', size: 80, color: 'black', x: 395, y: 497, content: 'Splendid'},
+  {font: 'Courier New', size: 126, color: 'blue', x: 422, y: 483, content: 'Amazing!'},
+  {font: 'sans-serif', size: 91, color: 'black', x: 628, y: 79, content: 'Amazing!'},
+  {font: 'Verdana', size: 1, color: 'red', x: 517, y: 863, content: 'Awesome'},
+  {font: 'Arial', size: 146, color: 'blue', x: 80, y: 418, content: 'Amazing!'},
+  {font: 'sans-serif', size: 14, color: 'black', x: 933, y: 272, content: 'Awesome'},
+  {font: 'Times New Roman', size: 46, color: 'green', x: 517, y: 600, content: 'Amazing!'},
+  {font: 'Courier New', size: 26, color: 'green', x: 227, y: 964, content: 'What up'},
+  {font: 'Courier New', size: 16, color: 'blue', x: 25, y: 411, content: 'Awesome'},
+  {font: 'sans-serif', size: 23, color: 'black', x: 185, y: 163, content: 'What up'},
+  {font: 'Courier New', size: 130, color: 'black', x: 867, y: 701, content: 'Hello World'},
+  {font: 'Times New Roman', size: 67, color: 'purple', x: 622, y: 891, content: 'What up'},
+  {font: 'Times New Roman', size: 52, color: 'purple', x: 261, y: 893, content: 'Awesome'},
+  {font: 'Verdana', size: 34, color: 'yellow', x: 439, y: 5, content: 'What up'},
+  {font: 'Verdana', size: 93, color: 'black', x: 554, y: 298, content: 'What up'},
+  {font: 'Verdana', size: 141, color: 'purple', x: 897, y: 797, content: 'Hello World'},
+  {font: 'Times New Roman', size: 132, color: 'red', x: 805, y: 960, content: 'Hello World'},
+  {font: 'sans-serif', size: 97, color: 'blue', x: 147, y: 395, content: 'What up'},
+  {font: 'Verdana', size: 1, color: 'blue', x: 545, y: 312, content: 'What up'},
+  {font: 'sans-serif', size: 5, color: 'purple', x: 219, y: 847, content: 'Awesome'},
+  {font: 'Verdana', size: 86, color: 'yellow', x: 712, y: 550, content: 'Splendid'},
+  {font: 'sans-serif', size: 23, color: 'red', x: 62, y: 654, content: 'What up'},
+  {font: 'sans-serif', size: 30, color: 'yellow', x: 121, y: 556, content: 'Hello World'},
+  {font: 'Arial', size: 9, color: 'purple', x: 515, y: 467, content: 'Splendid'},
+  {font: 'Arial', size: 49, color: 'black', x: 936, y: 116, content: 'What up'},
+  {font: 'Courier New', size: 32, color: 'black', x: 217, y: 350, content: 'Hello World'},
+  {font: 'Arial', size: 130, color: 'blue', x: 997, y: 22, content: 'Splendid'},
+  {font: 'serif', size: 23, color: 'green', x: 20, y: 215, content: 'Hello World'}
 ];
 
 const drawings = [
@@ -247,7 +251,11 @@ let seedTexts = () => {
       .then(function(createdText) {
         return createdText.setLocation(Math.floor(Math.random() * 50 + 1))
       })
-      .then(assignedText => assignedText.save())
+      .then(function(txt) {
+        return User.findById(Math.floor(Math.random() * users.length + 1))
+          .then(user => txt.setUser(user))
+      })
+      // .then(assignedText => assignedText.save())
   })
   return Promise.all(creatingTexts);
 };
@@ -259,7 +267,11 @@ let seedDrawings = () => {
       .then(function(createdDrawing) {
         return createdDrawing.setLocation(Math.floor(Math.random() * 50 + 1))
       })
-      .then(assignedDrawing => assignedDrawing.save())
+      .then(function(drw) {
+        return User.findById(Math.floor(Math.random() * users.length + 1))
+          .then(user => drw.setUser(user))
+      })
+      // .then(assignedDrawing => assignedDrawing.save())
   })
   return Promise.all(creatingDrawings);
 };
@@ -271,7 +283,11 @@ let seedImages = () => {
       .then(function(createdImage) {
         return createdImage.setLocation(Math.floor(Math.random() * 50 + 1))
       })
-      .then(assignedImage => assignedImage.save())
+      .then(function(img) {
+        return User.findById(Math.floor(Math.random() * users.length + 1))
+          .then(user => img.setUser(user))
+      })
+      // .then(assignedImage => assignedImage.save())
   })
   return Promise.all(creatingImages);
 };
