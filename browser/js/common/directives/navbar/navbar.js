@@ -13,7 +13,6 @@ app.directive('navbar', function( $rootScope, AuthService, AUTH_EVENTS, $state, 
         //         { label: 'Members Only', state: 'membersOnly', auth: true },
         //         { label: 'Profile', state: 'profile'}
         //     ];
-
             scope.user = null;
 
             scope.saveCanvas = CanvasFactory.saveCanvasContent();
