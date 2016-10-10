@@ -32,6 +32,10 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
         DrawingFactory.saveDrawing();
     }
 
+    function saveCanvasContent(){
+        //do something
+    }
+
     function loadCanvasContent(){
         navigator.geolocation.getCurrentPosition((position) => {
             
@@ -51,7 +55,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
                 DrawingFactory.drawDrawingsOnCanvas(drawings);
                 TextFactory.drawTextsOnCanvas(texts);
-                ImageFactory.drawImagesOnCanvas(images);
+                //ImageFactory.drawImagesOnCanvas(images);
 
             })
             .catch($log)
@@ -167,7 +171,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
     return {
         initializeCanvas: initializeCanvas,
-        saveImage: saveImage,
+        saveCanvasContent: saveCanvasContent,
         loadCanvasContent: loadCanvasContent,
     }
 
