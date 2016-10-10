@@ -1,6 +1,7 @@
 app.factory('TextFactory', function(){
 
-	var ctx;
+	let ctx;
+	let texts = [];
 
 	function initializeTextFactory(canvasCtx){
 		ctx = canvasCtx;
@@ -14,10 +15,18 @@ app.factory('TextFactory', function(){
 		return fetchFontFamilies();
 	}
 
-	function drawText( size, font, color, locX, locY, text){
+	function saveTexts(){
+		let holdTexts = texts;
+		texts = [];
+		return holdTexts;
+	}
+
+	function drawText( size, font, color, locX, locY, content){
 		ctx.font =  size + 'px ' + font;
         ctx.fillStyle = color;
-        ctx.fillText(text, locX, locY);
+        ctx.fillText(content, locX, locY);
+
+        texts.push({size: size, font: font, color: color, x: locX, y: locY, content: content})
 	}
 
 	function drawTextsOnCanvas(texts){
@@ -30,8 +39,10 @@ app.factory('TextFactory', function(){
 		initializeTextFactory: initializeTextFactory,
 		drawText: drawText,
 		drawTextsOnCanvas: drawTextsOnCanvas,
+		saveTexts: saveTexts,
 		getTextSizes: getTextSizes,
 		getFontFamilies: getFontFamilies,
+		//getTextLocations: getTextLocations
 	}
 
 });
@@ -62,5 +73,28 @@ function fetchFontFamilies(){
 		'Courier New',
 		'serif',
 		'sans-serif'
+	]
+}
+
+function fetchTextLocations(){
+
+	let top = 0;
+	let centerV = 200;
+	let bottom = 400;
+
+	let left = 0;
+	let centerH = 100;
+	let right = 400;
+
+	return [
+		{ locString: 'top-left', 		locCoords: 	{x: top, y: left } },
+		{ locString: 'top-center', 		locCoords: 	{x: top, y: centerH } },
+		{ locString: 'top-right', 		locCoords: 	{x: top, y: right } },
+		{ locString: 'center-left', 	locCoords: 	{x: centerV, y: left  } },
+		{ locString: 'center-center', 	locCoords: 	{x: centerV, y: centerH } },
+		{ locString: 'center-right', 	locCoords: 	{x: centerV, y: right } },
+		{ locString: 'bottom-left', 	locCoords: 	{x: bottom, y: left } },
+		{ locString: 'bottom-center', 	locCoords: 	{x: bottom, y: centerH } },
+		{ locString: 'bottom-right', 	locCoords: 	{x: bottom, y: right } },
 	]
 }
