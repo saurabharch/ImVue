@@ -1,8 +1,11 @@
 const router = require('express').Router() // eslint-disable-line new-cap
 module.exports = router;
 
-const Drawing = require('../../../db/models/drawing.js');
 const User = require('../../../db/models/user.js');
+const Drawing = require('../../../db/models/drawing.js');
+const Text = require('../../../db/models/text.js');
+const Image = require('../../../db/models/image.js');
+
 
 router.get('/', (req, res, next) => {
     console.log('Retriving All Users')
@@ -15,9 +18,13 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     console.log('Retriving User number #{req.params.id}')
-    User.findById(req.params.id)
-        .then(User => {
-            res.send(User)
+    User.findById(req.params.id, {include:[
+            {model: Drawing},
+            {model: Text},
+            {model: Image}
+        ]})
+        .then(userSpecifiedData => {
+            res.send(userSpecifiedData)
         })
         .catch(next)
 });

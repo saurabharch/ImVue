@@ -8,6 +8,9 @@ module.exports = db.define('text', {
   font: {
     type: Sequelize.ENUM(['Arial', 'Verdana', 'Times New Roman', 'Courier New', 'serif', 'sans-serif'])
   },
+  content: {
+    type: Sequelize.STRING
+  },
   size: {
     type: Sequelize.INTEGER
   },

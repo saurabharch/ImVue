@@ -16,3 +16,12 @@ Location.hasMany(User, {as: 'author'});
 Drawing.belongsTo(Location);
 Text.belongsTo(Location);
 Image.belongsTo(Location);
+
+
+Drawing.belongsTo(User);
+Text.belongsTo(User);
+Image.belongsTo(User);
+
+User.hasMany(Drawing);
+User.hasMany(Text);
+User.hasMany(Image);

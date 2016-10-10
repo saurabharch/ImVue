@@ -32,6 +32,29 @@ router.get('/:lat/:lng', (req, res, next) => {
 });
 
 
+router.post('/:lat/:lng', (req, res, next) => {
+    Location.findOrCreate({
+        latitude: req.params.lat,
+        longitude: req.params.lng,
+        angle: req.params.ang || null,
+        tilt: req.params.tilt || null
+    })
+        .then((location) => {
+            var creatingAll = [];
+            if (req.body.drawing) creatingAll.push(location.createDrawing(req.body.drawing));
+            if (req.body.text) creatingAll.push(location.createText(req.body.text));
+            if (req.body.image) creatingAll.push(location.createImage(req.body.image));
+
+            return Promise.all(creatingAll)
+        })
+        .then(createdItems => res.send(createdItems))
+        .catch(next);
+});
+
+
+
+
+
 // router.get('/:id', (req, res, next) => {
 //     console.log('Retriving drawing number #{req.params.id}')
 //     Location.findById(req.params.id)
