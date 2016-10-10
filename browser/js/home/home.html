@@ -6,7 +6,7 @@
 
             <input ng-model='textInput' ng-show="showInput" type='input' placeholder="Input Text Here">
 
-            <lable>Font</lable>
+            <lable>Font</label>
             <select ng-model="fontFamily" style="background-color: white">
                 <option ng-repeat='font in getFontFamilies()' value='{{font}}'>{{font}}</option>
             </select>
@@ -14,6 +14,11 @@
             <label>Size</label>
             <select ng-model='fontSize' style="background-color: white">
                 <option ng-repeat='size in getTextSizes()' value='{{size}}'>{{size}}</option>
+            </select>
+
+            <label>Location</label>
+            <select ng-model='fontLocation' style="background-color: white">
+                <option ng-repeat='loc in getTextLocations()' value={{loc.locCoords}}>{{loc.locString}}</option>
             </select>
 
             <button class="button" style='background-color: white' ng-click='addText(textInput)'>Add Text</button>

@@ -1,16 +1,16 @@
 app.controller('TextCtrl', function($scope, TextFactory){
 
-	let textSizes = TextFactory.getTextSizes();
-	let fontFamilies = TextFactory.getFontFamilies();
+	$scope.getTextSizes = () => TextFactory.getTextSizes;
 
-	$scope.getTextSizes = () => textSizes;
+	$scope.getFontFamilies = () => TextFactory.getFontFamilies;
 
-	$scope.getFontFamilies = () => fontFamilies;
+	$scope.getTextLocations = () => TextFactory.getTextLocations;
 
 	$scope.showInput = function(){
 		return true;
 	}
 	$scope.addText = function(){
-		TextFactory.drawText( $scope.fontSize, $scope.fontFamly, 'red', 300, 500, $scope.textInput)
+		var fontLocation = JSON.parse($scope.fontLocation)
+		TextFactory.drawText( $scope.fontSize, $scope.fontFamily, 'red', fontLocation.x, fontLocation.y, $scope.textInput)
 	}
 });
