@@ -1,4 +1,4 @@
-app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFactory, TextFactory, DrawingFactory, ImageFactory){ // eslint-disable-line max-params
+app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFactory, TextFactory, DrawingFactory, ImageFactory, $state){ // eslint-disable-line max-params
 
 	var workspace;
     var doc;
@@ -24,16 +24,21 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
         TextFactory.initializeTextFactory(ctx);
     }
 
-    function saveImage(){
-        // Clearn the canvas to show the user a response
-        // Could change this later to display a button that says saved \
-        // and they can click it to acknowledge?
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        DrawingFactory.saveDrawing();
-    }
-
     function saveCanvasContent(){
-        //do something
+        let drawingToSave = DrawingFactory.saveDrawing();
+        let texts = []; //TextFactory.saveTexts();
+        let images = {source: 'waldo.png', x: 100, y: 200};
+
+        //let images = ImageFactory.saveImages();
+
+        navigator.geolocation.getCurrentPosition((position) => {
+            
+            $http.post('https://localhost:1337/api/locations/' + position.coords.latitude + "/" + position.coords.longitude, {drawing: {image: drawingToSave}, texts: texts, images: images} )
+            .then( response => {
+                alert("Drawing Saved Successfully")
+            })
+
+        })
     }
 
     function loadCanvasContent(){

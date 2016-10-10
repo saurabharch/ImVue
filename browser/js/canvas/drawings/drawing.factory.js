@@ -17,13 +17,7 @@ app.factory('DrawingFactory', function($http, $log){
 
 	function saveDrawing(){
 
-        var drawingPointsString = drawingPoints.join(',')
-
-        navigator.geolocation.getCurrentPosition((position) => {
-
-			$http.post('/api/drawings', {location: position, image:  drawingPointsString})
-            .catch($log)
-        })
+        return drawingPoints.join(',')
 
     } /* End of saveImg Function */
 
