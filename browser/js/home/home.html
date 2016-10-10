@@ -2,7 +2,7 @@
     <div ng-controller='TextCtrl'>
         <form name='textForm'>
 
-            <label>Text</label> 
+            <label>Text</label>
 
             <input ng-model='textInput' ng-show="showInput" type='input' placeholder="Input Text Here">
 
@@ -15,7 +15,7 @@
             <select ng-model='fontSize' style="background-color: white">
                 <option ng-repeat='size in getTextSizes()' value='{{size}}'>{{size}}</option>
             </select>
-            
+
             <button class="button" style='background-color: white' ng-click='addText(textInput)'>Add Text</button>
 
         </form>
@@ -25,7 +25,9 @@
     <div ng-controller="CameraCtrl">
         <video autoplay="true" id="videoElement"></video>
     </div>
-    
+     <div class="select">
+      <label for="videoSource">Video source: </label><select id="videoSource"></select>
+    </div>
     <div id="tester" ng-controller="CanvasCtrl">
 
         <canvas id="paint"></canvas>

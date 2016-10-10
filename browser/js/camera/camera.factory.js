@@ -1,38 +1,65 @@
-app.factory('CameraFactory', function (){
+app.factory('CameraFactory', function () {
 
-	function streamCamera(){
+	var streamCamera = () => {
 
-		var video = document.querySelector('#videoElement');
+		var videoSelect = document.querySelector('select#videoSource');
+		var videoElement = document.querySelector('#videoElement');
 
-		navigator.getUserMedia =
-			navigator.getUserMedia ||
-			navigator.webkitGetUserMedia ||
-			navigator.mozGetUserMedia ||
-			navigator.msGetUserMedia ||
-			navigator.oGetUserMedia;
+		function gotCameras(devInfos) {
+			for (var i = 0; i !== devInfos.length; i++) {
+				var devInfo = devInfos[i];
+				var option = document.createElement('option');
+				option.value = devInfo.deviceId;
 
-		if (navigator.getUserMedia) {
-			navigator.getUserMedia({
-				video: {
-					frameRate: {
-						ideal: 5,
-						max: 10
-					}
+				if (devInfo.kind === 'videoinput') {
+					option.text = devInfo.label || 'camera ' + (videoSelect.length + 1);
+					videoSelect.appendChild(option);
+				} else {
+					console.log('Some other kind of source/device: ', devInfo);
 				}
-			}, handleVideo, videoError);
+			}
 		}
 
-		function handleVideo(stream) {
-			video.src = window.URL.createObjectURL(stream);
+		navigator.mediaDevices.enumerateDevices().then(gotCameras).catch(handleError);
+
+
+		function gotStream(stream) {
+			window.stream = stream;
+			videoElement.srcObject = stream;
+			return navigator.mediaDevices.enumerateDevices();
 		}
 
-		function videoError(event){
-			console.log('Error: navigator.getUserMedia not a function', event)
+
+		function start() {
+			if (window.stream) {
+				window.stream.getTracks().forEach(function (track) {
+					track.stop();
+				});
+			}
+
+			var videoSource = videoSelect.value;
+			var constraints = {
+				video: {
+					deviceId: videoSource ? {
+						exact: videoSource
+					} : undefined
+				}
+			};
+
+			navigator.mediaDevices.getUserMedia(constraints)
+				.then(gotStream)
+				// .then(gotCameras)
+				.catch(handleError)
 		}
+
+		videoSelect.onchange = start;
+		start();
+
+		function handleError(error) {
+			console.log('navigator.getUserMedia error: ', error);
+		}
+
 	}
 
-	return {
-		streamCamera: streamCamera,
-	}
-
+	return {streamCamera: streamCamera}
 });
