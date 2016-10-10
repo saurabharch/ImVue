@@ -1,4 +1,4 @@
-app.directive('navbar', function( $rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('navbar', function( $rootScope, AuthService, AUTH_EVENTS, $state, CanvasFactory) {
 
     return {
         restrict: 'E',
@@ -13,8 +13,9 @@ app.directive('navbar', function( $rootScope, AuthService, AUTH_EVENTS, $state) 
         //         { label: 'Members Only', state: 'membersOnly', auth: true },
         //         { label: 'Profile', state: 'profile'}
         //     ];
-
             scope.user = null;
+
+            scope.saveCanvas = CanvasFactory.saveCanvasContent();
 
             scope.isLoggedIn = function () {
                 return AuthService.isAuthenticated();

@@ -6,7 +6,7 @@ const Text = require('../../../db/models/text.js');
 const Image = require('../../../db/models/image.js');
 
 router.get('/:lat/:lng', (req, res, next) => {
-    var range = 2000 / 100000;
+    var range = 0.0005; // ~92 meters http://www.csgnetwork.com/gpsdistcalc.html
     var lat = parseFloat(req.params.lat);
     var lon = parseFloat(req.params.lng);
 
@@ -47,7 +47,10 @@ router.post('/:lat/:lng', (req, res, next) => {
 
             return Promise.all(creatingAll)
         })
-        .then(createdItems => res.send(createdItems))
+        .then(createdItems => {
+            return createdItems.setUser(req.session.userId)
+        })
+        .then(() => res.redirect('/'))
         .catch(next);
 });
 
