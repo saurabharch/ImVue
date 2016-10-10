@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require('express').Router(); // eslint-disable-line new-cap
 module.exports = router;
 const Location = require('../../../db/models/location.js');
 const Drawing = require('../../../db/models/drawing.js');
@@ -32,7 +32,7 @@ router.get('/:lat/:lng', (req, res, next) => {
 });
 
 router.post('/:lat/:lng', (req, res, next) => {
-    Location.findOrCreate({ 
+    Location.findOrCreate({
         where: {
             latitude: req.params.lat,
             longitude: req.params.lng,
@@ -47,7 +47,7 @@ router.post('/:lat/:lng', (req, res, next) => {
             if (req.body.text) creatingAll.push(location.createText(req.body.text));
             if (req.body.image) creatingAll.push(location.createImage(req.body.image));
 
-            return Promise.all(creatingAll)
+            return Promise.all(creatingAll); // eslint-disable-line new-cap
         })
         .then(createdItems => {
             createdItems.forEach( item => { item.setUser(req.user.id) })

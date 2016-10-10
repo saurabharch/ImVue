@@ -16,7 +16,7 @@ app.directive('navbar', function( $rootScope, AuthService, AUTH_EVENTS, $state, 
             scope.user = null;
 
             scope.saveCanvas = () => { CanvasFactory.saveCanvasContent(); }
-            
+            // eslint-disable-line no-trailing-spaces
             scope.isLoggedIn = function () {
                 return AuthService.isAuthenticated();
             };

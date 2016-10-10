@@ -20,7 +20,7 @@ app.controller('MapCtrl', function ($scope, geoLocationFactory, $http) {
   };
 
   function createMarker(pos, title) {
-    var newMarker = new google.maps.Marker({
+    var newMarker = new google.maps.Marker({  // eslint-disable-line no-undef
       position: pos,
       map: map,
       title: title,
@@ -40,10 +40,10 @@ app.controller('MapCtrl', function ($scope, geoLocationFactory, $http) {
           lng: coords.longitude
         }
 
-        map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), { // eslint-disable-line no-undef
           center: currentPos,
           zoom: 17,
-          styles: styles['hide']
+          styles: styles.hide
         })
         var currentPositionMarker = createMarker(currentPos, 'current Location');
         return $http.get(`/api/locations/${coords.longitude}/${coords.latitude}`)
@@ -55,7 +55,7 @@ app.controller('MapCtrl', function ($scope, geoLocationFactory, $http) {
             lng: drawings.data[i].longitude
           };
           var title = 'title: ' + drawings.data[i].id;
-          var infowindow = new google.maps.InfoWindow({
+          var infowindow = new google.maps.InfoWindow({ // eslint-disable-line no-undef
             content: title
           });
 
@@ -75,13 +75,8 @@ app.controller('MapCtrl', function ($scope, geoLocationFactory, $http) {
           })
         })
       })
-
-
-
   }
 
   initMap()
-
-
 
 });

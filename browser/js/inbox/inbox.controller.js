@@ -2,10 +2,10 @@ app.controller('InboxCtrl', function ($scope, geoLocationFactory, $http) {
 
 
   var fake = []
-  for(var i = 0; i < 21; i++){
-    var drawnt = {id:i, name:_.sample(['Han','Jose','Joe','Danny','Steve Irwin','Sammy Davis Jr.']), address:'5 Hanover Square New York, NY 10004', date:'10/9/2016', distance: _.random(2,25)}
+  for (var i = 0; i < 21; i++){
+    var drawnt = { id: i, name: _.sample(['Han', 'Jose', 'Joe', 'Danny', 'Steve Irwin', 'Sammy Davis Jr.']), address: '5 Hanover Square New York, NY 10004', date: '10/9/2016', distance: _.random(2, 25)}
 
-    if(i % 3 === 0) {
+    if (i % 3 === 0) {
       drawnt.viewed = true
     } else {
       drawnt.viewed = false
@@ -14,20 +14,18 @@ app.controller('InboxCtrl', function ($scope, geoLocationFactory, $http) {
   }
 
     function coordsToAddress(geocoder, lat, lng) {
-      var latlng = {lat:lat,lng:lng}
-      geocoder.geocode({'location': latlng}, function(results, status) {
+      var latlng = { lat: lat, lng: lng}
+      geocoder.geocode({ location: latlng}, function(results, status) {
         if (status === 'OK') {
           console.log(results)
         } else {
-          alert('Geocode was not successful for the following reason: ' + status);
+          alert('Geocode was not successful for the following reason: ' + status); // eslint-disable-line no-alert
         }
       });
     }
 
-
-
   function populateList(){
-    var geocoder = new google.maps.Geocoder();
+    var geocoder = new google.maps.Geocoder();  // eslint-disable-line no-undef
     geoLocationFactory.updateLocation
       .then(function (position) {
         console.log(position.coords)
