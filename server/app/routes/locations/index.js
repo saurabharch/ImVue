@@ -47,7 +47,10 @@ router.post('/:lat/:lng', (req, res, next) => {
 
             return Promise.all(creatingAll)
         })
-        .then(createdItems => res.send(createdItems))
+        .then(createdItems => {
+            return createdItems.setUser(req.session.userId)
+        })
+        .then(() => res.redirect('/'))
         .catch(next);
 });
 
