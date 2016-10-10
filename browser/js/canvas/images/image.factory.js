@@ -6,11 +6,11 @@ app.factory('ImageFactory', function(){
 		canvas = canvas2B;
 	}
 
-	function loadImagesToCanvas(images){
+	function drawImagesOnCanvas(images){
 
 		images.forEach( image => {
 			let img = new Image();
-			img.src = image.src
+			img.src = image.source
 			img.onload = () => {
 				canvas.drawImage(img, image.x, image.y)
 			}
@@ -24,6 +24,6 @@ app.factory('ImageFactory', function(){
 
 	return {
 		initializeImageFactory: initializeImageFactory,
-		loadImagesToCanvas: loadImagesToCanvas,
+		drawImagesOnCanvas: drawImagesOnCanvas,
 	}
 });

@@ -27,11 +27,10 @@ app.factory('DrawingFactory', function($http, $log){
 
     } /* End of saveImg Function */
 
-    function loadDrawingsOnCanvas(drawings){
+    function drawDrawingsOnCanvas(drawings){
 
-		drawings.forEach( drawingString => {
-
-			var canvasArray = drawingString.split(',')
+		drawings.forEach( drawing => {
+			let canvasArray = drawing.image.split(',')
 			for (var i = 0; i < canvasArray.length; i += 5 ){
 
 				canvas.draw(
@@ -52,7 +51,7 @@ app.factory('DrawingFactory', function($http, $log){
 		initializeDrawingFactory: initializeDrawingFactory,
 		addDrawingPoint: addDrawingPoint,
 		saveDrawing: saveDrawing,
-		loadDrawingsOnCanvas: loadDrawingsOnCanvas
+		drawDrawingsOnCanvas: drawDrawingsOnCanvas
 	}
 
 });
