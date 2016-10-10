@@ -34,15 +34,25 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
     function loadCanvasContent(){
         navigator.geolocation.getCurrentPosition((position) => {
-
-            $http.get('http://localhost:1337/api/locations' + position.coords.longitude, position.coords.latitude)
+            
+            $http.get('https://localhost:1337/api/locations/' + position.coords.latitude + "/" + position.coords.longitude )
             .then( response => {
-                //TODO: CHECKOUT RESPONSE FORMAT
-                console.log(response.data);
+                
+                let drawings = [];
+                let texts = [];
+                let images = [];
 
-                DrawingFactory.loadDrawingsOnCanvas(response.drawings);
-                ImageFactory.loadImagesOnCanvas(response.images);
-                TextFactory.loadTextsOnCanvas(response.texts);
+                response.data.forEach(function(location){
+                    // Turnary array pushes
+                    if( location.drawings.length )  { drawings = drawings.concat(location.drawings) }
+                    if( location.texts.length )     { texts = texts.concat(location.texts) }    
+                    if( location.images.length )    { images = images.concat(location.images)  } 
+                })
+
+                DrawingFactory.drawDrawingsOnCanvas(drawings);
+                TextFactory.drawTextsOnCanvas(texts);
+                ImageFactory.drawImagesOnCanvas(images);
+
             })
             .catch($log)
 
