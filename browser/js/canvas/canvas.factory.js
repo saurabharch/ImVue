@@ -71,7 +71,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
     function clearCanvas(){
         ctx.clearRect(0, 0, canvas.width, canvas.height)
-        DrawingFactory.clearDrawingPoints()  
+        DrawingFactory.clearDrawingPoints();
     }
 
     function undoLast(){
@@ -83,11 +83,11 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
         currentDrawing.pop()
         currentDrawing.forEach(function(point){
             point = point.split(',')
-            var start = {x: point[0], y: point[1]}
-            var end = {x: point[2], y: point[3]}
+            var start = {x: point[0], y: point[1]}  // eslint-disable-line id-length
+            var end = {x: point[2], y: point[3]}    // eslint-disable-line id-length
             var color = point[4]
             console.log(point)
-            canvas.draw(start,end,color)
+            canvas.draw(start, end, color)
         })
 
     }

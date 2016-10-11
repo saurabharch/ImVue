@@ -11,14 +11,6 @@ app.factory('TextFactory', function(){
 		ctx = canvasCtx;
 	}
 
-	function getTextSizes(){
-		return fetchTextSizes();
-	}
-
-	function getFontFamilies(){
-		return fetchFontFamilies();
-	}
-
 	function saveTexts(){
 		let holdTexts = texts;
 		texts = [];
@@ -26,7 +18,7 @@ app.factory('TextFactory', function(){
 	}
 
 	function drawText( size, font, color, locX, locY, content){
-		console.log( [size, font, color, locX, locY, content].join(" ") )
+		console.log( [size, font, color, locX, locY, content].join(' ') )
 		ctx.font =  size + 'px ' + font;
         ctx.fillStyle = color;
         ctx.fillText(content, locX, locY);
