@@ -128,8 +128,6 @@ body, html, #containerr {
   background-color: transparent;
   font-size: 80px;
   padding: 40px;
-  margin-top: 95%;
-  display: block;
 }
 
 #color-selector {
@@ -137,19 +135,11 @@ body, html, #containerr {
   background-color: transparent;
   font-size: 80px;
   padding: 40px;
-  margin-top: 95%;
-  display: block;
 }
 
-.color-selector {
-  display: block;
-  z-index: 2;
-  position: fixed;
-  bottom: 40px;
-  right: 0px;
-  width: 80px;
-  height: 120px;
-  background: black;
+#pop-out {
+  float:right;
+  margin-top: 90%;
 }
 
 .btn {
@@ -202,6 +192,20 @@ body, html, #containerr {
 .input-group-addon {
   color: black;
   font-size: 24px;
+}
+
+.trash {
+  z-index: 2;
+  background-color: transparent;
+  font-size: 80px;
+  padding: 40px;
+}
+
+.undo {
+  z-index: 2;
+  background-color: transparent;
+  font-size: 80px;
+  padding: 40px;
 }
 
 

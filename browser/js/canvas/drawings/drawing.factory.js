@@ -45,7 +45,8 @@ app.factory('DrawingFactory', function(){
 		initializeDrawingFactory: initializeDrawingFactory,
 		addDrawingPoint: addDrawingPoint,
 		saveDrawing: saveDrawing,
-		drawDrawingsOnCanvas: drawDrawingsOnCanvas
+		drawDrawingsOnCanvas: drawDrawingsOnCanvas,
+		drawingPoints: drawingPoints
 	}
 
 });
