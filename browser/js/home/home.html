@@ -37,7 +37,10 @@
 
         <canvas id="paint"></canvas>
 
-        <div class="cont" ng-controller='ColorCtrl'>
+        <span class="trash glyphicon glyphicon-trash" ng-click="clearCanvas()"></span>
+        <span class="undo glyphicon glyphicon-erase" ng-click="undo()"></span>
+
+        <div id="pop-out" class="cont" ng-controller='ColorCtrl'>
             <span class="color glyphicon glyphicon-tint" ng-click="toggleColorPalette()"></span>
             <div id="color-selector" ng-show="showColorPalette()">
                 <div class="marker selected" id="black"></div>
@@ -48,6 +51,8 @@
                 <div class="marker" id="orange"></div>
                 <div class="marker" id="yellow"></div>
                 <div class="marker" id="brown"></div>
+                <div class="marker" id="white"></div>
+                <div class="marker" id="hotpink"></div>
             </div>
         </div>
 

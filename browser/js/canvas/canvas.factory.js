@@ -69,6 +69,28 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
         })
     }
 
+    function clearCanvas(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+    }
+
+    function undoLast(){
+        console.log('in undo last')
+        clearCanvas()
+        var currentDrawing = DrawingFactory.drawingPoints
+        currentDrawing.pop()
+        currentDrawing.pop()
+        currentDrawing.pop()
+        currentDrawing.forEach(function(point){
+            point = point.split(',')
+            var start = {x: point[0], y: point[1]}
+            var end = {x: point[2], y: point[3]}
+            var color = point[4]
+            console.log(point)
+            canvas.draw(start,end,color)
+        })
+
+    }
+
     /* ---------------- HELPER FUNCTIONS ---------------- */
 
     function loadCanvas(){
@@ -179,6 +201,8 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
         initializeCanvas: initializeCanvas,
         saveCanvasContent: saveCanvasContent,
         loadCanvasContent: loadCanvasContent,
+        clearCanvas: clearCanvas,
+        undoLast: undoLast
     }
 
 });
