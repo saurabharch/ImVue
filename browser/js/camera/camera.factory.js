@@ -15,7 +15,7 @@ app.factory('CameraFactory', function () {
 					option.text = devInfo.label || 'camera ' + (videoSelect.length + 1);
 					videoSelect.appendChild(option);
 				} else {
-					console.log('Some other kind of source/device: ', devInfo);
+					//console.log('Some other kind of source/device: ', devInfo);
 				}
 			}
 		}

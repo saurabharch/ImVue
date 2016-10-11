@@ -1,4 +1,4 @@
-app.controller('InboxCtrl', function ($scope, geoLocationFactory, $http) {
+app.controller('InboxCtrl', function ($scope, geoLocationFactory, $http, CanvasFactory) {
 
 
   var fake = []
@@ -13,36 +13,59 @@ app.controller('InboxCtrl', function ($scope, geoLocationFactory, $http) {
     fake.push(drawnt)
   }
 
-    function coordsToAddress(geocoder, lat, lng) {
-      var latlng = { lat: lat, lng: lng}
-      geocoder.geocode({ location: latlng}, function(results, status) {
-        if (status === 'OK') {
-          console.log(results)
-        } else {
-          alert('Geocode was not successful for the following reason: ' + status); // eslint-disable-line no-alert
-        }
-      });
-    }
+  let projects = [];
 
-  function populateList(){
-    var geocoder = new google.maps.Geocoder();  // eslint-disable-line no-undef
-    geoLocationFactory.updateLocation
-      .then(function (position) {
-        console.log(position.coords)
-        var lat = position.coords.latitude
-        var lng = position.coords.longitude
-        coordsToAddress(geocoder, lat, lng)
-        $http.get(`/api/locations/${lng}/${lat}`)
-        .then(function(allInfo){
-          //allInfo contains drawings, texts, and images
-          //TODO: CHECKOUT THE FORMAT OF ALLINFO
-          console.log(allInfo.data);
-          $scope.drawings = allInfo.drawings;
+  CanvasFactory.getCurrentLocationResponse().forEach(function(response){
 
-        })
-      })
-  }
+    var currentLocation = {}
 
-  populateList()
+    response.drawings.forEach( drawing => {
+      if ( !currentLocation[drawing.userId] ){
+        currentLocation[drawing.userId] = {};
+      }
+
+      currentLocation[drawing.userId].drawing = drawing;
+    })
+
+    response.images.forEach( image => {
+      if ( !currentLocation[image.userId] ){
+        currentLocation[image.userId] = {};
+      }
+
+      currentLocation[image.userId].image = image;
+    })
+
+    response.texts.forEach( text => {
+      if ( !currentLocation[text.userId] ){
+        currentLocation[text.userId] = {};
+      }
+
+      currentLocation[text.userId].text = text;
+    })
+
+    _.keys(currentLocation).forEach(function(userId){
+
+      // console.log(currentLocation[userId])
+
+      if (currentLocation[userId].drawing) {
+        currentLocation[userId].name = currentLocation[userId].drawing.user.userName
+        currentLocation[userId].date = currentLocation[userId].drawing.createdAt
+      } else if (currentLocation[userId].text) {
+        currentLocation[userId].date = currentLocation[userId].text.createdAt
+        currentLocation[userId].name = currentLocation[userId].text.user.userName
+      } else if (currentLocation[userId].image) {
+        currentLocation[userId].date = currentLocation[userId].image.createdAt
+        currentLocation[userId].name = currentLocation[userId].image.user.userName
+      }
+      
+      projects.push(currentLocation[userId])
+    })
+
+
+  })
+
+  $scope.projects = projects
+
+  // populateList()
 
 });

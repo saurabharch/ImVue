@@ -11,6 +11,11 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
     var drawing = false;
 
+    let currentLocationResponse;
+    let currentLocDrawings;
+    let currentLocTexts;
+    let currentLocImages;
+
     /* ---------------- ACCESSABLE FUNCTIONS ---------------- */
 
     function initializeCanvas(init_workspace, init_doc){
@@ -48,25 +53,29 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
             $http.get('https://localhost:1337/api/locations/' + position.coords.latitude + '/' + position.coords.longitude )
             .then( response => {
 
-                let drawings = [];
-                let texts = [];
-                let images = [];
+                currentLocationResponse = [];
+                currentLocDrawings = [];
+                currentLocTexts = [];
+                currentLocImages = [];
 
                 response.data.forEach(function(location){
+                    currentLocationResponse.push(location)
                     // Turnary array pushes
-                    if ( location.drawings.length )  { drawings = drawings.concat(location.drawings) }
-                    if ( location.texts.length )     { texts = texts.concat(location.texts) }
-                    if ( location.images.length )    { images = images.concat(location.images)  }
+                    if ( location.drawings.length )  { currentLocDrawings = currentLocDrawings.concat(location.drawings) }
+                    if ( location.texts.length )     { currentLocTexts = currentLocTexts.concat(location.texts) }
+                    if ( location.images.length )    { currentLocImages = currentLocImages.concat(location.images)  }
                 })
-
-                DrawingFactory.drawDrawingsOnCanvas(drawings);
-                TextFactory.drawTextsOnCanvas(texts);
-                //ImageFactory.drawImagesOnCanvas(images);
 
             })
             .catch($log)
 
         })
+    }
+
+    function drawCurrentContentOnCanvas(){
+        DrawingFactory.drawDrawingsOnCanvas(currentLocDrawings);
+        TextFactory.drawTextsOnCanvas(currentLocTexts);
+        //ImageFactory.drawImagesOnCanvas(currentLocImages);
     }
 
     function clearCanvas(){
@@ -198,12 +207,20 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
     }
 
+    function getCurrentLocationResponse(){
+        return currentLocationResponse;
+    }
+
     return {
         initializeCanvas: initializeCanvas,
         saveCanvasContent: saveCanvasContent,
         loadCanvasContent: loadCanvasContent,
         clearCanvas: clearCanvas,
-        undoLast: undoLast
+        undoLast: undoLast,
+        getCurrentLocationResponse: getCurrentLocationResponse,
+        getCurrentDrawings: currentLocDrawings,
+        getCurrentImages: currentLocImages,
+        getCurrentTexts: currentLocTexts
     }
 
 });
