@@ -1,20 +1,26 @@
 const router = require('express').Router() // eslint-disable-line new-cap
-module.exports = router;
 const Drawing = require('../../../db/models/drawing.js')
 const Location = require('../../../db/models/location.js')
 
 
 router.post('/', (req, res, next) => {
-    Location.create({
-        latitude: req.body.location.coords.latitude,
-        longitude:  req.body.location.coords.longitude
-    })
+    console.log('req body LOCATION: ', req.body.location.coords)
+    // Location.create({
+    //     latitude: req.body.location.coords.latitude,
+    //     longitude:  req.body.location.coords.longitude
+    // })
+    Location.create(req.body.location.coords)
         .then(function(location) {
+            console.log('LOCATION =================\n', location)
             return location.createDrawing(req.body.image);
         })
-        .then( drawing => { res.send(drawing) })
-        .catch(next)
+        .then( drawing => {
+            console.log(drawing)
+            res.send(drawing) })
+        .catch(err => console.error(err));
 });
+
+module.exports = router;
 
 
 
