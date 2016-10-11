@@ -4,6 +4,7 @@ var Sequelize = require('sequelize');
 
 var db = require('../_db');
 
+//any required fields here?? -- KHGB
 module.exports = db.define('location', {
   latitude: {
     type: Sequelize.FLOAT
@@ -19,7 +20,7 @@ module.exports = db.define('location', {
   }
 });
 
-
+//what is going on here? Do you really want this on master? -- KHGB
 // var lat = 40.7052983;
 // var lon = -74.0091516;
 // var range = .001;

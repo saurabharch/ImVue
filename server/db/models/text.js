@@ -4,6 +4,7 @@ var Sequelize = require('sequelize');
 
 var db = require('../_db');
 
+// required fields? -- KHGB
 module.exports = db.define('text', {
   font: {
     type: Sequelize.ENUM(['Arial', 'Verdana', 'Times New Roman', 'Courier New', 'serif', 'sans-serif']) // eslint-disable-line new-cap

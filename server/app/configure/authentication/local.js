@@ -56,4 +56,6 @@ module.exports = function (app, db) {
 
     });
 
+    //under the login I would expect to see the signup here, so it can also utilize strategyFn -- KHGB
+
 };
