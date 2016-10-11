@@ -4,6 +4,7 @@ const Location = require('../../../db/models/location.js');
 const Drawing = require('../../../db/models/drawing.js');
 const Text = require('../../../db/models/text.js');
 const Image = require('../../../db/models/image.js');
+const User = require('../../../db/models/user.js');
 
 router.get('/:lat/:lng', (req, res, next) => {
     var range = 0.0005; // ~92 meters http://www.csgnetwork.com/gpsdistcalc.html
@@ -22,9 +23,9 @@ router.get('/:lat/:lng', (req, res, next) => {
             }
         },
         include: [
-            {model: Drawing},
-            {model: Text},
-            {model: Image}
+            {model: Drawing, include: [{model: User}]},
+            {model: Text, include: [ {model: User} ]},
+            {model: Image, include: [ {model: User} ]}
         ]
     })
         .then(allInfo => res.send(allInfo))
