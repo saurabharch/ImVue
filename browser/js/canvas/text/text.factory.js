@@ -3,6 +3,10 @@ app.factory('TextFactory', function(){
 	let ctx;
 	let texts = [];
 
+	let textSizes = fetchTextSizes();
+	let fontFamilies = fetchFontFamilies();
+	let textLocations = fetchTextLocations();
+
 	function initializeTextFactory(canvasCtx){
 		ctx = canvasCtx;
 	}
@@ -22,6 +26,7 @@ app.factory('TextFactory', function(){
 	}
 
 	function drawText( size, font, color, locX, locY, content){
+		console.log( [size, font, color, locX, locY, content].join(" ") )
 		ctx.font =  size + 'px ' + font;
         ctx.fillStyle = color;
         ctx.fillText(content, locX, locY);
@@ -40,9 +45,9 @@ app.factory('TextFactory', function(){
 		drawText: drawText,
 		drawTextsOnCanvas: drawTextsOnCanvas,
 		saveTexts: saveTexts,
-		getTextSizes: getTextSizes,
-		getFontFamilies: getFontFamilies,
-		fetchTextLocations: fetchTextLocations
+		getTextSizes: textSizes,
+		getFontFamilies: fontFamilies,
+		getTextLocations: textLocations
 	}
 
 });
@@ -78,23 +83,25 @@ function fetchFontFamilies(){
 
 function fetchTextLocations(){
 
-	let top = 0;
-	let centerV = 200;
-	let bottom = 400;
+	console.log(screen)
 
-	let left = 0;
-	let centerH = 100;
-	let right = 400;
+	let top = 			screen.availWidth * 0.1 ;
+	let centerVert = 	screen.availWidth * 0.5;
+	let bottom = 		screen.availWidth * 0.9;
+
+	let left = 			screen.availHeight * 0.1;
+	let centerHor = 	screen.availHeight * 0.5;
+	let right = 		screen.availHeight * 0.9;
 
 	return [ /*eslint-disable id-length*/
-		{ locString: 'top-left', 		locCoords: 	{x: top, y: left } },
-		{ locString: 'top-center', 		locCoords: 	{x: top, y: centerH } },
-		{ locString: 'top-right', 		locCoords: 	{x: top, y: right } },
-		{ locString: 'center-left', 	locCoords: 	{x: centerV, y: left  } },
-		{ locString: 'center-center', 	locCoords: 	{x: centerV, y: centerH } },
-		{ locString: 'center-right', 	locCoords: 	{x: centerV, y: right } },
-		{ locString: 'bottom-left', 	locCoords: 	{x: bottom, y: left } },
-		{ locString: 'bottom-center', 	locCoords: 	{x: bottom, y: centerH } },
-		{ locString: 'bottom-right', 	locCoords: 	{x: bottom, y: right } },
+		{ locString: 'top-left', 		locCoords: 	{ x: top, y: left } },
+		{ locString: 'top-center', 		locCoords: 	{ x: top, y: centerHor } },
+		{ locString: 'top-right', 		locCoords: 	{ x: top, y: right } },
+		{ locString: 'center-left', 	locCoords: 	{ x: centerVert, y: left  } },
+		{ locString: 'center-center', 	locCoords: 	{ x: centerVert, y: centerHor } },
+		{ locString: 'center-right', 	locCoords: 	{ x: centerVert, y: right } },
+		{ locString: 'bottom-left', 	locCoords: 	{ x: bottom, y: left } },
+		{ locString: 'bottom-center', 	locCoords: 	{ x: bottom, y: centerHor } },
+		{ locString: 'bottom-right', 	locCoords: 	{ x: bottom, y: right } },
 	]		/*eslint-enable id-length*/
 }
