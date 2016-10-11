@@ -11,6 +11,11 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
     var drawing = false;
 
+    let currentLocationResponse;
+    let currentLocDrawings;
+    let currentLocTexts;
+    let currentLocImages;
+
     /* ---------------- ACCESSABLE FUNCTIONS ---------------- */
 
     function initializeCanvas(init_workspace, init_doc){
@@ -24,43 +29,76 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
         TextFactory.initializeTextFactory(ctx);
     }
 
-    function saveImage(){
-        // Clearn the canvas to show the user a response
-        // Could change this later to display a button that says saved \
-        // and they can click it to acknowledge?
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        DrawingFactory.saveDrawing();
-    }
-
     function saveCanvasContent(){
-        //do something
+        let drawingToSave = DrawingFactory.saveDrawing();
+        let texts = []; //TextFactory.saveTexts();
+        let images = {source: 'waldo.png', x: 100, y: 200}; // eslint-disable-line id-length
+
+        //let images = ImageFactory.saveImages();
+
+        navigator.geolocation.getCurrentPosition((position) => {
+
+            $http.post('https://localhost:1337/api/locations/' + position.coords.latitude + '/' + position.coords.longitude, {drawing: {image: drawingToSave}, texts: texts, images: images} )
+            .then( () => {
+                alert('Drawing Saved Successfully') // eslint-disable-line no-alert
+            })
+            .catch($log)
+
+        })
     }
 
     function loadCanvasContent(){
+
         navigator.geolocation.getCurrentPosition((position) => {
-            
-            $http.get('https://localhost:1337/api/locations/' + position.coords.latitude + "/" + position.coords.longitude )
+            $http.get('https://localhost:1337/api/locations/' + position.coords.latitude + '/' + position.coords.longitude )
             .then( response => {
-                
-                let drawings = [];
-                let texts = [];
-                let images = [];
+
+                currentLocationResponse = [];
+                currentLocDrawings = [];
+                currentLocTexts = [];
+                currentLocImages = [];
 
                 response.data.forEach(function(location){
+                    currentLocationResponse.push(location)
                     // Turnary array pushes
-                    if( location.drawings.length )  { drawings = drawings.concat(location.drawings) }
-                    if( location.texts.length )     { texts = texts.concat(location.texts) }    
-                    if( location.images.length )    { images = images.concat(location.images)  } 
+                    if ( location.drawings.length )  { currentLocDrawings = currentLocDrawings.concat(location.drawings) }
+                    if ( location.texts.length )     { currentLocTexts = currentLocTexts.concat(location.texts) }
+                    if ( location.images.length )    { currentLocImages = currentLocImages.concat(location.images)  }
                 })
-
-                DrawingFactory.drawDrawingsOnCanvas(drawings);
-                TextFactory.drawTextsOnCanvas(texts);
-                //ImageFactory.drawImagesOnCanvas(images);
 
             })
             .catch($log)
 
         })
+    }
+
+    function drawCurrentContentOnCanvas(){
+        DrawingFactory.drawDrawingsOnCanvas(currentLocDrawings);
+        TextFactory.drawTextsOnCanvas(currentLocTexts);
+        //ImageFactory.drawImagesOnCanvas(currentLocImages);
+    }
+
+    function clearCanvas(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        DrawingFactory.clearDrawingPoints();
+    }
+
+    function undoLast(){
+        console.log(DrawingFactory.drawingPoints())
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        var currentDrawing = DrawingFactory.drawingPoints()
+        currentDrawing.pop()
+        currentDrawing.pop()
+        currentDrawing.pop()
+        currentDrawing.forEach(function(point){
+            point = point.split(',')
+            var start = {x: point[0], y: point[1]}  // eslint-disable-line id-length
+            var end = {x: point[2], y: point[3]}    // eslint-disable-line id-length
+            var color = point[4]
+            console.log(point)
+            canvas.draw(start, end, color)
+        })
+
     }
 
     /* ---------------- HELPER FUNCTIONS ---------------- */
@@ -169,10 +207,20 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
     }
 
+    function getCurrentLocationResponse(){
+        return currentLocationResponse;
+    }
+
     return {
         initializeCanvas: initializeCanvas,
         saveCanvasContent: saveCanvasContent,
         loadCanvasContent: loadCanvasContent,
+        clearCanvas: clearCanvas,
+        undoLast: undoLast,
+        getCurrentLocationResponse: getCurrentLocationResponse,
+        getCurrentDrawings: currentLocDrawings,
+        getCurrentImages: currentLocImages,
+        getCurrentTexts: currentLocTexts
     }
 
 });

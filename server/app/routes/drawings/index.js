@@ -1,6 +1,7 @@
 const router = require('express').Router() // eslint-disable-line new-cap
 const Drawing = require('../../../db/models/drawing.js')
 const Location = require('../../../db/models/location.js')
+module.exports = router;
 
 
 router.post('/', (req, res, next) => {
@@ -19,35 +20,6 @@ router.post('/', (req, res, next) => {
             res.send(drawing) })
         .catch(err => console.error(err));
 });
-
-module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 router.get('/:id', (req, res, next) => {

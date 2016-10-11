@@ -1,4 +1,4 @@
-app.factory('DrawingFactory', function($http, $log){
+app.factory('DrawingFactory', function(){
 
 	let drawingPoints = [];
 	let canvas;
@@ -8,6 +8,8 @@ app.factory('DrawingFactory', function($http, $log){
 	}
 
 	function addDrawingPoint( lastPos, currentPos, color ){
+		console.log(color)
+		console.log(drawingPoints)
 		drawingPoints.push(
             lastPos.x + ',' + lastPos.y + ',' +			// eslint-disable-line id-length
             currentPos.x + ',' + currentPos.y + ',' +	// eslint-disable-line id-length
@@ -15,15 +17,17 @@ app.factory('DrawingFactory', function($http, $log){
         )
 	}
 
+	function getDrawingPoints(){
+		return drawingPoints
+	}
+
+	function clearDrawingPoints(){
+		drawingPoints = []
+	}
+
 	function saveDrawing(){
 
-        var drawingPointsString = drawingPoints.join(',')
-
-        navigator.geolocation.getCurrentPosition((position) => {
-
-			$http.post('/api/drawings', {location: position, image:  drawingPointsString})
-            .catch($log)
-        })
+        return drawingPoints.join(',')
 
     } /* End of saveImg Function */
 
@@ -51,7 +55,9 @@ app.factory('DrawingFactory', function($http, $log){
 		initializeDrawingFactory: initializeDrawingFactory,
 		addDrawingPoint: addDrawingPoint,
 		saveDrawing: saveDrawing,
-		drawDrawingsOnCanvas: drawDrawingsOnCanvas
+		drawDrawingsOnCanvas: drawDrawingsOnCanvas,
+		drawingPoints: getDrawingPoints,
+		clearDrawingPoints: clearDrawingPoints
 	}
 
 });
