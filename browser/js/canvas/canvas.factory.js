@@ -65,9 +65,11 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
                     if ( location.texts.length )     { currentLocTexts = currentLocTexts.concat(location.texts) }
                     if ( location.images.length )    { currentLocImages = currentLocImages.concat(location.images)  }
                 })
+                //drawCurrentContentOnCanvas();
 
             })
             .catch($log)
+
 
         })
     }

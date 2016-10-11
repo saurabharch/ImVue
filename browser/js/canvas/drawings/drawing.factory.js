@@ -34,9 +34,9 @@ app.factory('DrawingFactory', function(){
     function drawDrawingsOnCanvas(drawings){
 
 		drawings.forEach( drawing => {
+			
 			let canvasArray = drawing.image.split(',')
 			for (var i = 0; i < canvasArray.length; i += 5 ){
-
 				canvas.draw(
 					/* Start Point */
 					{ x: canvasArray[i], y: canvasArray[i + 1] },          // eslint-disable-line id-length

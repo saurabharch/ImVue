@@ -1,18 +1,5 @@
 app.controller('InboxCtrl', function ($scope, geoLocationFactory, $http, CanvasFactory) {
 
-
-  var fake = []
-  for (var i = 0; i < 21; i++){
-    var drawnt = { id: i, name: _.sample(['Han', 'Jose', 'Joe', 'Danny', 'Steve Irwin', 'Sammy Davis Jr.']), address: '5 Hanover Square New York, NY 10004', date: '10/9/2016', distance: _.random(2, 25)}
-
-    if (i % 3 === 0) {
-      drawnt.viewed = true
-    } else {
-      drawnt.viewed = false
-    }
-    fake.push(drawnt)
-  }
-
   let projects = [];
 
   CanvasFactory.getCurrentLocationResponse().forEach(function(response){
@@ -60,7 +47,6 @@ app.controller('InboxCtrl', function ($scope, geoLocationFactory, $http, CanvasF
       
       projects.push(currentLocation[userId])
     })
-
 
   })
 
