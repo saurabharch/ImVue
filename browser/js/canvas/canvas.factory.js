@@ -71,12 +71,13 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
     function clearCanvas(){
         ctx.clearRect(0, 0, canvas.width, canvas.height)
+        DrawingFactory.clearDrawingPoints()  
     }
 
     function undoLast(){
-        console.log('in undo last')
-        clearCanvas()
-        var currentDrawing = DrawingFactory.drawingPoints
+        console.log(DrawingFactory.drawingPoints())
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        var currentDrawing = DrawingFactory.drawingPoints()
         currentDrawing.pop()
         currentDrawing.pop()
         currentDrawing.pop()

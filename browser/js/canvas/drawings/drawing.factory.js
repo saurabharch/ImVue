@@ -8,11 +8,21 @@ app.factory('DrawingFactory', function(){
 	}
 
 	function addDrawingPoint( lastPos, currentPos, color ){
+		console.log(color)
+		console.log(drawingPoints)
 		drawingPoints.push(
             lastPos.x + ',' + lastPos.y + ',' +			// eslint-disable-line id-length
             currentPos.x + ',' + currentPos.y + ',' +	// eslint-disable-line id-length
             color
         )
+	}
+
+	function getDrawingPoints(){
+		return drawingPoints
+	}
+
+	function clearDrawingPoints(){
+		drawingPoints = []
 	}
 
 	function saveDrawing(){
@@ -46,7 +56,8 @@ app.factory('DrawingFactory', function(){
 		addDrawingPoint: addDrawingPoint,
 		saveDrawing: saveDrawing,
 		drawDrawingsOnCanvas: drawDrawingsOnCanvas,
-		drawingPoints: drawingPoints
+		drawingPoints: getDrawingPoints,
+		clearDrawingPoints: clearDrawingPoints
 	}
 
 });
