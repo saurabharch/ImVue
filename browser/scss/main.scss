@@ -13,21 +13,22 @@
 }
 
 #videoElement {
-    position: absolute;
-    z-index: 0;
+   position: absolute;
+    top: 20%;
     width: 100%;
-    height: 100%;
-    margin: auto;
-    background-color: transparent;
+    height: 70%;
+    z-index: 1;
 }
 
 canvas {
-    background-color: transparent;
-    z-index: 2;
     position: absolute;
+    top: 34%;
+    left: 0;
+    right: 0;
     width: 100%;
-    height: 100%;
-    margin: auto;
+    height: 42%;
+    z-index: 2;
+    background-color: transparent;
 }
 
 .marker {
