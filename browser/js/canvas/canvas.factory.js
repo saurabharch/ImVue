@@ -50,7 +50,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
     function loadCanvasContent(){
 
         navigator.geolocation.getCurrentPosition((position) => {
-            $http.get('https://localhost:1337/api/locations/' + position.coords.latitude + '/' + position.coords.longitude )
+            $http.get('/api/locations/' + position.coords.latitude + '/' + position.coords.longitude )
             .then( response => {
 
                 currentLocationResponse = [];
