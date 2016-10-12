@@ -8,8 +8,6 @@ app.factory('DrawingFactory', function(){
 	}
 
 	function addDrawingPoint( lastPos, currentPos, color ){
-		console.log(color)
-		console.log(drawingPoints)
 		drawingPoints.push(
             lastPos.x + ',' + lastPos.y + ',' +			// eslint-disable-line id-length
             currentPos.x + ',' + currentPos.y + ',' +	// eslint-disable-line id-length
@@ -34,9 +32,9 @@ app.factory('DrawingFactory', function(){
     function drawDrawingsOnCanvas(drawings){
 
 		drawings.forEach( drawing => {
+			
 			let canvasArray = drawing.image.split(',')
 			for (var i = 0; i < canvasArray.length; i += 5 ){
-
 				canvas.draw(
 					/* Start Point */
 					{ x: canvasArray[i], y: canvasArray[i + 1] },          // eslint-disable-line id-length

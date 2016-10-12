@@ -18,11 +18,10 @@ app.factory('TextFactory', function(){
 	}
 
 	function drawText( size, font, color, locX, locY, content){
-		console.log( [size, font, color, locX, locY, content].join(' ') )
 		ctx.font =  size + 'px ' + font;
         ctx.fillStyle = color;
         ctx.fillText(content, locX, locY);
-
+        
         texts.push({size: size, font: font, color: color, x: locX, y: locY, content: content}) // eslint-disable-line id-length
 	}
 
@@ -74,8 +73,6 @@ function fetchFontFamilies(){
 }
 
 function fetchTextLocations(){
-
-	console.log(screen)
 
 	let top = 			screen.availWidth * 0.1 ;
 	let centerVert = 	screen.availWidth * 0.5;

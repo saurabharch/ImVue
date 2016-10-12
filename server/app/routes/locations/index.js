@@ -4,6 +4,7 @@ const Location = require('../../../db/models/location.js');
 const Drawing = require('../../../db/models/drawing.js');
 const Text = require('../../../db/models/text.js');
 const Image = require('../../../db/models/image.js');
+const User = require('../../../db/models/user.js');
 
 router.get('/:lat/:lng', (req, res, next) => { //long. isn't a sub-resource of lat. As well as the fact that we are filtering/finding a range which is for queries in a RESTful API. With that, these would be best as queries rather than params. 
     var range = 0.0005; // ~92 meters http://www.csgnetwork.com/gpsdistcalc.html
@@ -22,9 +23,9 @@ router.get('/:lat/:lng', (req, res, next) => { //long. isn't a sub-resource of l
             }
         },
         include: [
-            {model: Drawing},
-            {model: Text},
-            {model: Image}
+            {model: Drawing, include: [{model: User}]},
+            {model: Text, include: [ {model: User} ]},
+            {model: Image, include: [ {model: User} ]}
         ]
     })
         .then(allInfo => res.send(allInfo))

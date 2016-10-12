@@ -1,4 +1,4 @@
-app.controller('CanvasCtrl', function(CanvasFactory, $scope){
+app.controller('CanvasCtrl', function(CanvasFactory, ImageFactory, $scope){
 
 	CanvasFactory.initializeCanvas(window, document);
 	CanvasFactory.loadCanvasContent();
@@ -6,5 +6,9 @@ app.controller('CanvasCtrl', function(CanvasFactory, $scope){
 	$scope.clearCanvas = CanvasFactory.clearCanvas
 
 	$scope.undo = CanvasFactory.undoLast
+
+	$scope.loadImg = () => {
+		ImageFactory.loadImageOnCanvas($scope.image);
+	}
 
 });

@@ -1,0 +1,17 @@
+<div id="bottom">
+    <div ng-controller="CameraCtrl">
+        <video autoplay="true" id="videoElement"></video>
+    </div>
+     <div class="select">
+      <label for="videoSource">Video source: </label><select id="videoSource"></select>
+    </div>
+
+    <div id="tester" ng-controller="CanvasCtrl">
+        <canvas id="paint"></canvas>
+    </div>
+
+    <div id="tester" ng-controller="ViewCtrl">
+        <canvas ng-hide="orientationCorrect" id="tiltCanvas"></canvas>
+    </div>
+
+</div>
