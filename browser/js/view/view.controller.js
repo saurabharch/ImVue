@@ -62,8 +62,8 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
 	//event is an object with properties on it which we'll use for x and y
 	function deviceOrientationAction(event){
 		//difference between image tilt and device tilt
-		let x = event.gamma - projectTiltX;
-		let y = event.beta - projectTiltY;
+		let x = event.gamma - projectTiltX + center;
+		let y = event.beta - projectTiltY + center;
 
 		console.log('device tilt: ' + x + ' and ' + y)
 		//draw the green circle offset from the center the distance 
@@ -73,7 +73,7 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
 		//see if green circle is pretty close to center
 		//if it is, toggle orientationCorrect, this will hide the canvas 
 		//with the circles and show the canvas with the project
-		if(x < 10 && y < 10) {
+		if(Math.abs(center - x) < 10 && Math.abs(center - y) < 10) {
 			$scope.orientationCorrect = true;
 		}
 	}
