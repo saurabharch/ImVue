@@ -8,8 +8,6 @@ app.factory('DrawingFactory', function(){
 	}
 
 	function addDrawingPoint( lastPos, currentPos, color ){
-		console.log(color)
-		console.log(drawingPoints)
 		drawingPoints.push(
             lastPos.x + ',' + lastPos.y + ',' +			// eslint-disable-line id-length
             currentPos.x + ',' + currentPos.y + ',' +	// eslint-disable-line id-length
