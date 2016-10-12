@@ -64,27 +64,29 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
 	//event is an object with properties on it which we'll use for x and y
 	function deviceOrientationAction(event){
 
-		//difference between image tilt and device tilt
-		let x = event.gamma - projectTiltX + center;
-		let y = event.beta - projectTiltY + center;
-		
-		ctxTilt.clearRect( 0, 0, canvasTilt.width, canvasTilt.height);
-
-		drawTargetCircle();
-		//draw the green circle offset from the center the distance 
-		//between image tfilt and device tilt
-		drawGreenCircle(center,y);
-
 		//see if green circle is pretty close to center
 		//if it is, toggle orientationCorrect, this will hide the canvas 
 		//with the circles and show the canvas with the project
-		
 		if( Math.abs(event.beta - projectTiltY) < 25 ) {
-			$scope.orientationCorrect = true;
+			ctxTilt.clearRect( 0, 0, canvasTilt.width, canvasTilt.height);
 		}
 		else{
-			$scope.orientationCorrect = false;
+			//difference between image tilt and device tilt
+			let x = event.gamma - projectTiltX + center;
+			let y = event.beta - projectTiltY + center;
+			
+			ctxTilt.clearRect( 0, 0, canvasTilt.width, canvasTilt.height);
+
+			drawTargetCircle();
+			//draw the green circle offset from the center the distance 
+			//between image tfilt and device tilt
+			drawGreenCircle(center,y);
 		}
+
+	}
+
+	function foundImage(){
+		return $scope.orientationCorrect;
 	}
 
 	//this is the most important part, tells the program to listen for 
