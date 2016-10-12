@@ -1,16 +1,19 @@
+<span><h1 style="color:white; font-size:8.0em; padding-left: 40px; padding-top: 80px; position:absolute"  >ImVue</h1><span>
 <div id="top">
-    <span class="inbox glyphicon glyphicon-inbox" ui-sref="inbox"></span>
-    <span class="map glyphicon glyphicon-globe" ui-sref="map"></span>
-    <span class="draw glyphicon glyphicon-pencil" ui-sref="home"></span>
+
+    <span ng-show="user" class="inbox glyphicon glyphicon-inbox" ui-sref="inbox"></span>
+    <span ng-show="user" class="map glyphicon glyphicon-globe" ui-sref="map"></span>
+    <span ng-show="user" class="draw glyphicon glyphicon-pencil" ui-sref="home"></span>
     <!-- TODO hook up with functions -->
-    <span class="send glyphicon glyphicon-send" ng-click="saveCanvas()"></span>
+    <span ng-show="user" class="send glyphicon glyphicon-send" ng-click="saveCanvas()"></span>
 
-    <button ng-show="!user" type="button" class="logIn btn btn-default" ui-sref="signup">Sign Up</button>
-    <button ng-show="!user" type="button" class="logIn btn btn-default" ui-sref="login">Login</button>
-        <a ng-show="user" class="profile glyphicon glyphicon-user" ui-sref="profile({userId:user.id})"></a>
 
-    <button ng-click="logout()" ng-show="user" type="button" class="logIn btn btn-default" ui-sref="login">Log Out</button>
-    <h4 ng-show="user">Welcome {{user.userName}}!</h4>
+        <!--<a ng-show="user" class="profile glyphicon glyphicon-user" ui-sref="profile({userId:user.id})"></a>-->
+
+    <span>
+        <button ng-click="logout()" ng-show="user" type="button" class="logIn btn btn-default" ui-sref="login">Log Out</button>
+        <h4 ng-show="user">Welcome {{user.userName}}!</h4>
+    </span>
 
 </div>
 
