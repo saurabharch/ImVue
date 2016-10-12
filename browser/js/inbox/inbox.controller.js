@@ -46,7 +46,7 @@ app.controller('InboxCtrl', function ($scope, geoLocationFactory, $http, CanvasF
         currentLocation[userId].date = currentLocation[userId].image.createdAt
         currentLocation[userId].name = currentLocation[userId].image.user.userName
       }
-      
+
       projects.push(currentLocation[userId])
     })
 
