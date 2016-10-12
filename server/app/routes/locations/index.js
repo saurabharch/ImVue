@@ -32,7 +32,7 @@ router.get('/:lat/:lng', (req, res, next) => {
         .catch(next);
 });
 
-router.post('/:lat/:lng', (req, res, next) => {
+router.post('/:lat/:lng/:ang/:tilt', (req, res, next) => {
     Location.findOrCreate({
         where: {
             latitude: req.params.lat,
