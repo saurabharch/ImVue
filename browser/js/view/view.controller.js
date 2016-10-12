@@ -43,10 +43,12 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
     let center = size * 0.5
 
  	//outer target circle STAY STILL
- 	ctxTilt.lineWidth=75;
-    ctxTilt.beginPath();
-	ctxTilt.arc(center, center,400,0,2*Math.PI);
-	ctxTilt.stroke();
+ 	function drawTargetCircle(){
+	 	ctxTilt.lineWidth=75;
+	    ctxTilt.beginPath();
+		ctxTilt.arc(center, center,400,0,2*Math.PI);
+		ctxTilt.stroke();
+	}
 
 	//innner green circle 
 	//move on device orientation
@@ -61,21 +63,30 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
 	//this is the function that run on any tilt event
 	//event is an object with properties on it which we'll use for x and y
 	function deviceOrientationAction(event){
-		//difference between image tilt and device tilt
-		let x = event.gamma - projectTiltX + center;
-		let y = event.beta - projectTiltY + center;
-
-		console.log('device tilt: ' + x + ' and ' + y)
-		//draw the green circle offset from the center the distance 
-		//between image tfilt and device tilt
-		drawGreenCircle(x,y);
 
 		//see if green circle is pretty close to center
 		//if it is, toggle orientationCorrect, this will hide the canvas 
 		//with the circles and show the canvas with the project
-		if(Math.abs(center - x) < 10 && Math.abs(center - y) < 10) {
-			$scope.orientationCorrect = true;
+		if( Math.abs(event.beta - projectTiltY) < 25 ) {
+			ctxTilt.clearRect( 0, 0, canvasTilt.width, canvasTilt.height);
 		}
+		else{
+			//difference between image tilt and device tilt
+			let x = event.gamma - projectTiltX + center;
+			let y = event.beta - projectTiltY + center;
+			
+			ctxTilt.clearRect( 0, 0, canvasTilt.width, canvasTilt.height);
+
+			drawTargetCircle();
+			//draw the green circle offset from the center the distance 
+			//between image tfilt and device tilt
+			drawGreenCircle(center,y);
+		}
+
+	}
+
+	function foundImage(){
+		return $scope.orientationCorrect;
 	}
 
 	//this is the most important part, tells the program to listen for 
