@@ -1,4 +1,4 @@
-app.controller('ViewCtrl', function($stateParams, CanvasFactory, DrawingFactory, TextFactory){
+app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, DrawingFactory, TextFactory){
 
 	$scope.orientationCorrect = false;
 
@@ -21,10 +21,10 @@ app.controller('ViewCtrl', function($stateParams, CanvasFactory, DrawingFactory,
     let ctxTilt = canvasTilt.getContext('2d');
 
     //target til or tilt of project we're trying to render
-    let projectTextX = $stateParams.project.angleX;
-    let projectTextY = $stateParams.project.tiltY;
+    let projectTiltX = $stateParams.project.angleX;
+    let projectTiltY = $stateParams.project.tiltY;
 
-    console.log("tilt: x: ", projectTextX, "y: ", projectTextY);
+    console.log("project tilt:  ", projectTiltX, " and ", projectTiltY);
 
 
     //set canvas width and height to width of div since it'll be less than height
@@ -62,9 +62,10 @@ app.controller('ViewCtrl', function($stateParams, CanvasFactory, DrawingFactory,
 	//event is an object with properties on it which we'll use for x and y
 	function deviceOrientationAction(event){
 		//difference between image tilt and device tilt
-		let x = event.gamma - projectTextX;
-		let y = event.beta - projectTextY;
+		let x = event.gamma - projectTiltX;
+		let y = event.beta - projectTiltY;
 
+		console.log('device tilt: ' + x + ' and ' + y)
 		//draw the green circle offset from the center the distance 
 		//between image tfilt and device tilt
 		drawGreenCircle(x,y);
@@ -79,7 +80,11 @@ app.controller('ViewCtrl', function($stateParams, CanvasFactory, DrawingFactory,
 
 	//this is the most important part, tells the program to listen for 
 	//any changes in phone's orientation
-	window.addEventListener("deviceorientation", deviceOrientationAction);
+	if(window.DeviceOrientationEvent) {
+		window.addEventListener("deviceorientation", deviceOrientationAction);
+	} else {
+		console.log('your browser/device does not suppoort device orientation')
+	}
 	//right now the ng-show for the drawing doesn't work
 	//cuz the canvas for the drawings is on the canvas ctrl
 	//but we can figure that out tomorrow
