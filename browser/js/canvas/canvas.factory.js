@@ -16,6 +16,9 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
     let currentLocTexts;
     let currentLocImages;
 
+    var angle;
+    var tilt;
+
     /* ---------------- ACCESSABLE FUNCTIONS ---------------- */
 
     function initializeCanvas(init_workspace, init_doc){
@@ -37,7 +40,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
         navigator.geolocation.getCurrentPosition((position) => {
 
-            $http.post('https://localhost:1337/api/locations/' + position.coords.latitude + '/' + position.coords.longitude, {drawing: {image: drawingToSave}, texts: texts, images: images} )
+            $http.post('/api/locations/' + position.coords.latitude + '/' + position.coords.longitude + '/' + angle + '/' + tilt, {drawing: {image: drawingToSave}, texts: texts, images: images} )
             .then( () => {
                 alert('Drawing Saved Successfully') // eslint-disable-line no-alert
             })
@@ -111,6 +114,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
         resizeCanvas()
         workspace.addEventListener('resize', resizeCanvas)
+        workspace.addEventListener('deviceorientation', deviceOrientationListener);
 
         // Touch screen event handlers
         canvas.addEventListener('touchstart', mDown);
@@ -130,6 +134,11 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
             ctx.stroke();
             ctx.closePath();
         };
+    }
+
+    function deviceOrientationListener(event) {
+        angle = Math.round(event.alpha);
+        tilt = Math.round(event.beta);
     }
 
     function resizeCanvas() {

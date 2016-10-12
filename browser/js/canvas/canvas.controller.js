@@ -11,4 +11,5 @@ app.controller('CanvasCtrl', function(CanvasFactory, ImageFactory, $scope){
 		ImageFactory.loadImageOnCanvas($scope.image);
 	}
 
+
 });
