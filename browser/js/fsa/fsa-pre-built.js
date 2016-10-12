@@ -95,10 +95,10 @@
         };
 
         this.signUp = function(userName, email, password) {
-
+            //expect an object with all of these properties, and just send the object
             return $http.post('/api/users/register', { userName: userName, email: email, password: password })
                 .then(function(response) {
-                    console.log(response)
+                    console.log(response) //kill the logsssss
                     Session.create(response.data);
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                 });

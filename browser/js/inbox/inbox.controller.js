@@ -26,13 +26,13 @@ app.controller('InboxCtrl', function ($scope, geoLocationFactory, $http) {
 
   function populateList(){
     var geocoder = new google.maps.Geocoder();  // eslint-disable-line no-undef
-    geoLocationFactory.updateLocation
+    geoLocationFactory.updateLocation //does this need to be invoked?? -- KHGB
       .then(function (position) {
         console.log(position.coords)
         var lat = position.coords.latitude
         var lng = position.coords.longitude
         coordsToAddress(geocoder, lat, lng)
-        $http.get(`/api/locations/${lng}/${lat}`)
+        $http.get(`/api/locations/${lng}/${lat}`) //NO http in the controller
         .then(function(allInfo){
           //allInfo contains drawings, texts, and images
           //TODO: CHECKOUT THE FORMAT OF ALLINFO

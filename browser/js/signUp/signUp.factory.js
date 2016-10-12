@@ -1,4 +1,4 @@
-app.factory('signUpFactory', function($http, $log) {
+app.factory('signUpFactory', function($http, $log) { //is this factory used? I don't see it injected in the controller. If it is used somewhere else maybe it is better in that location -- KHGB
     var signUpFactory = {}
 
     signUpFactory.getUserEmail = function(email) {
