@@ -32,9 +32,8 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
     function saveCanvasContent(){
         let drawingToSave = DrawingFactory.saveDrawing();
         let texts = []; //TextFactory.saveTexts();
-        let images = {source: 'waldo.png', x: 100, y: 200}; // eslint-disable-line id-length
-
-        //let images = ImageFactory.saveImages();
+        let images = ImageFactory.fetchStickers(); // eslint-disable-line id-length
+        console.log(images);
 
         navigator.geolocation.getCurrentPosition((position) => {
 
@@ -212,6 +211,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
     function getCurrentLocationResponse(){
         return currentLocationResponse;
     }
+
 
     return {
         initializeCanvas: initializeCanvas,

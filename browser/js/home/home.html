@@ -1,4 +1,6 @@
 <div id="bottom">
+
+
     <div ng-controller='TextCtrl'>
         <form name='textForm'>
 
@@ -7,21 +9,21 @@
             <input ng-model='textInput' ng-show="showInput" type='input' placeholder="Input Text Here">
 
             <lable>Font</label>
-            <select ng-model="fontFamily" style="background-color: white">
+                <select ng-model="fontFamily" style="background-color: white">
                 <option ng-repeat='font in getFontFamilies()' value='{{font}}'>{{font}}</option>
             </select>
 
-            <label>Size</label>
-            <select ng-model='fontSize' style="background-color: white">
+                <label>Size</label>
+                <select ng-model='fontSize' style="background-color: white">
                 <option ng-repeat='size in getTextSizes()' value='{{size}}'>{{size}}</option>
             </select>
 
-            <label>Location</label>
-            <select ng-model='fontLocation' style="background-color: white">
+                <label>Location</label>
+                <select ng-model='fontLocation' style="background-color: white">
                 <option ng-repeat='loc in getTextLocations()' value={{loc.locCoords}}>{{loc.locString}}</option>
             </select>
 
-            <button class="button" style='background-color: white' ng-click='addText(textInput)'>Add Text</button>
+                <button class="button" style='background-color: white' ng-click='addText(textInput)'>Add Text</button>
 
         </form>
 
@@ -30,10 +32,23 @@
     <div ng-controller="CameraCtrl">
         <video autoplay="true" id="videoElement"></video>
     </div>
-     <div class="select">
-      <label for="videoSource">Video source: </label><select id="videoSource"></select>
+    <div class="select">
+        <label for="videoSource">Video source: </label><select id="videoSource"></select>
     </div>
     <div id="tester" ng-controller="CanvasCtrl">
+         <form name="imageUrl">
+             <label>Add Image</label>
+             <select ng-model='image' style="background-color: white">
+                 <option value='obama'>obama</option>
+                 <option value='puppy'>puppy</option>
+                 <option value='kitten'>kitten</option>
+                 <option value='waldo'>waldo</option>
+                 <option value='warrior'>warrior</option>
+                 <!--<option ng-repeat='img in imgs' value={{img}}>{{img.name}}</option>-->
+             </select>
+            <!--<input ng-model="imgUrl" type="text" style="z-index: 99">-->
+            <button ng-click="loadImg()">Load</button>
+        </form>
 
         <canvas id="paint"></canvas>
 
@@ -55,8 +70,7 @@
                 <div class="marker" id="hotpink"></div>
             </div>
         </div>
-
-
-
     </div>
+
+
 </div>
