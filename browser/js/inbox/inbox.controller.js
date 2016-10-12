@@ -33,6 +33,8 @@ app.controller('InboxCtrl', function ($scope, geoLocationFactory, $http, CanvasF
     _.keys(currentLocation).forEach(function(userId){
 
       // console.log(currentLocation[userId])
+      currentLocation[userId].tiltY = response.tilt;
+      currentLocation[userId].angleX = response.angle;
 
       if (currentLocation[userId].drawing) {
         currentLocation[userId].name = currentLocation[userId].drawing.user.userName
