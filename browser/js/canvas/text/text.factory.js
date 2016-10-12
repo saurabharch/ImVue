@@ -21,7 +21,6 @@ app.factory('TextFactory', function(){
 		ctx.font =  size + 'px ' + font;
         ctx.fillStyle = color;
         ctx.fillText(content, locX, locY);
-        
         texts.push({size: size, font: font, color: color, x: locX, y: locY, content: content}) // eslint-disable-line id-length
 	}
 
