@@ -2,29 +2,24 @@ app.controller('MapCtrl', function ($scope, geoLocationFactory, mapFactory, $htt
 
 
     $scope.allProjects = localProjects;
-
-
-    var myLatlng
-
-
   var map;
   var drawingArr = [];
 
-  var styles = {
-    default: null,
-    hide: [{
-      featureType: 'poi.business',
-      stylers: [{
-        visibility: 'off'
-      }]
-    }, {
-      featureType: 'transit',
-      elementType: 'labels.icon',
-      stylers: [{
-        visibility: 'off'
-      }]
-    }]
-  };
+  // var styles = {
+  //   default: null,
+  //   hide: [{
+  //     featureType: 'poi.business',
+  //     stylers: [{
+  //       visibility: 'off'
+  //     }]
+  //   }, {
+  //     featureType: 'transit',
+  //     elementType: 'labels.icon',
+  //     stylers: [{
+  //       visibility: 'off'
+  //     }]
+  //   }]
+  // };
 
   function createMarker(pos, title) {
     var newMarker = new google.maps.Marker({  // eslint-disable-line no-undef
@@ -36,13 +31,11 @@ app.controller('MapCtrl', function ($scope, geoLocationFactory, mapFactory, $htt
     return newMarker;
   }
 
-  function initMap(latPos,lngPos) {
-
+  function initMap(latPos, lngPos) {
 
     map = new google.maps.Map(document.getElementById('map'), {
-
-        center: {lat:latPos, lng:lngPos},
-        zoom:25
+        center: { lat: latPos, lng: lngPos},
+        zoom: 25
     });
 
       (function (drawings) {
@@ -78,24 +71,14 @@ app.controller('MapCtrl', function ($scope, geoLocationFactory, mapFactory, $htt
         // })
 
           var newMarker
-          drawingArr.forEach((drawing)=>{
-
+          drawingArr.forEach((drawing) => {
             createMarker(drawing.pos, drawing.title).addListener('click', function () {
-                console.log(this,"HERERERERE")
                 drawing.infoWindow.open(map, newMarker)
                       //Each one of these infoWindows should have a click handler that
                       //uisrefs you over to the view page for that drawing
                   })
-
-
           })
-
-
-
       })($scope.allProjects)
-
-      var myLatLng = {lat: -25.363, lng: 131.044};
-
   }
 
     geoLocationFactory.updateLocation
@@ -106,9 +89,7 @@ app.controller('MapCtrl', function ($scope, geoLocationFactory, mapFactory, $htt
             var lat = coords.latitude;
             var lng = coords.longitude;
 
-           initMap(lat,lng)
+           initMap(lat, lng)
         })
-
   // initMap()
-
 });
