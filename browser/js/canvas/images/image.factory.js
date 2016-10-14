@@ -12,8 +12,8 @@ app.factory('ImageFactory', function(){
 	}
 
 	function loadSelectedImageOnCanvas(imageStr){
-		var image = fetchImages().filter(image => imageStr === image.name)[0];
-		loadImageOnCanvas( image )
+		var image = fetchImages().filter( image => imageStr === image.name )[0]; // eslint-disable-line no-shadow
+		loadImageOnCanvas(image)
 		imagesArr.push(image);
 	}
 
@@ -25,14 +25,14 @@ app.factory('ImageFactory', function(){
 	}
 
 	function fetchImages(){
-		return [
-			{ name: 'obama', 		source: 'img/obama.png', x: 0, y: 0},
-			{ name: 'puppy', 		source: 'img/puppy.png', x: 0, y: 0},
-			{ name: 'kitten', 		source: 'img/cat.png', x: 0, y: 0},
-			{ name: 'waldo', 		source: 'img/waldo.png', x: 0, y: 0},
-			{ name: 'warrior', 		source: 'img/warrior.png', x: 0, y: 0},
-			{ name: 'little foot', 	source: 'img/LittleFoot.png', x: 0, y: 0}
-		];
+		return [	/*eslint-disable id-length*/
+			{ name: 'obama', 		source: 'img/obama.png', 		x: 0, y: 0},
+			{ name: 'puppy', 		source: 'img/puppy.png', 		x: 0, y: 0},
+			{ name: 'kitten', 		source: 'img/cat.png', 			x: 0, y: 0},
+			{ name: 'waldo', 		source: 'img/waldo.png', 		x: 0, y: 0},
+			{ name: 'warrior', 		source: 'img/warrior.png', 		x: 0, y: 0},
+			{ name: 'little foot', 	source: 'img/LittleFoot.png', 	x: 0, y: 0}
+		];			/*eslint-enable id-length*/
 	}
 
 

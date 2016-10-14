@@ -1,4 +1,4 @@
-app.factory('ProjectFactory', function(){
+app.factory('ProjectFactory', function(geoLocationFactory, $http, $log){
 	var projects = [];
 
 	function addProject(project){
@@ -6,11 +6,25 @@ app.factory('ProjectFactory', function(){
 	}
 
 	function getProjects(){
-		return projects
+		return projects;
+	}
+
+	function updateProjects(position){
+		$http.get('/api/projects/' + position.coords.latitude + '/' + position.coords.longitude )
+		.then( foundProjects => {
+			if ( foundProjects.data.length ){
+				projects = foundProjects.data;
+			}
+			else {
+				projects = [];
+			}
+		})
+        .catch($log)
 	}
 
 	return {
 		addProject: addProject,
-		getProjects: getProjects
+		getProjects: getProjects,
+		updateProjects: updateProjects
 	}
 })

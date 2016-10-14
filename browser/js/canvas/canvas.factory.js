@@ -11,7 +11,6 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
     var drawing = false;
 
-    let currentLocationProjects = [];
     let currentLocDrawings = [];
     let currentLocTexts = [];
     let currentLocImages = [];
@@ -35,7 +34,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
     function saveCanvasContent(){
         let drawingToSave = DrawingFactory.saveDrawing();
         let texts = TextFactory.saveTexts();
-        let images = ImageFactory.saveImages(); 
+        let images = ImageFactory.saveImages();
 
         navigator.geolocation.getCurrentPosition((position) => {
 
@@ -49,28 +48,17 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
     }
 
     function loadCanvasContent(){
-    
-        navigator.geolocation.getCurrentPosition((position) => {
-            $http.get('/api/projects/' + position.coords.latitude + '/' + position.coords.longitude )
-            .then( response => {
-                console.log(position)
-                if( response.data.length ){
-                    response.data.forEach( function(project){
-                        ProjectFactory.addProject(project)
-                    })
-                    console.log("Projects: ", ProjectFactory.getProjects())
-                }
-                else
-                    console.log("no projects in area")
-            })
-            .catch($log)
-        })
-    }
 
-    function drawCurrentContentOnCanvas(){
-        DrawingFactory.drawDrawingsOnCanvas(currentLocDrawings);
-        TextFactory.drawTextsOnCanvas(currentLocTexts);
-        ImageFactory.drawImagesOnCanvas(currentLocImages);
+        geoLocationFactory.updateChangedLocation()
+        .then( position => {
+            if (position){
+                ProjectFactory.updateProjects(position);
+            }
+            else {
+                console.log("didn't change position")
+            }
+        })
+        .catch($log)
     }
 
     function clearCanvas(){
@@ -120,7 +108,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
         canvas.draw = function (start, end, strokeColor) {
             ctx.beginPath();
             ctx.strokeStyle = strokeColor || 'black';
-            ctx.lineWidth=10;
+            ctx.lineWidth = 10;
             ctx.moveTo(start.x, start.y);
             ctx.lineTo(end.x, end.y);
             ctx.stroke();
@@ -209,18 +197,12 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
     }
 
-    function getCurrentLocationResponse(){
-        return currentLocationResponse;
-    }
-
-
     return {
         initializeCanvas: initializeCanvas,
         saveCanvasContent: saveCanvasContent,
         loadCanvasContent: loadCanvasContent,
         clearCanvas: clearCanvas,
         undoLast: undoLast,
-        getCurrentLocationResponse: getCurrentLocationResponse,
         getCurrentDrawings: currentLocDrawings,
         getCurrentImages: currentLocImages,
         getCurrentTexts: currentLocTexts

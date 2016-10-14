@@ -1,4 +1,4 @@
-app.controller('ViewCtrl', function ($scope, $stateParams, CanvasFactory, DrawingFactory, TextFactory) {
+app.controller('ViewCtrl', function ($scope, $stateParams, CanvasFactory, DrawingFactory, TextFactory, ImageFactory) {
 
 	var drawingPlace = document.getElementById('paint')
     var tiltPlace = document.getElementById('tiltCanvas')
@@ -29,12 +29,14 @@ app.controller('ViewCtrl', function ($scope, $stateParams, CanvasFactory, Drawin
 
 	CanvasFactory.initializeCanvas(window, document);
 
-	//this draws the project on the paint canvas, with drawings, text, no images yet
 	if ($stateParams.project.drawing) {
 		DrawingFactory.drawDrawingsOnCanvas([$stateParams.project.drawing])
 	}
-	if ($stateParams.project.text) {
-		TextFactory.drawTextsOnCanvas([$stateParams.project.text])
+	if ($stateParams.project.texts.length) {
+		TextFactory.drawTextsOnCanvas($stateParams.project.texts)
+	}
+	if ($stateParams.project.images.length){
+		ImageFactory.drawImagesOnCanvas($stateParams.project.images)
 	}
 
 	//this is the canvas that displays our tilt orientation guide
@@ -91,7 +93,7 @@ app.controller('ViewCtrl', function ($scope, $stateParams, CanvasFactory, Drawin
 			ctxTilt.clearRect(0, 0, canvasTilt.width, canvasTilt.height);
 		} else {
 			//difference between image tilt and device tilt
-			let x = event.alpha - projectTiltX + center;	// eslint-disable-line id-length
+			//let x = event.alpha - projectTiltX + center;	// eslint-disable-line id-length
 			let y = event.beta - projectTiltY + center; // eslint-disable-line id-length
 
 			ctxTilt.clearRect(0, 0, canvasTilt.width, canvasTilt.height);
