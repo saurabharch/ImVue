@@ -28,7 +28,7 @@ app.controller('CanvasCtrl', function(CanvasFactory, ImageFactory, $scope){
     drawingPlace.height = height
     drawingPlace.width = width
 
-    if(tiltPlace){
+    if (tiltPlace){
         tiltPlace.style.height = height + 'px'
         tiltPlace.style.width = width + 'px'
         tiltPlace.height = height
