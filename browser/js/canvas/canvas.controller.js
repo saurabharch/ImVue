@@ -18,19 +18,19 @@ app.controller('CanvasCtrl', function(CanvasFactory, ImageFactory, $scope){
 
 	var drawingPlace = document.getElementById('paint')
     var videoPlace = document.getElementById('videoElement')
-    var sidebar = document.getElementById('teste')
+    //var sidebar = document.getElementById('teste')
 
-    var h = window.innerHeight
-    var w = window.innerWidth
+    var height = window.innerHeight
+    var width = window.innerWidth
 
-    drawingPlace.style.height = h + 'px'
-    drawingPlace.style.width = w + 'px'
-    drawingPlace.height = h
-    drawingPlace.width = w
+    drawingPlace.style.height = height + 'px'
+    drawingPlace.style.width = width + 'px'
+    drawingPlace.height = height
+    drawingPlace.width = width
 
-    videoPlace.style.height = h + 'px'
-    videoPlace.style.width = w + 'px'
-    videoPlace.height = h
-    videoPlace.width = w
+    videoPlace.style.height = height + 'px'
+    videoPlace.style.width = width + 'px'
+    videoPlace.height = height
+    videoPlace.width = width
 
 });
