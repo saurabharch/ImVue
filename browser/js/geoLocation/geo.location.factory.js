@@ -5,7 +5,8 @@ app.factory('geoLocationFactory', function () {
 	var range = 0.00025;	// 0.00025 ~46 meters this is half our get location range http://www.csgnetwork.com/gpsdistcalc.html
 
 	function updateLocation(){
-		return new Promise( (resolve, reject) => { navigator.geolocation.getCurrentPosition(resolve) })
+		// the reject will be taken care of by a .catch when used
+		return new Promise( (resolve, reject) => { navigator.geolocation.getCurrentPosition(resolve) }) // eslint-disable-line no-unused-vars
     }
 
 	function updateChangedLocation(){
