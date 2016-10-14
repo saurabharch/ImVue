@@ -120,6 +120,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
         canvas.draw = function (start, end, strokeColor) {
             ctx.beginPath();
             ctx.strokeStyle = strokeColor || 'black';
+            ctx.lineWidth=10;
             ctx.moveTo(start.x, start.y);
             ctx.lineTo(end.x, end.y);
             ctx.stroke();

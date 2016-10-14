@@ -35,6 +35,7 @@ app.factory('ImageFactory', function(){
 		];
 	}
 
+
 	function saveImages() {
 		return imagesArr;
 	}
@@ -46,5 +47,6 @@ app.factory('ImageFactory', function(){
 		loadImageOnCanvas: loadImageOnCanvas,
 		saveImages: saveImages,
 		fetchImages: fetchImages
+
 	}
 });

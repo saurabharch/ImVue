@@ -11,8 +11,14 @@ app.controller('CanvasCtrl', function(CanvasFactory, ImageFactory, $scope){
 		ImageFactory.loadSelectedImageOnCanvas($scope.image);
 	}
 
+    $scope.saveCanvas = CanvasFactory.saveCanvasContent
+
+    $scope.toggleImageSelect = ImageFactory.toggleImageSelect
+    $scope.showImageSelect = ImageFactory.showImageSelect
+
 	var drawingPlace = document.getElementById('paint')
     var videoPlace = document.getElementById('videoElement')
+    var sidebar = document.getElementById('teste')
 
     var h = window.innerHeight
     var w = window.innerWidth
@@ -21,5 +27,10 @@ app.controller('CanvasCtrl', function(CanvasFactory, ImageFactory, $scope){
     drawingPlace.style.width = w + 'px'
     drawingPlace.height = h
     drawingPlace.width = w
+
+    videoPlace.style.height = h + 'px'
+    videoPlace.style.width = w + 'px'
+    videoPlace.height = h
+    videoPlace.width = w
 
 });
