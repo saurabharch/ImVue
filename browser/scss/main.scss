@@ -25,8 +25,16 @@ body, html, #containerr {
   color: white;
   position: absolute; 
   bottom: 0;
-  left: 40px;
+  left: 210px;
   font-size: 80px;
+}
+
+.profile {
+  display: block;
+  background-color: transparent;
+  float: left;
+  font-size: 80px;
+  padding: 40px;
 }
 
 .login {
@@ -55,6 +63,20 @@ body, html, #containerr {
   border-radius: 25px;
   font-size: 25px;
   margin-bottom: 25px;
+}
+
+.profile-sidebar {
+  height: 100%;
+  width: 34%;
+  border-right: solid;
+  border-width: thin;
+  float: left;
+}
+
+.profile-right {
+  height: 100%;
+  width: 66%;
+  float: right;
 }
 
 #videoElement {

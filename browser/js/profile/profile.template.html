@@ -1,7 +1,34 @@
+<div id="bottom" ng-controller="ProfileCtrl">
 
-<div id="bottom">
-<h1>Profile page</h1>
-    <div>
+    <div class="profile-sidebar">
+   
+    </div>
+
+    <div class="profile-right">
+
+    <div id="list-group">
+    	<div id="search-bar">
+		    <span class="input-group-addon">Filter</span>
+		    
+	        <input type="text" class="col-xs-6 filtery" placeholder="by date" ng-model="nameSearch">
+	        <input type="text" class="col-xs-6 filtery" placeholder="by location" ng-model="dateSearch">
+
+	        <span class="input-group-addon" style="font-size: 18;">
+	        	<div style='color: teal' class="col-xs-6"><h1>Date</h1></div>
+				<div style='color:teal' class="col-xs-6"><h1>Location</h1></div>
+	        </span>
+		</div>
+
+    	<div id="list-group-item" ng-repeat="project in projects" ng-class-odd="'odd'" ng-class-even="'even'">
+			<div ui-sref='view({project: project})'>
+					<div class="col-xs-6"><h1>{{project.date}}</h1></div>
+					<div class="col-xs-6">
+						<h1>{{project.location}}</h1>
+					</div>
+			</div>
+		</div>
+	</div>
 
     </div>
+
 </div>
