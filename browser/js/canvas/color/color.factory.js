@@ -18,7 +18,7 @@ app.factory('ColorFactory', function(){
             // Attach a click handler that will set our color variable to
             // the elements id, remove the selected class from all colors,
             // and then add the selected class to the clicked color.
-
+            
 
             function pickColor() {
                 color = this.id;
@@ -26,8 +26,11 @@ app.factory('ColorFactory', function(){
                 this.classList.add('selected');
             }
 
-            el.addEventListener('click', pickColor);
-            el.addEventListener('tap', pickColor);
+            el.onclick = pickColor
+
+            
+        el.addEventListener('click', pickColor);
+        el.addEventListener('tap', pickColor);
 
         });
     }

@@ -6,7 +6,7 @@ app.config(function ($stateProvider) {
 
         url: '/profile/:userId',
         templateUrl: 'js/profile/profile.template.html',
-        controller: 'profileCtrl'
+        controller: 'ProfileCtrl'
 
         // resolve:{
         //     loginInUserDrawings: function(profileFactory,$stateParams){

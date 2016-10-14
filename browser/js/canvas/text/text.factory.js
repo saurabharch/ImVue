@@ -6,6 +6,7 @@ app.factory('TextFactory', function(){
 	let textSizes = fetchTextSizes();
 	let fontFamilies = fetchFontFamilies();
 	let textLocations = fetchTextLocations();
+	let textSelect = false;
 
 	function initializeTextFactory(canvasCtx){
 		ctx = canvasCtx;
@@ -30,6 +31,14 @@ app.factory('TextFactory', function(){
 		})
 	}
 
+	function toggleTextSelect(){
+        textSelect = !textSelect;
+    }
+
+	function showTextSelect(){
+	    return textSelect;
+	}
+
 	return {
 		initializeTextFactory: initializeTextFactory,
 		drawText: drawText,
@@ -37,7 +46,9 @@ app.factory('TextFactory', function(){
 		saveTexts: saveTexts,
 		getTextSizes: textSizes,
 		getFontFamilies: fontFamilies,
-		getTextLocations: textLocations
+		getTextLocations: textLocations,
+		toggleTextSelect: toggleTextSelect,
+		showTextSelect: showTextSelect
 	}
 
 });
