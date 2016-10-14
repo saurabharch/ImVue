@@ -4,8 +4,8 @@ app.config(function($stateProvider) {
     templateUrl: 'js/map/map.template.html',
     controller: 'MapCtrl',
       resolve: {
-        localProjects:  (mapFactory) => {
-            return mapFactory.fetchAllLocalProjects()
+        mapProjects: (mapFactory) => {
+            return mapFactory.fetchMapProjects()
         }
       }
   })

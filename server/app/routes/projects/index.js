@@ -7,7 +7,34 @@ const Image = require('../../../db/models/image.js');
 const User = require('../../../db/models/user.js');
 
 router.get('/:lat/:lng', (req, res, next) => {
-    var range = 0.01; // 0.0005 ~92 meters http://www.csgnetwork.com/gpsdistcalc.html
+    var range = 0.0005; // 0.0005 ~92 meters http://www.csgnetwork.com/gpsdistcalc.html
+    var lat = parseFloat(req.params.lat);
+    var lon = parseFloat(req.params.lng);
+
+    Project.findAll({
+        where: {
+            $and: {
+                latitude: {
+                    $between: [lat - range, lat + range]
+                },
+                longitude: {
+                    $between: [lon - range, lon + range]
+                }
+            }
+        },
+        include: [
+            { model: Drawing },
+            { model: Text },
+            { model: Image },
+            { model: User }
+        ]
+    })
+    .then(allInfo => res.send(allInfo))
+    .catch(next);
+});
+
+router.get('/map/:lat/:lng', (req, res, next) => {
+    var range = 0.116; // 0.12 ~10.0 miles - ~16.2 km http://www.csgnetwork.com/gpsdistcalc.html
     var lat = parseFloat(req.params.lat);
     var lon = parseFloat(req.params.lng);
 
