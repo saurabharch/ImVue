@@ -29,16 +29,6 @@ router.get('/:id', (req, res, next) => {
         .catch(next)
 });
 
-// router.post('/', (req, res, next) => {
-//     console.log('Creating new User')
-//     let newUser = req.body
-//     User.create(newUser)
-//         .then(user => {
-//             res.send(user)
-//         })
-//         .catch(next)
-// })
-
 router.post('/register', function(req, res, next) {
 
     console.log(req.body)

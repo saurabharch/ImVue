@@ -1,70 +1,52 @@
 app.factory('ImageFactory', function(){
 
-	let canvas;
 	let ctx;
-	let stickerArr = [];
-	let imageSelect = false;
+	let imagesArr = [];
 
-	function initializeImageFactory(canvas2B){
-		canvas = canvas2B;
+	function initializeImageFactory(canvasCtx){
+		ctx = canvasCtx;
 	}
 
 	function drawImagesOnCanvas(images){
-		canvas = document.getElementById('paint');
-		ctx = canvas.getContext('2d');
-
 		images.map(loadImageOnCanvas);
 	}
 
-	function loadImageOnCanvas(image) {
-		var stickers = fetchStickers();
-
-		var sticker = stickers.filter(stick => stick.name === image)[0];
-
-		canvas = document.getElementById('paint');
-		ctx = canvas.getContext('2d');
-
-		let img = new Image();
-		img.src = sticker.url;
-		img.onload = () => { ctx.drawImage(img, 0, 0) }
-
-		stickerArr.push(sticker.url);
+	function loadSelectedImageOnCanvas(imageStr){
+		var image = fetchImages().filter(image => imageStr === image.name)[0];
+		loadImageOnCanvas( image )
+		imagesArr.push(image);
 	}
 
-	function fetchStickers(){
+	function loadImageOnCanvas(image) {
+		let img = new Image();
+		img.src = image.source;
+		console.log(img)
+		img.onload = () => { ctx.drawImage(img, image.x, image.y) }
+	}
+
+	function fetchImages(){
 		return [
-			{name: 'obama', url: 'img/obama.png'},
-			{name: 'puppy', url: 'img/puppy.png'},
-			{name: 'kitten', url: 'img/cat.png'},
-			{name: 'waldo', url: 'img/waldo.png'},
-			{name: 'warrior', url: 'img/warrior.png'},
-			{name: 'little foot', url: 'img/LittleFoot.png'}
+			{ name: 'obama', 		source: 'img/obama.png', x: 0, y: 0},
+			{ name: 'puppy', 		source: 'img/puppy.png', x: 0, y: 0},
+			{ name: 'kitten', 		source: 'img/cat.png', x: 0, y: 0},
+			{ name: 'waldo', 		source: 'img/waldo.png', x: 0, y: 0},
+			{ name: 'warrior', 		source: 'img/warrior.png', x: 0, y: 0},
+			{ name: 'little foot', 	source: 'img/LittleFoot.png', x: 0, y: 0}
 		];
 	}
 
-	function toggleImageSelect(){
-        imageSelect = !imageSelect;
-    }
 
-	function showImageSelect(){
-	    return imageSelect;
+	function saveImages() {
+		return imagesArr;
 	}
-
-	// function fetchStickers() {
-	// 	return stickerArr;
-	// }
-
-	// Unsure how we're going to do this at the moment
-	// function saveImages(){
-
-	// }
 
 	return {
 		initializeImageFactory: initializeImageFactory,
 		drawImagesOnCanvas: drawImagesOnCanvas,
+		loadSelectedImageOnCanvas: loadSelectedImageOnCanvas,
 		loadImageOnCanvas: loadImageOnCanvas,
-		fetchStickers: fetchStickers,
-		toggleImageSelect: toggleImageSelect,
-		showImageSelect: showImageSelect
+		saveImages: saveImages,
+		fetchImages: fetchImages
+
 	}
 });

@@ -8,7 +8,7 @@ app.controller('CanvasCtrl', function(CanvasFactory, ImageFactory, $scope){
 	$scope.undo = CanvasFactory.undoLast
 
 	$scope.loadImg = () => {
-		ImageFactory.loadImageOnCanvas($scope.image);
+		ImageFactory.loadSelectedImageOnCanvas($scope.image);
 	}
 
     $scope.saveCanvas = CanvasFactory.saveCanvasContent
