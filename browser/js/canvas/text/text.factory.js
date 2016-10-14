@@ -82,14 +82,14 @@ function fetchTextLocations(){
 	let right = 		screen.availHeight * 0.9;
 
 	return [ /*eslint-disable id-length*/
-		{ locString: 'top-left', 		locCoords: 	{ x: top, y: left } },
-		{ locString: 'top-center', 		locCoords: 	{ x: top, y: centerHor } },
-		{ locString: 'top-right', 		locCoords: 	{ x: top, y: right } },
-		{ locString: 'center-left', 	locCoords: 	{ x: centerVert, y: left  } },
-		{ locString: 'center-center', 	locCoords: 	{ x: centerVert, y: centerHor } },
-		{ locString: 'center-right', 	locCoords: 	{ x: centerVert, y: right } },
-		{ locString: 'bottom-left', 	locCoords: 	{ x: bottom, y: left } },
-		{ locString: 'bottom-center', 	locCoords: 	{ x: bottom, y: centerHor } },
-		{ locString: 'bottom-right', 	locCoords: 	{ x: bottom, y: right } },
+		{ locString: 'top-left', 		locCoords: 	{ x: left, 			y: top } },
+		{ locString: 'top-center', 		locCoords: 	{ x: centerHor, 	y: top } },
+		{ locString: 'top-right', 		locCoords: 	{ x: right, 		y: top} },
+		{ locString: 'center-left', 	locCoords: 	{ x: left, 			y: centerVert } },
+		{ locString: 'center-center', 	locCoords: 	{ x: centerHor, 	y: centerVert} },
+		{ locString: 'center-right', 	locCoords: 	{ x: right, 		y: centerVert } },
+		{ locString: 'bottom-left', 	locCoords: 	{ x: left, 			y: bottom } },
+		{ locString: 'bottom-center', 	locCoords: 	{ x: centerHor, 	y: bottom } },
+		{ locString: 'bottom-right', 	locCoords: 	{ x: right, 		y: bottom } },
 	]		/*eslint-enable id-length*/
 }

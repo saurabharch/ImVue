@@ -11,10 +11,10 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
     var drawing = false;
 
-    let currentLocationResponse;
-    let currentLocDrawings;
-    let currentLocTexts;
-    let currentLocImages;
+    let currentLocationProjects = [];
+    let currentLocDrawings = [];
+    let currentLocTexts = [];
+    let currentLocImages = [];
 
     var angle;
     var tilt;
@@ -28,19 +28,18 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
         loadCanvas();
         ColorFactory.initializeColorElements(doc);
         DrawingFactory.initializeDrawingFactory(canvas);
-        ImageFactory.initializeImageFactory(canvas);
+        ImageFactory.initializeImageFactory(ctx);
         TextFactory.initializeTextFactory(ctx);
     }
 
     function saveCanvasContent(){
         let drawingToSave = DrawingFactory.saveDrawing();
-        let texts = []; //TextFactory.saveTexts();
-        let images = ImageFactory.fetchStickers(); // eslint-disable-line id-length
-        console.log(images);
+        let texts = TextFactory.saveTexts();
+        let images = ImageFactory.saveImages(); 
 
         navigator.geolocation.getCurrentPosition((position) => {
 
-            $http.post('/api/locations/' + position.coords.latitude + '/' + position.coords.longitude + '/' + angle + '/' + tilt, {drawing: {image: drawingToSave}, texts: texts, images: images} )
+            $http.post('/api/projects/' + position.coords.latitude + '/' + position.coords.longitude + '/' + angle + '/' + tilt, {drawing: {image: drawingToSave}, texts: texts, images: images} )
             .then( () => {
                 alert('Drawing Saved Successfully') // eslint-disable-line no-alert
             })
@@ -50,24 +49,16 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
     }
 
     function loadCanvasContent(){
-
+    
         navigator.geolocation.getCurrentPosition((position) => {
-            $http.get('/api/locations/' + position.coords.latitude + '/' + position.coords.longitude )
+            $http.get('/api/projects/' + position.coords.latitude + '/' + position.coords.longitude )
             .then( response => {
-
-                currentLocationResponse = [];
-                currentLocDrawings = [];
-                currentLocTexts = [];
-                currentLocImages = [];
-
-                response.data.forEach(function(location){
-                    currentLocationResponse.push(location)
-                    // Turnary array pushes
-                    if ( location.drawings.length )  { currentLocDrawings = currentLocDrawings.concat(location.drawings) }
-                    if ( location.texts.length )     { currentLocTexts = currentLocTexts.concat(location.texts) }
-                    if ( location.images.length )    { currentLocImages = currentLocImages.concat(location.images)  }
-                })
-                //drawCurrentContentOnCanvas();
+                
+                if( response.data.length ){
+                    response.data.forEach( function(project){
+                        currentLocationProjects.push(project)
+                    })
+                }
 
             })
             .catch($log)
@@ -79,7 +70,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
     function drawCurrentContentOnCanvas(){
         DrawingFactory.drawDrawingsOnCanvas(currentLocDrawings);
         TextFactory.drawTextsOnCanvas(currentLocTexts);
-        //ImageFactory.drawImagesOnCanvas(currentLocImages);
+        ImageFactory.drawImagesOnCanvas(currentLocImages);
     }
 
     function clearCanvas(){
