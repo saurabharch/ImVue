@@ -1,25 +1,9 @@
 app.controller('MapCtrl', function ($scope, geoLocationFactory, mapFactory, $http, localProjects) {
 
 
-    $scope.allProjects = localProjects;
+  $scope.allProjects = localProjects;
   var map;
   var drawingArr = [];
-
-  // var styles = {
-  //   default: null,
-  //   hide: [{
-  //     featureType: 'poi.business',
-  //     stylers: [{
-  //       visibility: 'off'
-  //     }]
-  //   }, {
-  //     featureType: 'transit',
-  //     elementType: 'labels.icon',
-  //     stylers: [{
-  //       visibility: 'off'
-  //     }]
-  //   }]
-  // };
 
   function createMarker(pos, title) {
     var newMarker = new google.maps.Marker({  // eslint-disable-line no-undef
@@ -33,7 +17,7 @@ app.controller('MapCtrl', function ($scope, geoLocationFactory, mapFactory, $htt
 
   function initMap(latPos, lngPos) {
 
-    map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), { // eslint-disable-line no-undef
         center: { lat: latPos, lng: lngPos},
         zoom: 25
     });
@@ -60,15 +44,6 @@ app.controller('MapCtrl', function ($scope, geoLocationFactory, mapFactory, $htt
 
           drawingArr.push(marker);
         }
-          //console.log('drawingArr',drawingArr)
-        // drawingArr.forEach(function (drawing) {
-        //   var newMarker = createMarker(drawing.pos, drawing.title)
-        //   newMarker.addListener('click', function () {
-        //     drawing.infoWindow.open(map, newMarker)
-        //       //Each one of these infoWindows should have a click handler that
-        //       //uisrefs you over to the view page for that drawing
-        //   })
-        // })
 
           var newMarker
           drawingArr.forEach((drawing) => {

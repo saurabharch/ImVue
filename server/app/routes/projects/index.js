@@ -45,7 +45,6 @@ router.post('/:lat/:lng/:ang/:tilt', (req, res, next) => {
         }
     })
     .then((project) => {
-        
         var creatingAll = [];
 
         if (req.body.drawing.image.length){
@@ -54,14 +53,14 @@ router.post('/:lat/:lng/:ang/:tilt', (req, res, next) => {
         }
 
         if (req.body.texts.length ){
-            for( let i = 0; i < req.body.texts.length ; i++){
+            for ( let i = 0; i < req.body.texts.length ; i++){
                 req.body.texts[i].projectId = project.id;
                 creatingAll.push( Text.create(req.body.texts[i]) );
             }
-        } 
+        }
 
         if ( req.body.images.length ){
-            for( let i = 0; i < req.body.images.length ; i++){
+            for ( let i = 0; i < req.body.images.length ; i++){
                 req.body.images[i].projectId = project.id;
                 creatingAll.push( Image.create(req.body.images[i]) );
             }
@@ -69,7 +68,6 @@ router.post('/:lat/:lng/:ang/:tilt', (req, res, next) => {
 
         return Promise.all(creatingAll); // eslint-disable-line new-cap
     })
-    .then( createdItems => { })
     .then(() => res.sendStatus(201))
     .catch(next);
 });
