@@ -60,6 +60,15 @@ router.get('/map/:lat/:lng', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/:userId', (req,res,next) => {
+    Project.findAll({
+        where: {
+            userId: req.params.userId
+        }
+    })
+    .then(userProjects => res.send(userProjects))
+})
+
 router.post('/:lat/:lng/:ang/:tilt', (req, res, next) => {
 
     Project.create({
