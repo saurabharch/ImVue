@@ -1,12 +1,14 @@
 app.factory('CameraFactory', function () {
 
+	var cameraOptions = false;
+
 	var streamCamera = () => {
 
 		var videoSelect = document.querySelector('select#videoSource');
 		var videoElement = document.querySelector('#videoElement');
 
 		function gotCameras(devInfos) {
-			for (var i = 0; i !== devInfos.length; i++) {
+			for (var i = devInfos.length; i > -1; i--) {
 				var devInfo = devInfos[i];
 				var option = document.createElement('option');
 				option.value = devInfo.deviceId;
@@ -61,5 +63,18 @@ app.factory('CameraFactory', function () {
 
 	}
 
-	return {streamCamera: streamCamera}
+	function toggleCameraOptions() {
+		cameraOptions = !cameraOptions;
+	}
+
+
+    function showCameraOptions(){
+        return cameraOptions;
+    }
+
+	return {
+		streamCamera: streamCamera,
+		toggleCameraOptions: toggleCameraOptions,
+		showCameraOptions: showCameraOptions
+	}
 });

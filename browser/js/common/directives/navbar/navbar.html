@@ -1,37 +1,16 @@
-<span><h1 style="color:white; font-size:8.0em; padding-left: 40px; padding-top: 80px; position:absolute"  >ImVue</h1><span>
 <div id="top">
 
-    <span ng-show="user" class="inbox glyphicon glyphicon-inbox" ui-sref="inbox"></span>
-    <span ng-show="user" class="map glyphicon glyphicon-globe" ui-sref="map"></span>
-    <span ng-show="user" class="draw glyphicon glyphicon-pencil" ui-sref="home"></span>
-    <!-- TODO hook up with functions -->
-    <span ng-show="user" class="send glyphicon glyphicon-send" ng-click="saveCanvas()"></span>
+    <span class="logo">ImVue</span>
 
+    <span ng-show="user" class="navbar-btn glyphicon glyphicon-inbox" ui-sref="inbox"></span>
+    <span ng-show="user" class="navbar-btn glyphicon glyphicon-globe" ui-sref="map"></span>
+    <span ng-show="user" class="navbar-btn glyphicon glyphicon-pencil" ui-sref="home"></span>
 
         <!--<a ng-show="user" class="profile glyphicon glyphicon-user" ui-sref="profile({userId:user.id})"></a>-->
 
-    <span>
+    <!-- <span>
         <button ng-click="logout()" ng-show="user" type="button" class="logIn btn btn-default" ui-sref="login">Log Out</button>
         <h4 ng-show="user">Welcome {{user.userName}}!</h4>
-    </span>
+    </span> -->
 
 </div>
-
-
-<!--<nav class="navbar navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
-            <fullstack-logo></fullstack-logo>
-        </div>
-        <ul class="nav navbar-nav">
-            <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
-                <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
-            </li>
-        </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
-        <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.email }}!</span>
-            <a ng-click="logout()">Logout</a>
-        </div>
-    </div>
-</nav>-->

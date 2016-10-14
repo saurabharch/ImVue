@@ -3,6 +3,7 @@ app.factory('ImageFactory', function(){
 	let canvas;
 	let ctx;
 	let stickerArr = [];
+	let imageSelect = false;
 
 	function initializeImageFactory(canvas2B){
 		canvas = canvas2B;
@@ -41,6 +42,14 @@ app.factory('ImageFactory', function(){
 		];
 	}
 
+	function toggleImageSelect(){
+        imageSelect = !imageSelect;
+    }
+
+	function showImageSelect(){
+	    return imageSelect;
+	}
+
 	// function fetchStickers() {
 	// 	return stickerArr;
 	// }
@@ -54,6 +63,8 @@ app.factory('ImageFactory', function(){
 		initializeImageFactory: initializeImageFactory,
 		drawImagesOnCanvas: drawImagesOnCanvas,
 		loadImageOnCanvas: loadImageOnCanvas,
-		fetchStickers: fetchStickers
+		fetchStickers: fetchStickers,
+		toggleImageSelect: toggleImageSelect,
+		showImageSelect: showImageSelect
 	}
 });
