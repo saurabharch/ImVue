@@ -17,8 +17,8 @@ app.controller('CanvasCtrl', function(CanvasFactory, ImageFactory, $scope){
     $scope.showImageSelect = ImageFactory.showImageSelect
 
 	var drawingPlace = document.getElementById('paint')
+    var tiltPlace = document.getElementById('tiltCanvas')
     var videoPlace = document.getElementById('videoElement')
-    var sidebar = document.getElementById('teste')
 
     var h = window.innerHeight
     var w = window.innerWidth
@@ -27,6 +27,13 @@ app.controller('CanvasCtrl', function(CanvasFactory, ImageFactory, $scope){
     drawingPlace.style.width = w + 'px'
     drawingPlace.height = h
     drawingPlace.width = w
+
+    if(tiltPlace){
+        tiltPlace.style.height = h + 'px'
+        tiltPlace.style.width = w + 'px'
+        tiltPlace.height = h
+        tiltPlace.width = w
+    }
 
     videoPlace.style.height = h + 'px'
     videoPlace.style.width = w + 'px'
