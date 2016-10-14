@@ -10,15 +10,15 @@
 
 	        <span class="input-group-addon" style="font-size: 18;">
 	        	<div style='color: teal' class="col-xs-6"><h1>Author</h1></div>
-				<div style='color:teal' class="col-xs-6"><h1>Date</h1></div>
+				<div style='color: teal' class="col-xs-6"><h1>Date</h1></div>
 	        </span>
 		</div>
 
 		<div id="list-group-item" ng-repeat="project in projects | filter: { name: nameSearch } | filter: { date: dateSearch } | orderBy: 'date'" ng-class-odd="'odd'" ng-class-even="'even'">
 			<div ui-sref='view({project: project})'>
-					<div class="col-xs-6"><h1>{{project.name}}</h1></div>
+					<div class="col-xs-6"><h1>{{project.user.email}}</h1></div>
 					<div class="col-xs-6">
-						<h1>{{project.date.split('T')[0]}}  {{project.date.split('T')[1].split('.')[0]}}</h1>
+						<h1>{{project.createdAt.split('T')[0]}}  {{project.createdAt.split('T')[1].split('.')[0]}}</h1>
 					</div>
 			</div>
 		</div>

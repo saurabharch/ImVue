@@ -1,4 +1,4 @@
-app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFactory, TextFactory, DrawingFactory, ImageFactory){ // eslint-disable-line max-params
+app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFactory, TextFactory, DrawingFactory, ImageFactory, ProjectFactory){ // eslint-disable-line max-params
 
 	var workspace;
     var doc;
@@ -53,17 +53,17 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
         navigator.geolocation.getCurrentPosition((position) => {
             $http.get('/api/projects/' + position.coords.latitude + '/' + position.coords.longitude )
             .then( response => {
-                
+                console.log(position)
                 if( response.data.length ){
                     response.data.forEach( function(project){
-                        currentLocationProjects.push(project)
+                        ProjectFactory.addProject(project)
                     })
+                    console.log("Projects: ", ProjectFactory.getProjects())
                 }
-
+                else
+                    console.log("no projects in area")
             })
             .catch($log)
-
-
         })
     }
 

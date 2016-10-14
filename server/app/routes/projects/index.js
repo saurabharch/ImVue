@@ -7,7 +7,7 @@ const Image = require('../../../db/models/image.js');
 const User = require('../../../db/models/user.js');
 
 router.get('/:lat/:lng', (req, res, next) => {
-    var range = 0.0005; // ~92 meters http://www.csgnetwork.com/gpsdistcalc.html
+    var range = 0.01; // 0.0005 ~92 meters http://www.csgnetwork.com/gpsdistcalc.html
     var lat = parseFloat(req.params.lat);
     var lon = parseFloat(req.params.lng);
 
