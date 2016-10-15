@@ -29,16 +29,6 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
 
     CanvasFactory.initializeCanvas(window, document);
 
-    // if ($stateParams.project.drawing) {
-    //     DrawingFactory.drawDrawingsOnCanvas([$stateParams.project.drawing])
-    // }
-    // if ($stateParams.project.texts.length) {
-    //     TextFactory.drawTextsOnCanvas($stateParams.project.texts)
-    // }
-    // if ($stateParams.project.images.length) {
-    //     ImageFactory.drawImagesOnCanvas($stateParams.project.images)
-    // }
-
     //this is the canvas that displays our tilt orientation guide
     let canvasTilt = document.getElementById('tiltCanvas');
 
@@ -46,7 +36,7 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
     let ctxTilt = canvasTilt.getContext('2d');
 
     //target til or tilt of project we're trying to render
-    let projectTiltX = $stateParams.project.angle;
+    let projectTiltX = $stateParams.project.angle; // eslint-disable-line no-unused-vars
     let projectTiltY = $stateParams.project.tilt;
 
     //set canvas width and height to width of div since it'll be less than height
@@ -57,25 +47,15 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
     canvasTilt.style.width = size + 'px';
     canvasTilt.style.height = size + 'px';
 
-    // console.log("ctx: ", ctxTilt)
-    // console.log("screen: ", screen)
-    // console.log("window: ", window)
-    // console.log("canvas: ", canvasTilt)
-
     let center = size * 0.5
-    let targeCicleRadius = 400;
 
-    let greenBallRadius = 100;
-    let greenBallSpeed = 5;
-
-    let targetCirclesDrawn = false;
     let projectImagesDrawn = false;
 
     //outer target circle STAY STILL
     function drawTargetCircles() {
         CanvasFactory.clearCanvas();
         projectImagesDrawn = false;
-        
+
         ctxTilt.lineWidth = 30;
         ctxTilt.strokeStyle = 'red';
         ctxTilt.beginPath();
@@ -113,9 +93,9 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
         //with the circles and show the canvas with the project
         // if (Math.abs(event.beta - projectTiltY) < 25 && Math.abs(event.alpha - projectTiltX < 25)) {
         if ( Math.abs(event.beta - projectTiltY) < 15 ){
-            
+
             ctxTilt.clearRect(0, 0, canvasTilt.width, canvasTilt.height);
-            if( !projectImagesDrawn){
+            if (!projectImagesDrawn){
                 if ($stateParams.project.drawing) {
                     DrawingFactory.drawDrawingsOnCanvas([$stateParams.project.drawing])
                 }
@@ -128,20 +108,12 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
                 projectImagesDrawn = true;
             }
         } else {
-            //drawingPlace.clearRect( 0, 0, drawingPlace.width, drawingPlace.height)
-            //difference between image tilt and device tilt
-            //let x = event.alpha - projectTiltX + center;	// eslint-disable-line id-length
-            //let y = (((( event.beta - projectTiltY ) * greenBallSpeed) + center) % (2 * targeCicleRadius)) + (center - targeCicleRadius + greenBallRadius); // eslint-disable-line id-length
-            let y = ( ( event.beta - projectTiltY ) + center )
-            let x = center; 
-            //let x = (((( event.alpha - projectTiltX ) * greenBallSpeed) + center) % (2 * targeCicleRadius)) + (center - targeCicleRadius + greenBallRadius);
-             
+            let y = ( (( event.beta - projectTiltY ) * 5) + center )  // eslint-disable-line id-length
+            let x = center;                                     // eslint-disable-line id-length
+
             ctxTilt.clearRect(0, 0, canvasTilt.width, canvasTilt.height);
 
             drawTargetCircles();
-            //draw the green circle offset from the center the distance
-            //between image tfilt and device tilt
-            //drawGreenCircle( x, y);
             drawGreenCircle( x, y);
         }
     }
