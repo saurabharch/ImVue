@@ -72,13 +72,11 @@ router.get('/:userId', (req,res,next) => {
 router.post('/:lat/:lng/:ang/:tilt', (req, res, next) => {
 
     Project.create({
-        where: {
             latitude: req.params.lat,
             longitude: req.params.lng,
             angle: req.params.ang,
             tilt: req.params.tilt,
             userId: req.user.id
-        }
     })
     .then((project) => {
         var creatingAll = [];
