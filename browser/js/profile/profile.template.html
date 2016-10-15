@@ -9,6 +9,9 @@
         <h2>
    			Projects created: {{projects.length}}
    		</h2>
+        <span>
+        <button ng-click="logout()" ng-show="user" type="button" class="logIn btn btn-default" ui-sref="login">Log Out</button>
+        </span>
     </div>
     <div class="profile-right">
         <div id="list-group">
