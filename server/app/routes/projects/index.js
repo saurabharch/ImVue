@@ -5,22 +5,18 @@ const Drawing = require('../../../db/models/drawing.js');
 const Text = require('../../../db/models/text.js');
 const Image = require('../../../db/models/image.js');
 const User = require('../../../db/models/user.js');
+const projectRanges = require('./projects.ranges.js')
 
 router.get('/:lat/:lng', (req, res, next) => {
-    var range = 0.0005; // 0.0005 ~92 meters http://www.csgnetwork.com/gpsdistcalc.html
     var lat = parseFloat(req.params.lat);
     var lon = parseFloat(req.params.lng);
 
     Project.findAll({
         where: {
-            $and: {
-                latitude: {
-                    $between: [lat - range, lat + range]
-                },
-                longitude: {
-                    $between: [lon - range, lon + range]
-                }
-            }
+            $and:   [
+                        { latitude: { $between: [lat - projectRanges.inboxRange, lat + projectRanges.inboxRange]} },
+                        { longitude: { $between: [lon - projectRanges.inboxRange, lon + projectRanges.inboxRange]} }
+                    ]
         },
         include: [
             { model: Drawing },
@@ -34,7 +30,7 @@ router.get('/:lat/:lng', (req, res, next) => {
 });
 
 router.get('/map/:lat/:lng', (req, res, next) => {
-    var range = 0.116; // 0.12 ~10.0 miles - ~16.2 km http://www.csgnetwork.com/gpsdistcalc.html
+
     var lat = parseFloat(req.params.lat);
     var lon = parseFloat(req.params.lng);
 
@@ -42,10 +38,10 @@ router.get('/map/:lat/:lng', (req, res, next) => {
         where: {
             $and: {
                 latitude: {
-                    $between: [lat - range, lat + range]
+                    $between: [lat - projectRanges.mapRange, lat + projectRanges.mapRange]
                 },
                 longitude: {
-                    $between: [lon - range, lon + range]
+                    $between: [lon - projectRanges.mapRange, lon + projectRanges.mapRange]
                 }
             }
         },
@@ -60,7 +56,7 @@ router.get('/map/:lat/:lng', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/:userId', (req,res,next) => {
+router.get('/:userId', (req, res, next) => {
     Project.findAll({
         where: {
             userId: req.params.userId
@@ -72,13 +68,11 @@ router.get('/:userId', (req,res,next) => {
 router.post('/:lat/:lng/:ang/:tilt', (req, res, next) => {
 
     Project.create({
-        where: {
             latitude: req.params.lat,
             longitude: req.params.lng,
             angle: req.params.ang,
             tilt: req.params.tilt,
             userId: req.user.id
-        }
     })
     .then((project) => {
         var creatingAll = [];
