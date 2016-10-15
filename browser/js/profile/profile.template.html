@@ -1,47 +1,38 @@
 <div id="bottom" ng-controller="ProfileCtrl">
-
     <div class="profile-sidebar">
-   		<h1>
+        <h1>
    			{{user.userName}}
    		</h1>
-   		<h2>
+        <h2>
    			Artist with ImVue since: {{user.createdAt.split('T')[0]}}
    		</h2>
-   		<h2>
+        <h2>
    			Projects created: {{projects.length}}
    		</h2>
-
     </div>
-
     <div class="profile-right">
-
-	    <div id="list-group">
-	    	<div id="search-bar">
-			    <span class="input-group-addon">Filter</span>
-			    
-		        <input type="text" class="col-xs-6 filtery" placeholder="by date" ng-model="dateSearch">
-		        <input type="text" class="col-xs-6 filtery" placeholder="by location" ng-model="locationSearch">
-
-		        <span class="input-group-addon" style="font-size: 18;">
+        <div id="list-group">
+            <div id="search-bar">
+                <span class="input-group-addon">Filter</span>
+                <input type="text" class="col-xs-6 filtery" placeholder="by date" ng-model="dateSearch">
+                <input type="text" class="col-xs-6 filtery" placeholder="by location" ng-model="locationSearch">
+                <span class="input-group-addon" style="font-size: 18;">
 		        	<div style='color: teal' class="col-xs-6"><h1>Date</h1></div>
 					<div style='color:teal' class="col-xs-6"><h1>Location</h1></div>
 		        </span>
-			</div>
-
-	    	<div id="list-group-item" ng-repeat="project in projects" ng-class-odd="'odd'" ng-class-even="'even'">
-				<div ui-sref='view({project: project})'>
-					<div class="col-xs-6">
-						<h3>
+            </div>
+            <div id="list-group-item" ng-repeat="project in projects" ng-class-odd="'odd'" ng-class-even="'even'">
+                <div ui-sref='view({project: project})'>
+                    <div class="col-xs-6">
+                        <h3>
 							{{project.createdAt.split('T')[0]}}  {{project.createdAt.split('T')[1].split('.')[0]}}
 						</h3>
-					</div>
-					<div class="col-xs-6">
-						<h3>{{project.address}}</h3>
-					</div>
-				</div>
-			</div>
-		</div>
-
+                    </div>
+                    <div class="col-xs-6">
+                        <h3>{{project.address}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 </div>

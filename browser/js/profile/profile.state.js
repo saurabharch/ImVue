@@ -1,7 +1,6 @@
-
 'use strict'
 
-app.config(function ($stateProvider) {
+app.config(function($stateProvider) {
     $stateProvider.state('profile', {
 
         url: '/profile/:userId',
@@ -19,4 +18,3 @@ app.config(function ($stateProvider) {
         // }
     });
 });
-

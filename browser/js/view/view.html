@@ -1,54 +1,40 @@
 <div id="bottom">
     <div ng-controller="CameraCtrl">
         <video autoplay="true" id="videoElement"></video>
-
         <span class="canvas-btn glyphicon glyphicon-camera" data-toggle="modal" data-target="#cameraModal"></span>
-
         <!-- Camera Modal -->
-        <div ng-controller="CanvasCtrl" class="modal fade" id="cameraModal" tabindex="-1" role="dialog" 
-             aria-labelledby="myModalLabel" aria-hidden="true">
+        <div ng-controller="CanvasCtrl" class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div id="modal-title" class="modal-header">
                         Select your camera!
                     </div>
-                    
                     <!-- Modal Body -->
                     <div class="modal-body">
-
                         <form name='imageUrl' id="modal-form">
-
-                        <div class="select">
-                            <div>
-                                <label for="videoSource">Available Cameras</label>
+                            <div class="select">
+                                <div>
+                                    <label for="videoSource">Available Cameras</label>
+                                </div>
+                                <div>
+                                    <select id="videoSource"></select>
+                                </div>
                             </div>
                             <div>
-                                <select id="videoSource"></select>
-                            </div>
-                        </div>
-
-                        <div>
-
-                        <button class="btn btn-default form-control" style="background-color: white; margin-top: 20px;" type="button" data-dismiss="modal">
+                                <button class="btn btn-default form-control" style="background-color: white; margin-top: 20px;" type="button" data-dismiss="modal">
                                     Close
-                        </button>
-
+                                </button>
                         </form>
-                        
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+        <div ng-controller="CanvasCtrl">
+            <canvas id="paint"></canvas>
+        </div>
+        <div id="tester" ng-controller="ViewCtrl">
+            <canvas id="tiltCanvas"></canvas>
+        </div>
     </div>
-
-    <div ng-controller="CanvasCtrl">
-        <canvas id="paint"></canvas>
-    </div>
-
-    <div id="tester" ng-controller="ViewCtrl">
-        <canvas id="tiltCanvas"></canvas>
-    </div>
-
-</div>
