@@ -1,219 +1,175 @@
 <div id="bottom">
-
     <div ng-controller="CameraCtrl">
         <video autoplay="true" id="videoElement"></video>
     </div>
-
     <div ng-controller="CanvasCtrl">
-
         <canvas id="paint"></canvas>
-
         <div class="col-xs-3">
             <span class="canvas-btn glyphicon glyphicon-trash" ng-click="clearCanvas()"></span>
             <span class="canvas-btn glyphicon glyphicon-erase" ng-click="undo()"></span>
             <span class="canvas-btn glyphicon glyphicon-floppy-disk" ng-click="saveCanvas()"></span>
         </div>
-
         <div class="col-xs-6">
-            
         </div>
-
         <div class="sidebar-right col-xs-3">
-
             <div ng-controller="CameraCtrl">
                 <span class="canvas-btn glyphicon glyphicon-camera" data-toggle="modal" data-target="#cameraModal"></span>
-
                 <!-- Camera Modal -->
-                <div ng-controller="CanvasCtrl" class="modal fade" id="cameraModal" tabindex="-1" role="dialog" 
-                     aria-labelledby="myModalLabel" aria-hidden="true">
+                <div ng-controller="CanvasCtrl" class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <!-- Modal Header -->
                             <div id="modal-title" class="modal-header">
                                 Select your camera!
                             </div>
-                            
                             <!-- Modal Body -->
                             <div class="modal-body">
-
                                 <form name='imageUrl' id="modal-form">
-
-                                <div class="select">
-                                    <div>
-                                        <label for="videoSource">Available Cameras</label>
+                                    <div class="select">
+                                        <div>
+                                            <label for="videoSource">Available Cameras</label>
+                                        </div>
+                                        <div>
+                                            <select id="videoSource"></select>
+                                        </div>
                                     </div>
                                     <div>
-                                        <select id="videoSource"></select>
-                                    </div>
-                                </div>
-
-                                <div>
-
-                                <button class="btn btn-default form-control" style="background-color: white; margin-top: 20px;" type="button" data-dismiss="modal">
+                                        <button class="btn btn-default form-control" style="background-color: white; margin-top: 20px;" type="button" data-dismiss="modal">
                                             Close
-                                </button>
-
+                                        </button>
                                 </form>
-                                
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!-- End Camera Modal -->
                 </div>
-                <!-- End Camera Modal -->
+                <div>
+                    <!-- image stuff -->
+                    <span class="canvas-btn glyphicon glyphicon-picture" data-toggle="modal" data-target="#imageModal"></span>
+                    <!-- Image Modal -->
+                    <div ng-controller="CanvasCtrl" class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div id="modal-title" class="modal-header">
+                                    Add an image to your project!
+                                </div>
+                                <!-- Modal Body -->
+                                <div class="modal-body">
+                                    <form name='imageUrl' id="modal-form">
+                                        <div>
+                                            <label id="modal-label">Image</label>
+                                            <div>
+                                                <select class="modal-select" ng-model="image" style="background-color: white">
+                                                    <option value='obama'>obama</option>
+                                                    <option value='puppy'>puppy</option>
+                                                    <option value='kitten'>kitten</option>
+                                                    <option value='waldo'>waldo</option>
+                                                    <option value='warrior'>warrior</option>
+                                                    <option value='little foot'>Little Foot</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-default form-control" style="background-color: white; margin-top: 20px" ng-click="loadImg()" data-dismiss="modal">
+                                                Add Image
+                                            </button>
+                                            <button class="btn btn-default form-control" style="background-color: white" type="button" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Image Modal -->
+                    </div>
+                    <div ng-controller='TextCtrl'>
+                        <span type="button" class="canvas-btn glyphicon glyphicon-font" data-toggle="modal" data-target="#textModal"></span>
+                        <!-- Text Modal -->
+                        <div ng-controller="TextCtrl" class="modal fade" id="textModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div id="modal-title" class="modal-header">
+                                        Add text to your project!
+                                    </div>
+                                    <!-- Modal Body -->
+                                    <div class="modal-body">
+                                        <form name='textForm' id="modal-form">
+                                            <div>
+                                                <label id="modal-label">Text</label>
+                                                <div>
+                                                    <input class="modal-input" ng-model='textInput' type='input' placeholder="Input Text Here">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label id="modal-label">Font</label>
+                                                <div>
+                                                    <select class="modal-select" ng-model="fontFamily" style="background-color: white">
+                                                        <option selected="selected disabled">Select Font</option>
+                                                        <option ng-repeat='font in getFontFamilies()' value='{{font}}'>{{font}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label id="modal-label">Size</label>
+                                                <div>
+                                                    <select class="modal-select" ng-model='fontSize' style="background-color: white">
+                                                        <option selected="selected disabled">Select Size</option>
+                                                        <option ng-repeat='size in getTextSizes()' value='{{size}}'>{{size}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label id="modal-label">Location</label>
+                                                <div>
+                                                    <select class="modal-select" ng-model='fontLocation' style="background-color: white">
+                                                        <option selected="selected disabled">Select Location</option>
+                                                        <option ng-repeat='loc in getTextLocations()' value={{loc.locCoords}}>{{loc.locString}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-default form-control" style="background-color: white; margin-top: 20px" ng-click="addText()" data-dismiss="modal">
+                                                Add Text
+                                            </button>
+                                            <button class="btn btn-default form-control" style="background-color: white" type="button" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Text Modal -->
+                    </div>
+                    <div ng-controller='ColorCtrl'>
+                        <span class="canvas-btn glyphicon glyphicon-tint" data-toggle="modal" data-target="#colorModal"></span>
+                        <!-- Color Modal -->
+                        <div ng-controller="CanvasCtrl" class="modal fade" id="colorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content" style="background-color: transparent;">
+                                    <div id="color-selector">
+                                        <div class="marker selected" id="black"></div>
+                                        <div data-dismiss="modal" class="marker" id="purple"></div>
+                                        <div data-dismiss="modal" class="marker" id="red"></div>
+                                        <div data-dismiss="modal" class="marker" id="blue"></div>
+                                        <div data-dismiss="modal" class="marker" id="green"></div>
+                                        <div data-dismiss="modal" class="marker" id="orange"></div>
+                                        <div data-dismiss="modal" class="marker" id="yellow"></div>
+                                        <div data-dismiss="modal" class="marker" id="saddlebrown"></div>
+                                        <div data-dismiss="modal" class="marker" id="white"></div>
+                                        <div data-dismiss="modal" class="marker" id="hotpink"></div>
+                                        <div data-dismiss="modal" class="marker" id="seagreen"></div>
+                                        <div data-dismiss="modal" class="marker" id="slategray"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Color Modal -->
+                </div>
             </div>
-
-            <div> <!-- image stuff -->
-                <span class="canvas-btn glyphicon glyphicon-picture" data-toggle="modal" data-target="#imageModal"></span>
-
-                 <!-- Image Modal -->
-                <div ng-controller="CanvasCtrl" class="modal fade" id="imageModal" tabindex="-1" role="dialog" 
-                     aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <!-- Modal Header -->
-                            <div id="modal-title" class="modal-header">
-                                Add an image to your project!
-                            </div>
-                            
-                            <!-- Modal Body -->
-                            <div class="modal-body">
-
-                                <form name='imageUrl' id="modal-form">
-
-                                <div>
-                                    <label id="modal-label">Image</label>
-                                    <div>
-                                        <select class="modal-select" ng-model="image" style="background-color: white">
-                                            <option value='obama'>obama</option>
-                                             <option value='puppy'>puppy</option>
-                                             <option value='kitten'>kitten</option>
-                                             <option value='waldo'>waldo</option>
-                                             <option value='warrior'>warrior</option>
-                                             <option value='little foot'>Little Foot</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div>
-
-                                <button class="btn btn-default form-control" style="background-color: white; margin-top: 20px" ng-click="loadImg()" data-dismiss="modal">
-                                    Add Image
-                                </button>
-
-                                <button class="btn btn-default form-control" style="background-color: white" type="button" data-dismiss="modal">
-                                            Close
-                                </button>
-
-                                </form>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Image Modal -->
-
-            </div>
-
-            <div ng-controller='TextCtrl'>
-
-                <span type="button" class="canvas-btn glyphicon glyphicon-font" data-toggle="modal" data-target="#textModal"></span>
-
-                <!-- Text Modal -->
-                <div ng-controller="TextCtrl" class="modal fade" id="textModal" tabindex="-1" role="dialog" 
-                     aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <!-- Modal Header -->
-                            <div id="modal-title" class="modal-header">
-                                Add text to your project!
-                            </div>
-                            
-                            <!-- Modal Body -->
-                            <div class="modal-body">
-
-                                <form name='textForm' id="modal-form">
-                                <div>
-                                    <label id="modal-label">Text</label>
-                                    <div>
-                                        <input class="modal-input"ng-model='textInput' type='input' placeholder="Input Text Here">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label id="modal-label">Font</label>
-                                    <div>
-                                        <select class="modal-select" ng-model="fontFamily" style="background-color: white">
-                                            <option selected="selected disabled">Select Font</option>
-                                            <option ng-repeat='font in getFontFamilies()' value='{{font}}'>{{font}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label id="modal-label">Size</label>
-                                    <div>
-                                        <select class="modal-select" ng-model='fontSize' style="background-color: white">
-                                        <option selected="selected disabled">Select Size</option>
-                                        <option ng-repeat='size in getTextSizes()' value='{{size}}'>{{size}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label id="modal-label">Location</label>
-                                    <div>
-                                        <select class="modal-select" ng-model='fontLocation' style="background-color: white">
-                                        <option selected="selected disabled">Select Location</option>
-                                        <option ng-repeat='loc in getTextLocations()' value={{loc.locCoords}}>{{loc.locString}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <button class="btn btn-default form-control" style="background-color: white; margin-top: 20px" ng-click="addText()" data-dismiss="modal">
-                                    Add Text
-                                </button>
-
-                                <button class="btn btn-default form-control" style="background-color: white" type="button" data-dismiss="modal">
-                                            Close
-                                </button>
-
-                                </form>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Text Modal -->
-            </div>
-
-            <div ng-controller='ColorCtrl'>
-                <span class="canvas-btn glyphicon glyphicon-tint" data-toggle="modal" data-target="#colorModal"></span>
-
-                 <!-- Color Modal -->
-                <div ng-controller="CanvasCtrl" class="modal fade" id="colorModal" tabindex="-1" role="dialog" 
-                     aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content" style="background-color: transparent;">
-                                <div id="color-selector">
-                                    <div class="marker selected" id="black"></div>
-                                    <div data-dismiss="modal"class="marker" id="purple"></div>
-                                    <div data-dismiss="modal"class="marker" id="red"></div>
-                                    <div data-dismiss="modal"class="marker" id="blue"></div>
-                                    <div data-dismiss="modal"class="marker" id="green"></div>
-                                    <div data-dismiss="modal"class="marker" id="orange"></div>
-                                    <div data-dismiss="modal"class="marker" id="yellow"></div>
-                                    <div data-dismiss="modal"class="marker" id="saddlebrown"></div>
-                                    <div data-dismiss="modal"class="marker" id="white"></div>
-                                    <div data-dismiss="modal"class="marker" id="hotpink"></div>
-                                    <div data-dismiss="modal"class="marker" id="seagreen"></div>
-                                    <div data-dismiss="modal"class="marker" id="slategray"></div>
-                                </div>   
-                            </div> 
-                            
-                        </div>
-                    </div>
-                </div>
-                <!-- End Color Modal -->
-    </div>
         </div>
-
     </div>
-
-
-</div>

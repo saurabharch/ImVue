@@ -1,13 +1,13 @@
-app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFactory, TextFactory, DrawingFactory, ImageFactory, ProjectFactory){ // eslint-disable-line max-params
+app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFactory, TextFactory, DrawingFactory, ImageFactory, ProjectFactory) { // eslint-disable-line max-params
 
-	var workspace;
+    var workspace;
     var doc;
 
-	var canvas;
+    var canvas;
     var ctx;
 
-    var currentMousePosition = { x: 0, y: 0 };  // eslint-disable-line id-length
-    var lastMousePosition = { x: 0, y: 0 };     // eslint-disable-line id-length
+    var currentMousePosition = { x: 0, y: 0 }; // eslint-disable-line id-length
+    var lastMousePosition = { x: 0, y: 0 }; // eslint-disable-line id-length
 
     var drawing = false;
 
@@ -20,7 +20,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
     /* ---------------- ACCESSABLE FUNCTIONS ---------------- */
 
-    function initializeCanvas(init_workspace, init_doc){
+    function initializeCanvas(init_workspace, init_doc) {
         workspace = init_workspace;
         doc = init_doc;
 
@@ -31,52 +31,51 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
         TextFactory.initializeTextFactory(ctx);
     }
 
-    function saveCanvasContent(){
+    function saveCanvasContent() {
         let drawingToSave = DrawingFactory.saveDrawing();
         let texts = TextFactory.saveTexts();
         let images = ImageFactory.saveImages();
 
         navigator.geolocation.getCurrentPosition((position) => {
 
-            $http.post('/api/projects/' + position.coords.latitude + '/' + position.coords.longitude + '/' + angle + '/' + tilt, {drawing: {image: drawingToSave}, texts: texts, images: images} )
-            .then( () => {
-                alert('Drawing Saved Successfully') // eslint-disable-line no-alert
-            })
-            .catch($log)
+            $http.post('/api/projects/' + position.coords.latitude + '/' + position.coords.longitude + '/' + angle + '/' + tilt, { drawing: { image: drawingToSave }, texts: texts, images: images })
+                .then(() => {
+                    alert('Drawing Saved Successfully') // eslint-disable-line no-alert
+                })
+                .catch($log)
 
         })
     }
 
-    function loadCanvasContent(){
+    function loadCanvasContent() {
 
         geoLocationFactory.updateChangedLocation()
-        .then( position => {
-            if (position){
-                ProjectFactory.updateProjects(position);
-            }
-            else {
-                console.log("didn't change position")
-            }
-        })
-        .catch($log)
+            .then(position => {
+                if (position) {
+                    ProjectFactory.updateProjects(position);
+                } else {
+                    console.log("didn't change position")
+                }
+            })
+            .catch($log)
     }
 
-    function clearCanvas(){
+    function clearCanvas() {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         DrawingFactory.clearDrawingPoints();
     }
 
-    function undoLast(){
+    function undoLast() {
         console.log(DrawingFactory.drawingPoints())
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         var currentDrawing = DrawingFactory.drawingPoints()
         currentDrawing.pop()
         currentDrawing.pop()
         currentDrawing.pop()
-        currentDrawing.forEach(function(point){
+        currentDrawing.forEach(function(point) {
             point = point.split(',')
-            var start = {x: point[0], y: point[1]}  // eslint-disable-line id-length
-            var end = {x: point[2], y: point[3]}    // eslint-disable-line id-length
+            var start = { x: point[0], y: point[1] } // eslint-disable-line id-length
+            var end = { x: point[2], y: point[3] } // eslint-disable-line id-length
             var color = point[4]
             console.log(point)
             canvas.draw(start, end, color)
@@ -86,7 +85,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
     /* ---------------- HELPER FUNCTIONS ---------------- */
 
-    function loadCanvas(){
+    function loadCanvas() {
 
         canvas = doc.getElementById('paint');
         ctx = canvas.getContext('2d');
@@ -105,7 +104,7 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
         //canvas.addEventListener('mouseup', mUp);
         //canvas.addEventListener('mousemove', mMove);
 
-        canvas.draw = function (start, end, strokeColor) {
+        canvas.draw = function(start, end, strokeColor) {
             ctx.beginPath();
             ctx.strokeStyle = strokeColor || 'black';
             ctx.lineWidth = 10;
@@ -131,14 +130,15 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
         // Allocate backing store large enough to give us a 1:1 device pixel
         // to canvas pixel ratio.
-        var w = canvas.clientWidth * pixelRatio,    // eslint-disable-line id-length
-            h = canvas.clientHeight * pixelRatio;   // eslint-disable-line id-length
+        var w = canvas.clientWidth * pixelRatio, // eslint-disable-line id-length
+            h = canvas.clientHeight * pixelRatio; // eslint-disable-line id-length
         if (w !== canvas.width || h !== canvas.height) {
             // Resizing the canvas destroys the current content.
             // So, save it...
             var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height)
 
-            canvas.width = w; canvas.height = h;
+            canvas.width = w;
+            canvas.height = h;
 
             // ...then restore it.
             ctx.putImageData(imgData, 0, 0)
@@ -157,22 +157,22 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
     // Event functions for canvas
 
-    function getCurrentX(event){
+    function getCurrentX(event) {
         return Math.floor(event.changedTouches[0].pageX)
     }
 
-    function getCurrentY(event){
+    function getCurrentY(event) {
         return Math.floor(event.changedTouches[0].pageY)
     }
 
     function mDown(event) {
-            event.preventDefault();
+        event.preventDefault();
 
-            drawing = true;
-            currentMousePosition.x = getCurrentX(event) - this.offsetLeft;  // eslint-disable-line id-length
-            currentMousePosition.y = getCurrentY(event) - this.offsetTop;   // eslint-disable-line id-length
+        drawing = true;
+        currentMousePosition.x = getCurrentX(event) - this.offsetLeft; // eslint-disable-line id-length
+        currentMousePosition.y = getCurrentY(event) - this.offsetTop; // eslint-disable-line id-length
 
-        }
+    }
 
     function mUp() {
         drawing = false;
@@ -183,11 +183,11 @@ app.factory('CanvasFactory', function($http, $log, geoLocationFactory, ColorFact
 
         if (!drawing) return;
 
-        lastMousePosition.x = currentMousePosition.x;   // eslint-disable-line id-length
-        lastMousePosition.y = currentMousePosition.y;   // eslint-disable-line id-length
+        lastMousePosition.x = currentMousePosition.x; // eslint-disable-line id-length
+        lastMousePosition.y = currentMousePosition.y; // eslint-disable-line id-length
 
-        currentMousePosition.x = getCurrentX(event) - this.offsetLeft;  // eslint-disable-line id-length
-        currentMousePosition.y = getCurrentY(event) - this.offsetTop;   // eslint-disable-line id-length
+        currentMousePosition.x = getCurrentX(event) - this.offsetLeft; // eslint-disable-line id-length
+        currentMousePosition.y = getCurrentY(event) - this.offsetTop; // eslint-disable-line id-length
 
         // Save points for each drawing
         DrawingFactory.addDrawingPoint(lastMousePosition, currentMousePosition, ColorFactory.getCurrentColor())

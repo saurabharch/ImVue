@@ -1,7 +1,6 @@
-app.controller('MapCtrl', function ($scope, mapFactory, mapProjects) {
+app.controller('MapCtrl', function($scope, mapFactory, mapProjects) {
 
-  $scope.allProjects = mapProjects;
-
-  mapFactory.initMap(mapProjects);
+    $scope.allProjects = mapProjects;
+    mapFactory.initMap(mapProjects);
 
 });

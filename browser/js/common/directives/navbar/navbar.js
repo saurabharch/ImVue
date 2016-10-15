@@ -1,41 +1,41 @@
-app.directive('navbar', function( $rootScope, AuthService, AUTH_EVENTS, $state, CanvasFactory) {
+app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, CanvasFactory) {
 
     return {
         restrict: 'E',
         scope: {},
         templateUrl: 'js/common/directives/navbar/navbar.html',
-        link: function (scope) {
+        link: function(scope) {
 
-        //     scope.items = [
-        //         { label: 'Home', state: 'home' },
-        //         { label: 'About', state: 'about' },
-        //         { label: 'Documentation', state: 'docs' },
-        //         { label: 'Members Only', state: 'membersOnly', auth: true },
-        //         { label: 'Profile', state: 'profile'}
-        //     ];
+            //     scope.items = [
+            //         { label: 'Home', state: 'home' },
+            //         { label: 'About', state: 'about' },
+            //         { label: 'Documentation', state: 'docs' },
+            //         { label: 'Members Only', state: 'membersOnly', auth: true },
+            //         { label: 'Profile', state: 'profile'}
+            //     ];
             scope.user = null;
 
             scope.saveCanvas = () => { CanvasFactory.saveCanvasContent(); }
-            // eslint-disable-line no-trailing-spaces
-            scope.isLoggedIn = function () {
+                // eslint-disable-line no-trailing-spaces
+            scope.isLoggedIn = function() {
                 return AuthService.isAuthenticated();
             };
 
-            scope.logout = function () {
+            scope.logout = function() {
 
-                AuthService.logout().then(function () {
+                AuthService.logout().then(function() {
 
-                   $state.go('login');
+                    $state.go('login');
                 });
             };
 
-            var setUser = function () {
-                AuthService.getLoggedInUser().then(function (user) {
+            var setUser = function() {
+                AuthService.getLoggedInUser().then(function(user) {
                     scope.user = user;
                 });
             };
 
-            var removeUser = function () {
+            var removeUser = function() {
                 scope.user = null;
             };
 

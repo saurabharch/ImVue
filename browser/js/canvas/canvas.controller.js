@@ -1,22 +1,22 @@
-app.controller('CanvasCtrl', function(CanvasFactory, ImageFactory, $scope){
+app.controller('CanvasCtrl', function(CanvasFactory, ImageFactory, $scope) {
 
-	CanvasFactory.initializeCanvas(window, document);
-	CanvasFactory.loadCanvasContent();
+    CanvasFactory.initializeCanvas(window, document);
+    CanvasFactory.loadCanvasContent();
 
-	$scope.clearCanvas = CanvasFactory.clearCanvas
+    $scope.clearCanvas = CanvasFactory.clearCanvas
 
-	$scope.undo = CanvasFactory.undoLast
+    $scope.undo = CanvasFactory.undoLast
 
-	$scope.loadImg = () => {
-		ImageFactory.loadSelectedImageOnCanvas($scope.image);
-	}
+    $scope.loadImg = () => {
+        ImageFactory.loadSelectedImageOnCanvas($scope.image);
+    }
 
     $scope.saveCanvas = CanvasFactory.saveCanvasContent
 
     $scope.toggleImageSelect = ImageFactory.toggleImageSelect
     $scope.showImageSelect = ImageFactory.showImageSelect
 
-	var drawingPlace = document.getElementById('paint')
+    var drawingPlace = document.getElementById('paint')
     var tiltPlace = document.getElementById('tiltCanvas')
     var videoPlace = document.getElementById('videoElement')
 
@@ -28,7 +28,7 @@ app.controller('CanvasCtrl', function(CanvasFactory, ImageFactory, $scope){
     drawingPlace.height = height
     drawingPlace.width = width
 
-    if (tiltPlace){
+    if (tiltPlace) {
         tiltPlace.style.height = height + 'px'
         tiltPlace.style.width = width + 'px'
         tiltPlace.height = height

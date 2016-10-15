@@ -1,16 +1,11 @@
 <div id="top">
-
-	<span ng-show="user" class="profile glyphicon glyphicon-user" ui-sref="profile({userId:user.id})"></span>
-
+    <span ng-show="user" class="profile glyphicon glyphicon-user" ui-sref="profile({userId:user.id})"></span>
     <span class="logo">ImVue</span>
-
     <span ng-show="user" class="navbar-btn glyphicon glyphicon-inbox" ui-sref="inbox"></span>
     <span ng-show="user" class="navbar-btn glyphicon glyphicon-globe" ui-sref="map"></span>
     <span ng-show="user" class="navbar-btn glyphicon glyphicon-pencil" ui-sref="home"></span>
-
     <!-- <span>
         <button ng-click="logout()" ng-show="user" type="button" class="logIn btn btn-default" ui-sref="login">Log Out</button>
         <h4 ng-show="user">Welcome {{user.userName}}!</h4>
     </span> -->
-
 </div>
