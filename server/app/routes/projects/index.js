@@ -15,7 +15,7 @@ router.get('/:lat/:lng', (req, res, next) => {
         where: {
             $and:   [
                         { latitude: { $between: [lat - projectRanges.inboxRange, lat + projectRanges.inboxRange]} },
-                        { longitude: { $between:[lon - projectRanges.inboxRange, lon + projectRanges.inboxRange]} }
+                        { longitude: { $between: [lon - projectRanges.inboxRange, lon + projectRanges.inboxRange]} }
                     ]
         },
         include: [
@@ -30,7 +30,7 @@ router.get('/:lat/:lng', (req, res, next) => {
 });
 
 router.get('/map/:lat/:lng', (req, res, next) => {
-    var range = 0.116; // 0.12 ~10.0 miles - ~16.2 km http://www.csgnetwork.com/gpsdistcalc.html
+
     var lat = parseFloat(req.params.lat);
     var lon = parseFloat(req.params.lng);
 
@@ -56,7 +56,7 @@ router.get('/map/:lat/:lng', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/:userId', (req,res,next) => {
+router.get('/:userId', (req, res, next) => {
     Project.findAll({
         where: {
             userId: req.params.userId
