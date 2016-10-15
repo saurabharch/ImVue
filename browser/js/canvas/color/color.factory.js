@@ -1,15 +1,15 @@
 /* eslint-disable  id-length */
-app.factory('ColorFactory', function(){
+app.factory('ColorFactory', function() {
 
     var colorElements;
     var color;
     var colorPallete = false;
 
-    function initializeColorElements(doc){
+    function initializeColorElements(doc) {
 
         colorElements = [].slice.call(doc.querySelectorAll('.marker'));
 
-        colorElements.forEach(function (el) {
+        colorElements.forEach(function(el) {
 
             // Set the background color of this element
             // to its id (purple, red, blue, etc).
@@ -27,21 +27,21 @@ app.factory('ColorFactory', function(){
 
             el.onclick = pickColor
 
-        el.addEventListener('click', pickColor);
-        el.addEventListener('tap', pickColor);
+            el.addEventListener('click', pickColor);
+            el.addEventListener('tap', pickColor);
 
         });
     }
 
-    function getCurrentColor(){
+    function getCurrentColor() {
         return color;
     }
 
-    function toggleColorPalette(){
+    function toggleColorPalette() {
         colorPallete = !colorPallete;
     }
 
-    function showColorPalette(){
+    function showColorPalette() {
         return colorPallete;
     }
 

@@ -1,5 +1,5 @@
-app.controller('InboxCtrl', function ($scope, ProjectFactory) {
+app.controller('InboxCtrl', function($scope, ProjectFactory) {
 
-  $scope.projects = ProjectFactory.getProjects();
+    $scope.projects = ProjectFactory.getProjects();
 
 });

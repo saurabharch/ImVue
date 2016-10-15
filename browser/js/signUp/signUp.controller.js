@@ -6,13 +6,13 @@ app.controller('SignUpCtrl', function($scope, AuthService, $state) {
     $scope.sendSignUp = function(signUpUser) {
 
         $scope.error = null;
-console.log(AuthService)
+        console.log(AuthService)
 
         AuthService.signUp(signUpUser.userName, signUpUser.email, signUpUser.password)
             .then(() => {
-            $state.go('home');
-        }).catch(() => {
-            $scope.error = 'Invalid username/email combination'
-        });
+                $state.go('home');
+            }).catch(() => {
+                $scope.error = 'Invalid username/email combination'
+            });
     };
 });
