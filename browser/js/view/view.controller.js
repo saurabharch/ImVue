@@ -29,15 +29,15 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
 
     CanvasFactory.initializeCanvas(window, document);
 
-    if ($stateParams.project.drawing) {
-        DrawingFactory.drawDrawingsOnCanvas([$stateParams.project.drawing])
-    }
-    if ($stateParams.project.texts.length) {
-        TextFactory.drawTextsOnCanvas($stateParams.project.texts)
-    }
-    if ($stateParams.project.images.length) {
-        ImageFactory.drawImagesOnCanvas($stateParams.project.images)
-    }
+    // if ($stateParams.project.drawing) {
+    //     DrawingFactory.drawDrawingsOnCanvas([$stateParams.project.drawing])
+    // }
+    // if ($stateParams.project.texts.length) {
+    //     TextFactory.drawTextsOnCanvas($stateParams.project.texts)
+    // }
+    // if ($stateParams.project.images.length) {
+    //     ImageFactory.drawImagesOnCanvas($stateParams.project.images)
+    // }
 
     //this is the canvas that displays our tilt orientation guide
     let canvasTilt = document.getElementById('tiltCanvas');
@@ -46,8 +46,8 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
     let ctxTilt = canvasTilt.getContext('2d');
 
     //target til or tilt of project we're trying to render
-    let projectTiltX = $stateParams.project.angleX;
-    let projectTiltY = $stateParams.project.tiltY;
+    let projectTiltX = $stateParams.project.angle;
+    let projectTiltY = $stateParams.project.tilt;
 
     //set canvas width and height to width of div since it'll be less than height
     //css style width/height must equal canvas width and height or distortion happens
@@ -63,21 +63,43 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
     // console.log("canvas: ", canvasTilt)
 
     let center = size * 0.5
+    let targeCicleRadius = 400;
+
+    let greenBallRadius = 100;
+    let greenBallSpeed = 5;
+
+    let targetCirclesDrawn = false;
+    let projectImagesDrawn = false;
 
     //outer target circle STAY STILL
-    function drawTargetCircle() {
-        ctxTilt.lineWidth = 75;
+    function drawTargetCircles() {
+        CanvasFactory.clearCanvas();
+        projectImagesDrawn = false;
+        
+        ctxTilt.lineWidth = 30;
+        ctxTilt.strokeStyle = 'red';
         ctxTilt.beginPath();
-        ctxTilt.arc(center, center, 400, 0, 2 * Math.PI);
+        ctxTilt.arc( center, center, 300, 0, 2 * Math.PI);
         ctxTilt.stroke();
+
+        ctxTilt.lineWidth = 30;
+        ctxTilt.strokeStyle = 'red';
+        ctxTilt.beginPath();
+        ctxTilt.arc( center, center, 200, 0, 2 * Math.PI);
+        ctxTilt.stroke();
+
+        ctxTilt.beginPath();
+        ctxTilt.arc( center, center, 100, 0, 2 * Math.PI);
+        ctxTilt.fillStyle = 'red';
+        ctxTilt.fill();
     }
 
     //innner green circle
     //move on device orientation
     //starts at center + the tilt of the picture
-    function drawGreenCircle(x, y) { // eslint-disable-line id-length
+    function drawGreenCircle( x, y) { // eslint-disable-line id-length
         ctxTilt.beginPath();
-        ctxTilt.arc(x, y, 325, 0, 2 * Math.PI);
+        ctxTilt.arc( x, y, 100, 0, 2 * Math.PI);
         ctxTilt.fillStyle = 'green';
         ctxTilt.fill();
     }
@@ -89,19 +111,38 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
         //see if green circle is pretty close to center
         //if it is, toggle orientationCorrect, this will hide the canvas
         //with the circles and show the canvas with the project
-        if (Math.abs(event.beta - projectTiltY) < 25 && Math.abs(event.alpha - projectTiltX < 25)) {
+        // if (Math.abs(event.beta - projectTiltY) < 25 && Math.abs(event.alpha - projectTiltX < 25)) {
+        if ( Math.abs(event.beta - projectTiltY) < 15 ){
+            
             ctxTilt.clearRect(0, 0, canvasTilt.width, canvasTilt.height);
+            if( !projectImagesDrawn){
+                if ($stateParams.project.drawing) {
+                    DrawingFactory.drawDrawingsOnCanvas([$stateParams.project.drawing])
+                }
+                if ($stateParams.project.texts.length) {
+                    TextFactory.drawTextsOnCanvas($stateParams.project.texts)
+                }
+                if ($stateParams.project.images.length) {
+                    ImageFactory.drawImagesOnCanvas($stateParams.project.images)
+                }
+                projectImagesDrawn = true;
+            }
         } else {
+            //drawingPlace.clearRect( 0, 0, drawingPlace.width, drawingPlace.height)
             //difference between image tilt and device tilt
             //let x = event.alpha - projectTiltX + center;	// eslint-disable-line id-length
-            let y = event.beta - projectTiltY + center; // eslint-disable-line id-length
-
+            //let y = (((( event.beta - projectTiltY ) * greenBallSpeed) + center) % (2 * targeCicleRadius)) + (center - targeCicleRadius + greenBallRadius); // eslint-disable-line id-length
+            let y = ( ( event.beta - projectTiltY ) + center )
+            let x = center; 
+            //let x = (((( event.alpha - projectTiltX ) * greenBallSpeed) + center) % (2 * targeCicleRadius)) + (center - targeCicleRadius + greenBallRadius);
+             
             ctxTilt.clearRect(0, 0, canvasTilt.width, canvasTilt.height);
 
-            drawTargetCircle();
+            drawTargetCircles();
             //draw the green circle offset from the center the distance
             //between image tfilt and device tilt
-            drawGreenCircle(center, y);
+            //drawGreenCircle( x, y);
+            drawGreenCircle( x, y);
         }
     }
 
