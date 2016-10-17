@@ -4,7 +4,6 @@ app.factory('signUpFactory', function($http, $log) {
     signUpFactory.getUserEmail = function(email) {
         return $http.get('/api/users/email/' + email)
             .then(function(user) {
-                console.log(user)
                 if (user.data) {
                     return true;
                 } else {
