@@ -2,7 +2,7 @@
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-module.exports = function (app, db) {
+module.exports = function(app, db) {
 
     var User = db.model('user');
 
@@ -14,14 +14,14 @@ module.exports = function (app, db) {
         callbackURL: facebookConfig.callbackURL
     };
 
-    var verifyCallback = function (accessToken, refreshToken, profile, done) {
+    var verifyCallback = function(accessToken, refreshToken, profile, done) {
 
         User.findOne({
                 where: {
                     facebook_id: profile.id
                 }
             })
-            .then(function (user) {
+            .then(function(user) {
                 if (user) {
                     return user;
                 } else {
@@ -30,10 +30,10 @@ module.exports = function (app, db) {
                     });
                 }
             })
-            .then(function (userToLogin) {
+            .then(function(userToLogin) {
                 done(null, userToLogin);
             })
-            .catch(function (err) {
+            .catch(function(err) {
                 console.error('Error creating user from Facebook authentication', err);
                 done(err);
             })

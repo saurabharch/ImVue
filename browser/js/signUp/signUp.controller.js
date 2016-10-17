@@ -4,10 +4,7 @@ app.controller('SignUpCtrl', function($scope, AuthService, $state) {
     $scope.error = null;
 
     $scope.sendSignUp = function(signUpUser) {
-
         $scope.error = null;
-        console.log(AuthService)
-
         AuthService.signUp(signUpUser.userName, signUpUser.email, signUpUser.password)
             .then(() => {
                 $state.go('home');
