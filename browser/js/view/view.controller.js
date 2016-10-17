@@ -70,17 +70,17 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
         ctxTilt.lineWidth = 30;
         ctxTilt.strokeStyle = 'red';
         ctxTilt.beginPath();
-        ctxTilt.arc( center, center, 300, 0, 2 * Math.PI);
+        ctxTilt.arc(center, center, 300, 0, 2 * Math.PI);
         ctxTilt.stroke();
 
         ctxTilt.lineWidth = 30;
         ctxTilt.strokeStyle = 'red';
         ctxTilt.beginPath();
-        ctxTilt.arc( center, center, 200, 0, 2 * Math.PI);
+        ctxTilt.arc(center, center, 200, 0, 2 * Math.PI);
         ctxTilt.stroke();
 
         ctxTilt.beginPath();
-        ctxTilt.arc( center, center, 100, 0, 2 * Math.PI);
+        ctxTilt.arc(center, center, 100, 0, 2 * Math.PI);
         ctxTilt.fillStyle = 'red';
         ctxTilt.fill();
     }
@@ -88,9 +88,9 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
     //innner green circle
     //move on device orientation
     //starts at center + the tilt of the picture
-    function drawGreenCircle( x, y) { // eslint-disable-line id-length
+    function drawGreenCircle(x, y) { // eslint-disable-line id-length
         ctxTilt.beginPath();
-        ctxTilt.arc( x, y, 100, 0, 2 * Math.PI);
+        ctxTilt.arc(x, y, 100, 0, 2 * Math.PI);
         ctxTilt.fillStyle = 'green';
         ctxTilt.fill();
     }
@@ -103,10 +103,10 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
         //if it is, toggle orientationCorrect, this will hide the canvas
         //with the circles and show the canvas with the project
         // if (Math.abs(event.beta - projectTiltY) < 25 && Math.abs(event.alpha - projectTiltX < 25)) {
-        if ( Math.abs(event.beta - projectTiltY) < 15 ){
+        if (Math.abs(event.beta - projectTiltY) < 15) {
 
             ctxTilt.clearRect(0, 0, canvasTilt.width, canvasTilt.height);
-            if (!projectImagesDrawn){
+            if (!projectImagesDrawn) {
                 if ($stateParams.project.drawing) {
                     DrawingFactory.drawDrawingsOnCanvas([$stateParams.project.drawing])
                 }
@@ -119,13 +119,13 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
                 projectImagesDrawn = true;
             }
         } else {
-            let y = ( (( event.beta - projectTiltY ) * 5) + center )  // eslint-disable-line id-length
-            let x = center;                                     // eslint-disable-line id-length
+            let y = (((event.beta - projectTiltY) * 5) + center) // eslint-disable-line id-length
+            let x = center; // eslint-disable-line id-length
 
             ctxTilt.clearRect(0, 0, canvasTilt.width, canvasTilt.height);
 
             drawTargetCircles();
-            drawGreenCircle( x, y);
+            drawGreenCircle(x, y);
         }
     }
 

@@ -24,8 +24,6 @@ app.controller('ProfileCtrl', function($scope, ProfileFactory, AuthService) {
                 projects.forEach(project => {
                         promises.push(toAddress(project));
                     })
-                    // console.log(projects)
-                    // $scope.projects = projects
                 return Promise.all(promises)
             })
             .then(addresses => {

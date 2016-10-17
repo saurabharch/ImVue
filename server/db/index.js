@@ -18,4 +18,3 @@ Image.belongsTo(Project);
 
 User.hasMany(Project);
 Project.belongsTo(User);
-

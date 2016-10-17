@@ -1,109 +1,109 @@
 // @import 'home/main';
-
-body, html, #containerr {
-  height: 100%
+body,
+html,
+#containerr {
+    height: 100%
 }
 
 #top {
-  z-index: 4;
-  background-color: teal;
-  width: 100%;
-  height: 13%;
-  margin: auto;
-  position: relative;
+    z-index: 4;
+    background-color: teal;
+    width: 100%;
+    height: 13%;
+    margin: auto;
+    position: relative;
 }
 
 #bottom {
-  background-color: cadetblue;
-  width: 100%;
-  height: 87%;
-  margin: auto;
-  overflow: scrollable;
+    background-color: cadetblue;
+    width: 100%;
+    height: 87%;
+    margin: auto;
+    overflow: scrollable;
 }
 
 .logo {
-  color: white;
-  position: absolute; 
-  bottom: 0;
-  left: 210px;
-  font-size: 80px;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 210px;
+    font-size: 80px;
 }
 
 .logIn {
-  width: 55%;
-  margin-top: 100%;
-  font-size: 20px;
+    width: 55%;
+    margin-top: 100%;
+    font-size: 20px;
 }
 
 .profile {
-  display: block;
-  background-color: transparent;
-  float: left;
-  font-size: 80px;
-  padding: 40px;
+    display: block;
+    background-color: transparent;
+    float: left;
+    font-size: 80px;
+    padding: 40px;
 }
 
 .login {
-  text-align: center;
-
+    text-align: center;
 }
 
 #login-form {
-  width: 50%;
-  margin-right: 25%;
-  margin-left: 25%;
+    width: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
 }
 
 #login-label {
-  font-size: 25px;
-  padding-bottom: 3%; 
+    font-size: 25px;
+    padding-bottom: 3%;
 }
 
 #login-title {
-  font-size: 60px;
-  padding-bottom: 5%;
+    font-size: 60px;
+    padding-bottom: 5%;
 }
 
 .form-control {
-  height: 65px;
-  border-radius: 25px;
-  font-size: 25px;
-  margin-bottom: 25px;
+    height: 65px;
+    border-radius: 25px;
+    font-size: 25px;
+    margin-bottom: 25px;
 }
 
 .profile-sidebar {
-  padding-top: 20%;
-  text-align: center;
-  height: 100%;
-  width: 34%;
-  border-right: solid;
-  border-width: thin;
-  float: left;
+    padding-top: 20%;
+    text-align: center;
+    height: 100%;
+    width: 34%;
+    border-right: solid;
+    border-width: thin;
+    float: left;
 }
 
 .profile-right {
-  height: 100%;
-  width: 66%;
-  float: right;
+    height: 100%;
+    width: 66%;
+    float: right;
 }
 
 #videoElement {
-  position: absolute;
-  width: 100%;
-  z-index: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 0;
 }
 
 canvas {
-  position: absolute;
-  z-index: 2;
-  background-color: transparent;
+    position: absolute;
+    z-index: 2;
+    background-color: transparent;
 }
 
 .marker {
-  width: 80px;
-  height: 80px;
-  float: left;
-  box-sizing: border-box;
+    width: 80px;
+    height: 80px;
+    float: left;
+    box-sizing: border-box;
 }
 
 .marker.selected {
@@ -111,150 +111,146 @@ canvas {
 }
 
 .geo {
-  font-size: 250%
+    font-size: 250%
 }
 
 .cont {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .pos {
-  text-align: center;
+    text-align: center;
 }
 
 .navbar-btn {
-  display: block;
-  background-color: transparent;
-  float: right;
-  font-size: 80px;
-  padding: 40px;
+    display: block;
+    background-color: transparent;
+    float: right;
+    font-size: 80px;
+    padding: 40px;
 }
 
 .btn {
-  background-color: darkgray;
-  border-bottom-color: black;
-  border: solid;
+    background-color: darkgray;
+    border-bottom-color: black;
+    border: solid;
 }
 
 #map {
-  height: 100%;
+    height: 100%;
 }
 
 #list-group {
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 #list-group-item {
-  width: 100%;
-  height: 10%;
-  font-size: 24px;
-  border: solid;
-  border-width: thin;
-  text-align: center;
+    width: 100%;
+    height: 10%;
+    font-size: 24px;
+    border: solid;
+    border-width: thin;
+    text-align: center;
 }
 
 #search-bar {
-  width: 100%;
-  font-size: 24px;
-  border: solid;
-  border-width: thin;
-  background-color: transparent;
+    width: 100%;
+    font-size: 24px;
+    border: solid;
+    border-width: thin;
+    background-color: transparent;
 }
 
 .even {
-  background: rgba(128,128,128, .2);
+    background: rgba(128, 128, 128, .2);
 }
 
 .odd {
-  background: rgba(128,128,128, .5);
+    background: rgba(128, 128, 128, .5);
 }
 
 .filtery {
-  border: solid;
-  border-width: thin;
-  background-color: white;
+    border: solid;
+    border-width: thin;
+    background-color: white;
 }
 
 .input-group-addon {
-  color: black;
-  font-size: 24px;
+    color: black;
+    font-size: 24px;
 }
 
 .sidebar-right {
-  float: right;
-  text-align: right;
-  margin-right: 10px;
+    float: right;
+    text-align: right;
+    margin-right: 10px;
 }
 
 .col-xs-3 {
-  width: 22%;
+    width: 22%;
 }
 
 .canvas-btn {
-  z-index: 2;
-  background-color: transparent;
-  font-size: 60px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  display: block;
+    z-index: 2;
+    background-color: transparent;
+    font-size: 60px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: block;
 }
 
 #color-selector {
-  z-index: 2;
-  background-color: transparent;
-  font-size: 80px;
-  padding: 40px;
+    z-index: 2;
+    background-color: transparent;
+    font-size: 80px;
+    padding: 40px;
 }
 
 .sidebar-popout {
-  z-index: 2;
-  background-color: transparent;
-  padding: 10px;
-  font-size: 30px;
+    z-index: 2;
+    background-color: transparent;
+    padding: 10px;
+    font-size: 30px;
 }
 
 .modal {
-  top: 35%;
+    top: 35%;
 }
 
 #modal-form {
-  width: 50%;
-  margin-right: 25%;
-  margin-left: 25%;
+    width: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
 }
 
 #modal-label {
-  font-size: 30px;
-  padding-bottom: 3%; 
+    font-size: 30px;
+    padding-bottom: 3%;
 }
 
 #modal-title {
-  text-align: center;
-  font-size: 35px;
-  padding-bottom: 5%;
-  font-weight: bold;
+    text-align: center;
+    font-size: 35px;
+    padding-bottom: 5%;
+    font-weight: bold;
 }
 
 .modal-select {
-  font-size: 25px;
-  width: 100px;
+    font-size: 25px;
+    width: 100px;
 }
 
 .modal-body {
-  text-align: center;
+    text-align: center;
 }
 
 .modal-input {
-  border: solid;
-  border-width: thin;
-  border-radius: 5px;
-  font-size: 20px;
+    border: solid;
+    border-width: thin;
+    border-radius: 5px;
+    font-size: 20px;
 }
-
-
-
-
