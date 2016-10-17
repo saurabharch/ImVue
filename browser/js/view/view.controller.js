@@ -7,6 +7,8 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
     var height = window.innerHeight
     var width = window.innerWidth
 
+    CanvasFactory.initializeCanvas(window, document);
+
     drawingPlace.style.height = height + 'px'
     drawingPlace.style.width = width + 'px'
     drawingPlace.height = height
@@ -24,10 +26,19 @@ app.controller('ViewCtrl', function($scope, $stateParams, CanvasFactory, Drawing
     videoPlace.height = height
     videoPlace.width = width
 
+    // For debug
+    // if ($stateParams.project.drawing) {
+    //     DrawingFactory.drawDrawingsOnCanvas([$stateParams.project.drawing])
+    // }
+    // if ($stateParams.project.images.length) {
+    //     ImageFactory.drawImagesOnCanvas($stateParams.project.images)
+    // }
+    // if ($stateParams.project.texts.length) {
+    //     TextFactory.drawTextsOnCanvas($stateParams.project.texts)
+    // }
+
 
     $scope.orientationCorrect = false;
-
-    CanvasFactory.initializeCanvas(window, document);
 
     //this is the canvas that displays our tilt orientation guide
     let canvasTilt = document.getElementById('tiltCanvas');

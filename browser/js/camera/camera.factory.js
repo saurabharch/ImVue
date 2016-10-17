@@ -8,7 +8,7 @@ app.factory('CameraFactory', function() {
         var videoElement = document.querySelector('#videoElement');
 
         function gotCameras(devInfos) {
-            for (var i = devInfos.length; i > -1; i--) {
+            for (var i = 0; i < devInfos.length; i++) {
                 var devInfo = devInfos[i];
                 var option = document.createElement('option');
                 option.value = devInfo.deviceId;

@@ -16,7 +16,9 @@ const users = [
   {userName: 'President', email: 'obama@gmail.com', password: 'potus'},
   {userName: 'Han', email: 'han@gmail.com', password: 'han1234'},
   {userName: 'joey', email: 'joey@gmail.com', password: 'joey'},
-  {userName: 'danny', email: 'danny@gmail.com', password: 'danny'}
+  {userName: 'danny', email: 'danny@gmail.com', password: 'danny'},
+  {userName: 'fullstack', email: 'fullstack@fullstack.com', password: 'fullstack'},
+  {userName: 'LuckyPub', email: 'luckyPub@luckyPub.com', password: 'luckyPub'},
 ];
 
 
@@ -24,6 +26,11 @@ const texts = [
   {font: 'serif', size: 32, color: 'black', x: 843, y: 357, content: 'Hello World'},
   {font: 'Arial', size: 40, color: 'black', x: 478, y: 290, content: 'Awesome'},
   {font: 'Verdana', size: 144, color: 'black', x: 816, y: 765, content: 'Awesome'},
+  {font: 'serif', size: 60, color: 'red', x: 50, y: 700, content: 'Fullstack was founded in 2012!'},
+  {font: 'serif', size: 70, color: '#33FF49', x: 150, y: 300, content: 'Welcome to LuckyPub!'},
+  {font: 'serif', size: 70, color: '#33FF49', x: 150, y: 550, content: 'Show @ bar for BOGO!'},
+  {font: 'serif', size: 70, color: '#33FF49', x: 150, y: 550, content: 'Unscramble the letters on the north'},
+  {font: 'serif', size: 70, color: '#33FF49', x: 150, y: 550, content: 'side of Wash Square Arch for the next clue!'},
 ];
 
 const drawings = [
@@ -36,12 +43,15 @@ const images = [
   {source: 'img/cat.png', x: 126, y: 40},
   {source: 'img/waldo.png', x: 153, y: 143},
   {source: 'img/obama.png', x: 119, y: 200},
+  {source: 'img/light_bulb.png', x: 250, y:150}
+  {source: 'img/2D_Barcode.png', x: 250, y:150}
 ];
 
 var projects = [
   {latitude: 40.705778, longitude: -74.008235, angle: 179, tilt: 78},
   {latitude: 40.705665, longitude: -74.008604, angle: 217, tilt: -9},
   {latitude: 40.705805, longitude: -74.008770, angle: 21, tilt: -25},
+  {latitude: 40.729139, longitude: -73.985458, angle: 21, tilt: -25},
 ];
 
 
