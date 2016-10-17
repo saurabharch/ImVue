@@ -17,7 +17,7 @@ describe('AuthService', function () {
         Session = _Session_;
         AUTH_EVENTS = _AUTH_EVENTS_;
         Session.destroy();
-    }));
+    }));    
 
     it('should be an object', function () {
         expect(AuthService).to.be.an('object');
