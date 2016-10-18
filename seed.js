@@ -56,7 +56,7 @@ var projects = [
 
 
 
-let seedUsers = () => {
+let seedUsers = function(){
   let creatingUsers = users.map(user => User.create(user));
   return Promise.all(creatingUsers);
 };
