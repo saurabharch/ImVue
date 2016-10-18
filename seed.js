@@ -43,7 +43,7 @@ const images = [
   {source: 'img/cat.png', x: 126, y: 40},
   {source: 'img/waldo.png', x: 153, y: 143},
   {source: 'img/obama.png', x: 119, y: 200},
-  {source: 'img/light_bulb.png', x: 250, y:150}
+  {source: 'img/light_bulb.png', x: 250, y:150},
   {source: 'img/2D_Barcode.png', x: 250, y:150}
 ];
 
