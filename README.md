@@ -19,7 +19,7 @@ Create an art project from a android device and save it to a specific geolocatio
   
   -visit https://localhost:1337/ with a android phone on the same network
 
-## Currently at Deployed
+## Currently Deployed
 
    https://radiant-cliffs-28831.herokuapp.com
   
