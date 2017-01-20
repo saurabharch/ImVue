@@ -3,6 +3,7 @@ var chalk = require('chalk');
 var db = require('./db');
 var fs = require('fs');
 var path = require('path')
+var http = require('http')
 
 // Create a node server instance! cOoL!
 var server;
@@ -42,3 +43,8 @@ db.sync()
     .catch(function(err) {
         console.error(chalk.red(err.stack));
     });
+
+setInterval(function() {
+    console.log('Stay away awake')
+    http.get("https://radiant-cliffs-28831.herokuapp.com");
+}, 300000); // every 5 minutes (300000)
